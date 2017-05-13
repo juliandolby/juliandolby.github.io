@@ -1,0 +1,97 @@
+---
+layout: slide
+title: "Toward Scalable Semantic Big Data"
+description: SBD talk titled "Toward Scalable Semantic Big Data"
+date: 2017-05-10 12:45:00 -0500
+theme: black
+transition: slide
+categories: SBD SIGMOD talk
+---
+
+<section style="text-align: center;">
+<h3 style="margin-top: 0;">Toward Scalable Semantic Big Data</h3>
+<br />
+<br />
+<br />
+<p>Julian Dolby</p>
+<p>IBM Thomas J. Watson Research Center</p>
+<br />
+<br />
+<br />
+<br />
+<p><small>Semantic Big Data, SIGMOD, Chicago, May 2017</small></p>
+</section>
+
+<section>
+<h3>Example OWL Universe</h3>
+<ul>
+<li> Individuals
+<br>
+$\begin{array}{l}Museum(Athens), Museum(Heraklion)\\
+Minoan(LaParisienne), Mycenean(DeathMask)\end{array}$</li>
+<li> Roles
+<br>
+$\begin{array}{l}
+Exhibits(Athens,DeathMask)\\
+Exhibits(Heraklion,LaParisienne)
+\end{array}$ </li>
+<li> Axioms
+<br>
+$\begin{array}{l}
+Minoan \sqsubseteq \exists{creationSite.Crete}\\
+Mycenaean \sqsubseteq \exists{creationSite.Mycenae}
+\end{array}$</li>
+</ul>
+</section>
+
+<section>
+<h3>Example ABox $A$</h3>
+<img class="plain" src="/images/ABox.png" border="0" align="center"/>
+</section>
+
+<section>
+<h3>The Summary ABox</h3>
+<ul>
+<li>Map ABox $A$ to $A'$ for scalability using $f$
+<br>
+$\begin{array}{l}
+C(a) \in A \implies C(f(a)) \in A'\\
+R(a,b) \in A \implies R(f(a), f(b)) \in A'
+\end{array}$</li>
+<li> We choose <em>concept sets</em> as f</li>
+</ul>
+</section>
+
+<section>
+<h3>Example Summary ABox $A'$</h3>
+<img class="plain" src="/images/SummaryABox.png" border="0" align="center"/>
+</section>
+
+<section>
+<h3>Example Query</h3>
+<ul>
+<li>"Museums that have works from Crete"</li>
+<li>Answer is <em>Heraklion</em> since has Minoan <em>LaParisienne</em></li>
+<li>DL: $Museum \wedge \exists{Exhibits.\exists{creationSite.Crete}}$</li>
+<li>Needs DL reasoning: <em>creationSite</em> edge is implicit</li>
+</ul>
+</section>
+
+<section>
+<img class="plain" src="/images/QueryClash.png" border="0" align="center"/>
+</section>
+
+<section>
+
+Artwork
+ creationSite
+ category
+ 
+Museum
+ long
+ lat
+
+ip-api.com
+
+some random math, like $\theta$
+</section>

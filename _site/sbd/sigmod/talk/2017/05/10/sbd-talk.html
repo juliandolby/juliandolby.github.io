@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+  <head>
+</script>
+    <meta charset="utf-8">
+
+    <title>
+      
+        Toward Scalable Semantic Big Data | Julian Dolby, IBM Thomas J. Watson Research Center
+      
+    </title>
+
+    <meta name="author" content="" />
+
+    <!-- Description -->
+    
+      <meta name="description" content="SBD talk titled "Toward Scalable Semantic Big Data"" />
+    
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="/reveal.js/css/reveal.css"/>
+    
+      <link rel="stylesheet" href="/reveal.js/css/theme/black.css" id="theme"/>
+    
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="/reveal.js/lib/css/zenburn.css"/>
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? '/reveal.js/css/print/pdf.css' : '/reveal.js/css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <link rel="canonical" href="http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk.html">
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+  
+    <div class="reveal">
+      <div class="slides">
+        <section style="text-align: center;">
+<h3 style="margin-top: 0;">Toward Scalable Semantic Big Data</h3>
+<br />
+<br />
+<br />
+<p>Julian Dolby</p>
+<p>IBM Thomas J. Watson Research Center</p>
+<br />
+<br />
+<br />
+<br />
+<p><small>Semantic Big Data, SIGMOD, Chicago, May 2017</small></p>
+</section>
+
+<section>
+<h3>Example OWL Universe</h3>
+<ul>
+<li> Individuals
+<br />
+$\begin{array}{l}Museum(Athens), Museum(Heraklion)\\
+Minoan(LaParisienne), Mycenean(DeathMask)\end{array}$</li>
+<li> Roles
+<br />
+$\begin{array}{l}
+Exhibits(Athens,DeathMask)\\
+Exhibits(Heraklion,LaParisienne)
+\end{array}$ </li>
+<li> Axioms
+<br />
+$\begin{array}{l}
+Minoan \sqsubseteq \exists{creationSite.Crete}\\
+Mycenaean \sqsubseteq \exists{creationSite.Mycenae}
+\end{array}$</li>
+</ul>
+</section>
+
+<section>
+<h3>Example ABox $A$</h3>
+<img class="plain" src="/images/ABox.png" border="0" align="center" />
+</section>
+
+<section>
+<h3>The Summary ABox</h3>
+<ul>
+<li>Map ABox $A$ to $A'$ for scalability using $f$
+<br />
+$\begin{array}{l}
+C(a) \in A \implies C(f(a)) \in A'\\
+R(a,b) \in A \implies R(f(a), f(b)) \in A'
+\end{array}$</li>
+<li> We choose <em>concept sets</em> as f</li>
+</ul>
+</section>
+
+<section>
+<h3>Example Summary ABox $A'$</h3>
+<img class="plain" src="/images/SummaryABox.png" border="0" align="center" />
+</section>
+
+<section>
+<h3>Example Query</h3>
+<ul>
+<li>"Museums that have works from Crete"</li>
+<li>Answer is <em>Heraklion</em> since has Minoan <em>LaParisienne</em></li>
+<li>DL: $Museum \wedge \exists{Exhibits.\exists{creationSite.Crete}}$</li>
+<li>Needs DL reasoning: <em>creationSite</em> edge is implicit</li>
+</ul>
+</section>
+
+<section>
+<img class="plain" src="/images/QueryClash.png" border="0" align="center" />
+</section>
+
+<section>
+
+Artwork
+ creationSite
+ category
+ 
+Museum
+ long
+ lat
+
+ip-api.com
+
+some random math, like $\theta$
+</section>
+
+      </div>
+    </div>
+
+    <script src="/reveal.js/lib/js/head.min.js"></script>
+    <script src="/reveal.js/js/reveal.js"></script>
+    <script>
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        
+          transition: 'slide',
+        
+        // Optional reveal.js plugins
+      math: {
+        mathjax: 'https://cdn.mathjax.org/mathjax/latest/MathJax.js',
+        config: 'TeX-AMS-MML_HTMLorMML'  // See http://docs.mathjax.org/en/latest/config-files.html
+      },
+
+        dependencies: [
+          { src: '/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: '/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: '/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: '/reveal.js/plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: '/reveal.js/plugin/zoom-js/zoom.js', async: true },
+          { src: '/reveal.js/plugin/notes/notes.js', async: true },
+          { src: '/reveal.js/plugin/math/math.js', async: true }
+        ]
+      });
+    </script>
+    
+  </body>
+</html>
