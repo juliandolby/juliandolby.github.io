@@ -67,6 +67,12 @@
 </section>
 
 <section>
+<h3>Objects in Our Universe</h3>
+<img src="/images/LaParisienne.jpg" width="20%" />
+<img src="/images/MaskOfAgamemnon.jpg" width="30%" />
+</section>
+
+<section>
 <h3>Example OWL Universe</h3>
 <ul>
 <li> Individuals
@@ -116,7 +122,12 @@ R(a,b) \in A \implies R(f(a), f(b)) \in A'
 <ul>
 <li>"Museums that have works from Crete"</li>
 <li>Answer is <em>Heraklion</em> since has Minoan <em>LaParisienne</em></li>
-<li>DL: $Museum \wedge \exists{Exhibits.\exists{creationSite.Crete}}$</li>
+<li>DL
+ <ul>
+ <li>$Museum \wedge \exists{Exhibits.\exists{creationSite.Crete}}$</li>
+ <li>Negate query at each node, find contradictions</li>
+ <li>Entities, edges in contradition called justification</li>
+ </ul></li>
 <li>Needs DL reasoning: <em>creationSite</em> edge is implicit</li>
 </ul>
 </section>
@@ -126,18 +137,71 @@ R(a,b) \in A \implies R(f(a), f(b)) \in A'
 </section>
 
 <section>
+<h3>Refinement</h3>
+<ul>
+<li><em>Partition</em> summary nodes by edges in justification
+<br />
+$key(a) \equiv \left\{ R(s, t) \left| \begin{array}{l}
+f(a) = s \wedge\\
+R(s,t) \in J \wedge\\
+\exists b \; R(a,b) \in A \wedge f(b) = t
+\end{array} \right. \right\}$
+</li>
+</ul>
+</section>
 
-Artwork
- creationSite
- category
- 
-Museum
- long
- lat
+<section>
+<img class="plain" src="/images/RefiningClash.png" border="0" align="center" />
+</section>
 
-ip-api.com
+<section>
+<h3>Clinical Trial 00419068</h3>
+<ul>
+<li>"Patient on corticosteroid or cytotoxic agent"</li>
+<li>DL query for potential trial member:
+<br />
+$Patient00419068 \sqsubseteq \exists{associatedObservation}.\\
+\; {\exists{roleGroup}.\\
+\;\; {\exists{administeredSubstance}.\\
+\;\;\; {\exists{roleGroup}.\\
+\;\;\;\; {\exists{hasActiveIngredient}.\\
+\;\;\;\;\; {\left(corticosteroid \sqcup cytotoxicAgent\right)}}}}}$</li>
+<li><em>roleGroup</em> expresses n-ary relations</li>
+</ul>
+</section>
 
-some random math, like $\theta$
+<section>
+$$\begin{array}{|l|r|r|l| } 
+\hline 
+Query &amp; Matches &amp; Time (m) &amp; Weakened\\ \hline 
+NCT00084266 &amp; 1018 &amp; 68.9 &amp; yes\\ \hline
+NCT00288808 &amp; 3127 &amp; 63.8 &amp; no \\ \hline
+NCT00393341 &amp; 74 &amp; 26.4 &amp; yes \\ \hline
+NCT00419978 &amp; 164 &amp; 31.8 &amp; yes\\ \hline
+NCT00304382 &amp; 107  &amp; 56.4 &amp; yes \\ \hline
+NCT00304889 &amp; 2 &amp; 61.4 &amp; no \\ \hline
+NCT00001162 &amp; 1357 &amp; 370.8 &amp; no \\ \hline
+NCT00298870 &amp; 5555 &amp; 145.5 &amp; no \\ \hline
+NCT00419068 &amp; 4794 &amp; 78.8 &amp; no \\ \hline 
+\end{array}$$
+</section>
+
+<section>
+<h3>Web Service Example</h3>
+<ul>
+<li>Web service to return lattitude and longitude</li>
+<pre style="font-size: 40px; align:left;">
+function geo:getPosition( -&gt; ?lat ?long)
+service get http://ip-api.com/xml [] -&gt; xml
+"/query": "./lat" "./long"
+</pre>
+<li><code>getPosition</code> used with <em>bind</em></li>
+<pre style="font-size: 40px; align:left;">
+select ?lat ?long where {
+  bind ?lat ?long as geo:getPosition()
+}
+</pre>
+</ul>
 </section>
 
       </div>

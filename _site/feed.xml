@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.4.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-05-12T22:37:19-04:00</updated><id>http://localhost:4000/</id><title type="html">Julian Dolby, IBM Thomas J. Watson Research Center</title><subtitle>Presentations</subtitle><entry><title type="html">Toward Scalable Semantic Big Data</title><link href="http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk.html" rel="alternate" type="text/html" title="Toward Scalable Semantic Big Data" /><published>2017-05-10T13:45:00-04:00</published><updated>2017-05-10T13:45:00-04:00</updated><id>http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk</id><content type="html" xml:base="http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk.html">&lt;section style=&quot;text-align: center;&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.4.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-05-13T22:37:40-04:00</updated><id>http://localhost:4000/</id><title type="html">Julian Dolby, IBM Thomas J. Watson Research Center</title><subtitle>Presentations</subtitle><entry><title type="html">Toward Scalable Semantic Big Data</title><link href="http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk.html" rel="alternate" type="text/html" title="Toward Scalable Semantic Big Data" /><published>2017-05-10T13:45:00-04:00</published><updated>2017-05-10T13:45:00-04:00</updated><id>http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk</id><content type="html" xml:base="http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk.html">&lt;section style=&quot;text-align: center;&quot;&gt;
 &lt;h3 style=&quot;margin-top: 0;&quot;&gt;Toward Scalable Semantic Big Data&lt;/h3&gt;
 &lt;br /&gt;
 &lt;br /&gt;
@@ -10,6 +10,12 @@
 &lt;br /&gt;
 &lt;br /&gt;
 &lt;p&gt;&lt;small&gt;Semantic Big Data, SIGMOD, Chicago, May 2017&lt;/small&gt;&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h3&gt;Objects in Our Universe&lt;/h3&gt;
+&lt;img src=&quot;/images/LaParisienne.jpg&quot; width=&quot;20%&quot; /&gt;
+&lt;img src=&quot;/images/MaskOfAgamemnon.jpg&quot; width=&quot;30%&quot; /&gt;
 &lt;/section&gt;
 
 &lt;section&gt;
@@ -62,7 +68,12 @@ R(a,b) \in A \implies R(f(a), f(b)) \in A'
 &lt;ul&gt;
 &lt;li&gt;&quot;Museums that have works from Crete&quot;&lt;/li&gt;
 &lt;li&gt;Answer is &lt;em&gt;Heraklion&lt;/em&gt; since has Minoan &lt;em&gt;LaParisienne&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;DL: $Museum \wedge \exists{Exhibits.\exists{creationSite.Crete}}$&lt;/li&gt;
+&lt;li&gt;DL
+ &lt;ul&gt;
+ &lt;li&gt;$Museum \wedge \exists{Exhibits.\exists{creationSite.Crete}}$&lt;/li&gt;
+ &lt;li&gt;Negate query at each node, find contradictions&lt;/li&gt;
+ &lt;li&gt;Entities, edges in contradition called justification&lt;/li&gt;
+ &lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;Needs DL reasoning: &lt;em&gt;creationSite&lt;/em&gt; edge is implicit&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/section&gt;
@@ -72,18 +83,71 @@ R(a,b) \in A \implies R(f(a), f(b)) \in A'
 &lt;/section&gt;
 
 &lt;section&gt;
+&lt;h3&gt;Refinement&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Partition&lt;/em&gt; summary nodes by edges in justification
+&lt;br /&gt;
+$key(a) \equiv \left\{ R(s, t) \left| \begin{array}{l}
+f(a) = s \wedge\\
+R(s,t) \in J \wedge\\
+\exists b \; R(a,b) \in A \wedge f(b) = t
+\end{array} \right. \right\}$
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/section&gt;
 
-Artwork
- creationSite
- category
- 
-Museum
- long
- lat
+&lt;section&gt;
+&lt;img class=&quot;plain&quot; src=&quot;/images/RefiningClash.png&quot; border=&quot;0&quot; align=&quot;center&quot; /&gt;
+&lt;/section&gt;
 
-ip-api.com
+&lt;section&gt;
+&lt;h3&gt;Clinical Trial 00419068&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&quot;Patient on corticosteroid or cytotoxic agent&quot;&lt;/li&gt;
+&lt;li&gt;DL query for potential trial member:
+&lt;br /&gt;
+$Patient00419068 \sqsubseteq \exists{associatedObservation}.\\
+\; {\exists{roleGroup}.\\
+\;\; {\exists{administeredSubstance}.\\
+\;\;\; {\exists{roleGroup}.\\
+\;\;\;\; {\exists{hasActiveIngredient}.\\
+\;\;\;\;\; {\left(corticosteroid \sqcup cytotoxicAgent\right)}}}}}$&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;roleGroup&lt;/em&gt; expresses n-ary relations&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/section&gt;
 
-some random math, like $\theta$
+&lt;section&gt;
+$$\begin{array}{|l|r|r|l| } 
+\hline 
+Query &amp;amp; Matches &amp;amp; Time (m) &amp;amp; Weakened\\ \hline 
+NCT00084266 &amp;amp; 1018 &amp;amp; 68.9 &amp;amp; yes\\ \hline
+NCT00288808 &amp;amp; 3127 &amp;amp; 63.8 &amp;amp; no \\ \hline
+NCT00393341 &amp;amp; 74 &amp;amp; 26.4 &amp;amp; yes \\ \hline
+NCT00419978 &amp;amp; 164 &amp;amp; 31.8 &amp;amp; yes\\ \hline
+NCT00304382 &amp;amp; 107  &amp;amp; 56.4 &amp;amp; yes \\ \hline
+NCT00304889 &amp;amp; 2 &amp;amp; 61.4 &amp;amp; no \\ \hline
+NCT00001162 &amp;amp; 1357 &amp;amp; 370.8 &amp;amp; no \\ \hline
+NCT00298870 &amp;amp; 5555 &amp;amp; 145.5 &amp;amp; no \\ \hline
+NCT00419068 &amp;amp; 4794 &amp;amp; 78.8 &amp;amp; no \\ \hline 
+\end{array}$$
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h3&gt;Web Service Example&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Web service to return lattitude and longitude&lt;/li&gt;
+&lt;pre style=&quot;font-size: 40px; align:left;&quot;&gt;
+function geo:getPosition( -&amp;gt; ?lat ?long)
+service get http://ip-api.com/xml [] -&amp;gt; xml
+&quot;/query&quot;: &quot;./lat&quot; &quot;./long&quot;
+&lt;/pre&gt;
+&lt;li&gt;&lt;code&gt;getPosition&lt;/code&gt; used with &lt;em&gt;bind&lt;/em&gt;&lt;/li&gt;
+&lt;pre style=&quot;font-size: 40px; align:left;&quot;&gt;
+select ?lat ?long where {
+  bind ?lat ?long as geo:getPosition()
+}
+&lt;/pre&gt;
+&lt;/ul&gt;
 &lt;/section&gt;</content><author><name></name></author><summary type="html">Toward Scalable Semantic Big Data Julian Dolby IBM Thomas J. Watson Research Center Semantic Big Data, SIGMOD, Chicago, May 2017</summary></entry><entry><title type="html">Welcome to Jekyll!</title><link href="http://localhost:4000/jekyll/update/2017/05/09/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2017-05-09T15:53:08-04:00</published><updated>2017-05-09T15:53:08-04:00</updated><id>http://localhost:4000/jekyll/update/2017/05/09/welcome-to-jekyll</id><content type="html" xml:base="http://localhost:4000/jekyll/update/2017/05/09/welcome-to-jekyll.html">&lt;section style=&quot;text-align: left;&quot;&gt;
 &lt;h1&gt;Toward Scalable Semantic Big Data&lt;/h1&gt;
 &lt;/section&gt;
