@@ -23,6 +23,33 @@ categories: SBD SIGMOD talk
 </section>
 
 <section>
+<h3>Collaborative Work</h3>
+<div class="row">
+ <div style="float: left;">
+  <ul>
+  <li>Bishwaranjan Bhattacharjee</li>
+  <li>Mihaela Bornea</li>
+  <li>James Cimino</li>
+  <li>Patrick Dantressangle</li>
+  <li>Achille Fokoue</li>
+  <li>Aditya Kalyanpur</li>
+  <li>Anastasios Kementsietsidis</li>
+  </ul>
+ </div>
+ <div style="float: right;">
+  <ul>
+  <li>Aaron Kersehbaum</li>
+  <li>Li Ma</li>
+  <li>Chintan Patel</li>
+  <li>Edith Schonberg</li>
+  <li>Kavitha Srinivas</li>
+  <li>Octavian Udrea</li>
+  </ul>
+ </div>
+</div>
+</section>
+
+<section>
 <h3>Outline</h3>
 <ul>
 <li>Running Example</li>
