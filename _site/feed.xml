@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.4.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-05-15T12:19:58-04:00</updated><id>http://localhost:4000/</id><title type="html">Julian Dolby, IBM Thomas J. Watson Research Center</title><subtitle>Presentations</subtitle><entry><title type="html">Toward Scalable Semantic Big Data</title><link href="http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk.html" rel="alternate" type="text/html" title="Toward Scalable Semantic Big Data" /><published>2017-05-10T13:45:00-04:00</published><updated>2017-05-10T13:45:00-04:00</updated><id>http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk</id><content type="html" xml:base="http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk.html">&lt;section style=&quot;text-align: center;&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.4.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-05-15T12:51:18-04:00</updated><id>http://localhost:4000/</id><title type="html">Julian Dolby, IBM Thomas J. Watson Research Center</title><subtitle>Presentations</subtitle><entry><title type="html">Toward Scalable Semantic Big Data</title><link href="http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk.html" rel="alternate" type="text/html" title="Toward Scalable Semantic Big Data" /><published>2017-05-10T13:45:00-04:00</published><updated>2017-05-10T13:45:00-04:00</updated><id>http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk</id><content type="html" xml:base="http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk.html">&lt;section style=&quot;text-align: center;&quot;&gt;
 &lt;h3 style=&quot;margin-top: 0;&quot;&gt;Toward Scalable Semantic Big Data&lt;/h3&gt;
 &lt;br /&gt;
 &lt;br /&gt;
@@ -119,6 +119,59 @@ R(s,t) \in J \wedge\\
 &lt;section&gt;
 &lt;h4&gt;Refined Query Answer&lt;/h4&gt;
 &lt;img class=&quot;plain&quot; src=&quot;/images/ResolvedClash.png&quot; border=&quot;0&quot; align=&quot;center&quot; /&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h3&gt;Reasoning Results&lt;/h3&gt;
+$${\scriptsize \begin{array}{|l|l|l|l|l|l|}
+\hline
+Reasoner &amp;amp; Dataset  &amp;amp; Avg. Time  &amp;amp; St.Dev &amp;amp; Range \\ \hline
+KAON2 &amp;amp; UOBM1  &amp;amp; 20.7 &amp;amp;  1.2 &amp;amp; 18-37\\ \hline
+KAON2 &amp;amp; UOBM10 &amp;amp; 447.6 &amp;amp;  23.3 &amp;amp; 414.8-530\\ \hline
+SHER &amp;amp; UOBM1 &amp;amp; 4.2 &amp;amp; 3.8 &amp;amp; 2.4-23.8\\ \hline
+SHER &amp;amp; UOBM10  &amp;amp; 15.4 &amp;amp;  25.6 &amp;amp; 6.4-191.1 \\ \hline
+SHER &amp;amp; UOBM30  &amp;amp; 34.7 &amp;amp;  63.5 &amp;amp; 11.6-391.1 \\ \hline
+\end{array}}$$
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h3&gt;Clinical Trials Use-Case&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Clinical trials&lt;/em&gt; critical for drug development&lt;/li&gt;
+ &lt;ul&gt;
+ &lt;li&gt;Show effectiveness and safety of new drugs&lt;/li&gt;
+ &lt;li&gt;Finding patients often a manual process&lt;/li&gt;
+ &lt;li&gt;Result can be low participation rates&lt;/li&gt;
+ &lt;/ul&gt;
+&lt;li&gt;Reasoning should be able to help&lt;/li&gt;
+ &lt;ul&gt;
+ &lt;li&gt;Trial criteria online, in semi-structured form&lt;/li&gt;
+ &lt;li&gt;Medical knowledge formalized, e.g. SNOMED-CT&lt;/li&gt;
+ &lt;li&gt;Criteria as queries against medical knowledge&lt;/li&gt;
+ &lt;/ul&gt;
+&lt;/ul&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h3&gt;Challenges&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Knowledge engineering&lt;/li&gt;
+ &lt;ul&gt;
+ &lt;li&gt;Must manually connect hospital with SNOMED&lt;/li&gt;
+ &lt;li&gt;Hospital format often a taxonomy&lt;/li&gt;
+ &lt;/ul&gt;
+&lt;li&gt;Scalability&lt;/li&gt;
+ &lt;ul&gt;
+ &lt;li&gt;High expressivity required e.g. negation&lt;/li&gt;
+ &lt;li&gt;Large amounts of patient data (59M assertions)&lt;/li&gt;
+ &lt;/ul&gt;
+&lt;li&gt;Noisy, incomplete data&lt;/li&gt;
+ &lt;ul&gt;
+ &lt;li&gt;E.g. contradictory results from tests&lt;/li&gt;
+ &lt;li&gt;Summarization efficiently handles clashes&lt;/li&gt;
+ &lt;li&gt;Cleanse data before reasoning&lt;/li&gt;
+ &lt;/ul&gt;
+&lt;/ul&gt;
 &lt;/section&gt;
 
 &lt;section&gt;

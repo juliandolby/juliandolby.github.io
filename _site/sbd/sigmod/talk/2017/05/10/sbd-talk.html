@@ -176,6 +176,59 @@ R(s,t) \in J \wedge\\
 </section>
 
 <section>
+<h3>Reasoning Results</h3>
+$${\scriptsize \begin{array}{|l|l|l|l|l|l|}
+\hline
+Reasoner &amp; Dataset  &amp; Avg. Time  &amp; St.Dev &amp; Range \\ \hline
+KAON2 &amp; UOBM1  &amp; 20.7 &amp;  1.2 &amp; 18-37\\ \hline
+KAON2 &amp; UOBM10 &amp; 447.6 &amp;  23.3 &amp; 414.8-530\\ \hline
+SHER &amp; UOBM1 &amp; 4.2 &amp; 3.8 &amp; 2.4-23.8\\ \hline
+SHER &amp; UOBM10  &amp; 15.4 &amp;  25.6 &amp; 6.4-191.1 \\ \hline
+SHER &amp; UOBM30  &amp; 34.7 &amp;  63.5 &amp; 11.6-391.1 \\ \hline
+\end{array}}$$
+</section>
+
+<section>
+<h3>Clinical Trials Use-Case</h3>
+<ul>
+<li><em>Clinical trials</em> critical for drug development</li>
+ <ul>
+ <li>Show effectiveness and safety of new drugs</li>
+ <li>Finding patients often a manual process</li>
+ <li>Result can be low participation rates</li>
+ </ul>
+<li>Reasoning should be able to help</li>
+ <ul>
+ <li>Trial criteria online, in semi-structured form</li>
+ <li>Medical knowledge formalized, e.g. SNOMED-CT</li>
+ <li>Criteria as queries against medical knowledge</li>
+ </ul>
+</ul>
+</section>
+
+<section>
+<h3>Challenges</h3>
+<ul>
+<li>Knowledge engineering</li>
+ <ul>
+ <li>Must manually connect hospital with SNOMED</li>
+ <li>Hospital format often a taxonomy</li>
+ </ul>
+<li>Scalability</li>
+ <ul>
+ <li>High expressivity required e.g. negation</li>
+ <li>Large amounts of patient data (59M assertions)</li>
+ </ul>
+<li>Noisy, incomplete data</li>
+ <ul>
+ <li>E.g. contradictory results from tests</li>
+ <li>Summarization efficiently handles clashes</li>
+ <li>Cleanse data before reasoning</li>
+ </ul>
+</ul>
+</section>
+
+<section>
 <h3>Clinical Trial 00419068</h3>
 <ul>
 <li>"Patient on corticosteroid or cytotoxic agent"</li>
