@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.4.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-05-13T22:37:40-04:00</updated><id>http://localhost:4000/</id><title type="html">Julian Dolby, IBM Thomas J. Watson Research Center</title><subtitle>Presentations</subtitle><entry><title type="html">Toward Scalable Semantic Big Data</title><link href="http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk.html" rel="alternate" type="text/html" title="Toward Scalable Semantic Big Data" /><published>2017-05-10T13:45:00-04:00</published><updated>2017-05-10T13:45:00-04:00</updated><id>http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk</id><content type="html" xml:base="http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk.html">&lt;section style=&quot;text-align: center;&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.4.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-05-15T12:04:37-04:00</updated><id>http://localhost:4000/</id><title type="html">Julian Dolby, IBM Thomas J. Watson Research Center</title><subtitle>Presentations</subtitle><entry><title type="html">Toward Scalable Semantic Big Data</title><link href="http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk.html" rel="alternate" type="text/html" title="Toward Scalable Semantic Big Data" /><published>2017-05-10T13:45:00-04:00</published><updated>2017-05-10T13:45:00-04:00</updated><id>http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk</id><content type="html" xml:base="http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk.html">&lt;section style=&quot;text-align: center;&quot;&gt;
 &lt;h3 style=&quot;margin-top: 0;&quot;&gt;Toward Scalable Semantic Big Data&lt;/h3&gt;
 &lt;br /&gt;
 &lt;br /&gt;
@@ -13,9 +13,22 @@
 &lt;/section&gt;
 
 &lt;section&gt;
-&lt;h3&gt;Objects in Our Universe&lt;/h3&gt;
+&lt;h3&gt;Outline&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Running Example&lt;/li&gt;
+&lt;li&gt;Scalable expressive reasoning&lt;/li&gt;
+&lt;li&gt;Clinical trials use-case&lt;/li&gt;
+&lt;li&gt;Storing RDF data in a database&lt;/li&gt;
+&lt;li&gt;Integration of Web data&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h3&gt;Running Example&lt;/h3&gt;
+&lt;h4&gt;Objects in Our Universe&lt;/h4&gt;
 &lt;img src=&quot;/images/LaParisienne.jpg&quot; width=&quot;20%&quot; /&gt;
-&lt;img src=&quot;/images/MaskOfAgamemnon.jpg&quot; width=&quot;30%&quot; /&gt;
+&lt;img src=&quot;/images/MaskOfAgamemnon.jpg&quot; width=&quot;31%&quot; /&gt;
+&lt;img src=&quot;/images/StarryNight.jpg&quot; width=&quot;38%&quot; /&gt;
 &lt;/section&gt;
 
 &lt;section&gt;
@@ -23,13 +36,14 @@
 &lt;ul&gt;
 &lt;li&gt; Individuals
 &lt;br /&gt;
-$\begin{array}{l}Museum(Athens), Museum(Heraklion)\\
-Minoan(LaParisienne), Mycenean(DeathMask)\end{array}$&lt;/li&gt;
+$\begin{array}{l}Museum(Athens), Museum(Heraklion), \\
+Museum(MOMA), Minoan(LaParisienne),\\
+Mycenean(DeathMask),VanGogh(StarryNight)\end{array}$&lt;/li&gt;
 &lt;li&gt; Roles
 &lt;br /&gt;
 $\begin{array}{l}
-Exhibits(Athens,DeathMask)\\
-Exhibits(Heraklion,LaParisienne)
+has(Athens,DeathMask),has(MOMA,StarryNight)\\
+has(Heraklion,LaParisienne)
 \end{array}$ &lt;/li&gt;
 &lt;li&gt; Axioms
 &lt;br /&gt;
@@ -70,16 +84,17 @@ R(a,b) \in A \implies R(f(a), f(b)) \in A'
 &lt;li&gt;Answer is &lt;em&gt;Heraklion&lt;/em&gt; since has Minoan &lt;em&gt;LaParisienne&lt;/em&gt;&lt;/li&gt;
 &lt;li&gt;DL
  &lt;ul&gt;
- &lt;li&gt;$Museum \wedge \exists{Exhibits.\exists{creationSite.Crete}}$&lt;/li&gt;
+ &lt;li&gt;$Museum \wedge \exists{has.\exists{creationSite.Crete}}$&lt;/li&gt;
  &lt;li&gt;Negate query at each node, find contradictions&lt;/li&gt;
- &lt;li&gt;Entities, edges in contradition called justification&lt;/li&gt;
+ &lt;li&gt;Entities, edges in contradiction called justification&lt;/li&gt;
  &lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;Needs DL reasoning: &lt;em&gt;creationSite&lt;/em&gt; edge is implicit&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/section&gt;
 
 &lt;section&gt;
-&lt;img class=&quot;plain&quot; src=&quot;/images/QueryClash.png&quot; border=&quot;0&quot; align=&quot;center&quot; /&gt;
+&lt;h4&gt;Query Answer&lt;/h4&gt;
+&lt;img class=&quot;plain&quot; height=&quot;90%&quot; src=&quot;/images/QueryClash.png&quot; border=&quot;0&quot; align=&quot;center&quot; /&gt;
 &lt;/section&gt;
 
 &lt;section&gt;
@@ -97,6 +112,7 @@ R(s,t) \in J \wedge\\
 &lt;/section&gt;
 
 &lt;section&gt;
+&lt;h4&gt;Query Refinement&lt;/h4&gt;
 &lt;img class=&quot;plain&quot; src=&quot;/images/RefiningClash.png&quot; border=&quot;0&quot; align=&quot;center&quot; /&gt;
 &lt;/section&gt;
 
@@ -117,7 +133,8 @@ $Patient00419068 \sqsubseteq \exists{associatedObservation}.\\
 &lt;/section&gt;
 
 &lt;section&gt;
-$$\begin{array}{|l|r|r|l| } 
+&lt;h3&gt;Clincal Trials Results&lt;/h3&gt;
+$${\scriptsize \begin{array}{|l|r|r|l| } 
 \hline 
 Query &amp;amp; Matches &amp;amp; Time (m) &amp;amp; Weakened\\ \hline 
 NCT00084266 &amp;amp; 1018 &amp;amp; 68.9 &amp;amp; yes\\ \hline
@@ -129,9 +146,130 @@ NCT00304889 &amp;amp; 2 &amp;amp; 61.4 &amp;amp; no \\ \hline
 NCT00001162 &amp;amp; 1357 &amp;amp; 370.8 &amp;amp; no \\ \hline
 NCT00298870 &amp;amp; 5555 &amp;amp; 145.5 &amp;amp; no \\ \hline
 NCT00419068 &amp;amp; 4794 &amp;amp; 78.8 &amp;amp; no \\ \hline 
-\end{array}$$
+\end{array}}$$
 &lt;/section&gt;
 
+&lt;section&gt;
+&lt;h3&gt;RDF in a Relational Store&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Numerous large RDF data sources&lt;/li&gt;
+ &lt;ul&gt;
+ &lt;li&gt;DBPedia (&amp;gt;300M triples)&lt;/li&gt;
+ &lt;li&gt;Web data (&amp;gt;1B triples from BTC)&lt;/li&gt;
+ &lt;/ul&gt;
+&lt;li&gt;Exploit scalable RDBMS technology&lt;/li&gt;
+ &lt;ul&gt;
+ &lt;li&gt;query optimization&lt;/li&gt;
+ &lt;li&gt;transaction support&lt;/li&gt;
+ &lt;li&gt;concurrency&lt;/li&gt;
+ &lt;/ul&gt;
+&lt;li&gt;DB2RDF&lt;/li&gt;
+ &lt;ul&gt;
+ &lt;li&gt;In DB2 v10.1&lt;/li&gt;
+ &lt;/ul&gt;
+&lt;/ul&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h3&gt;RDF Challenges for DBs&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Dynamic schema&lt;/li&gt;
+ &lt;ul&gt;
+ &lt;li&gt;Set of properties depends on dataset&lt;/li&gt;
+ &lt;li&gt;RDBMS require fixed schema&lt;/li&gt;
+ &lt;li&gt;DB2RDF tailors schema for each RDF dataset&lt;/li&gt;
+ &lt;/ul&gt;
+&lt;li&gt;SPARQL queries&lt;/li&gt;
+ &lt;ul&gt;
+ &lt;li&gt;Declarative graph query language&lt;/li&gt;
+ &lt;li&gt;DB2RDF translates SPARQL to SQL&lt;/li&gt;
+ &lt;li&gt;Retain benefits from DB technology&lt;/li&gt;
+ &lt;/ul&gt;
+&lt;/ul&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h4&gt;Museums with Locations&lt;/h4&gt;
+&lt;img class=&quot;plain&quot; src=&quot;/images/GraphWithLocations.png&quot; border=&quot;0&quot; align=&quot;center&quot; /&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h3&gt;DB2RDF Schema&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Entity-oriented&lt;/em&gt; schema&lt;/li&gt;
+ &lt;ul&gt;
+ &lt;li&gt;properties for subject on single row&lt;/li&gt;
+ &lt;li&gt;rows for predicates and values&lt;/li&gt;
+ &lt;li&gt;secondary table for multi-valued predicates&lt;/li&gt;
+ &lt;/ul&gt;
+&lt;li&gt;Fit entities onto limited database rows&lt;/li&gt;
+ &lt;ul&gt;
+ &lt;li&gt;generally more predicates than available rows&lt;/li&gt;
+ &lt;li&gt;&lt;em&gt;graph coloring&lt;/em&gt; to maximize density&lt;/li&gt;
+ &lt;li&gt;spill onto multiple rows only when necessary&lt;/li&gt;
+ &lt;/ul&gt;
+&lt;li&gt;Analogous tables for reverse direction&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/section&gt;
+
+&lt;section style=&quot;align: center;&quot;&gt;
+&lt;h3&gt;Example Entity-Oriented Table&lt;/h3&gt;
+${\scriptsize \begin{array}{|r|l|l|l|l|l|l|}\hline
+{\rm{subject}} &amp;amp; {\rm{p1}} &amp;amp; {\rm{v1}} &amp;amp; {\rm{p2}} &amp;amp; {\rm{v2}} &amp;amp; {\rm{p3}} &amp;amp; {\rm{v3}}\\ \hline
+LaParisienne &amp;amp; type &amp;amp; Minoan &amp;amp; &amp;amp; &amp;amp; &amp;amp;\\
+DeathMask &amp;amp; type &amp;amp; Mycenean &amp;amp; &amp;amp; &amp;amp; &amp;amp;\\
+StarryNight &amp;amp; type &amp;amp; VanGogh &amp;amp; &amp;amp; &amp;amp; &amp;amp;\\
+Heraklion &amp;amp; type &amp;amp; Museum &amp;amp; has &amp;amp; La\dots &amp;amp; at &amp;amp; l1\\
+Athens &amp;amp; type &amp;amp; Museum &amp;amp; has &amp;amp; De\dots &amp;amp; at &amp;amp; l2\\
+MOMA &amp;amp; type &amp;amp; Museum &amp;amp; has &amp;amp; St\dots &amp;amp; at &amp;amp; l3\\
+l1 &amp;amp; type &amp;amp; Location &amp;amp; lat &amp;amp; 35.3 &amp;amp; long &amp;amp; 25.1\\
+l2 &amp;amp; type &amp;amp; Location &amp;amp; lat &amp;amp; 38.0 &amp;amp; long &amp;amp; 23.7\\
+l3 &amp;amp; type &amp;amp; Location &amp;amp; lat &amp;amp; 40.7 &amp;amp; long &amp;amp; -74.0\\ \hline
+\end{array}}$
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h3&gt;DB2RDF Results&lt;/h3&gt;
+&lt;img class=&quot;plain&quot; src=&quot;/images/PRBenchLong.png&quot; border=&quot;0&quot; align=&quot;center&quot; /&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h3&gt;Data Everywhere&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Numerous structured data sources available
+ &lt;ul&gt;
+ &lt;li&gt;medical (Drugbank, Uniprot); general (DBpedia)&lt;/li&gt;
+ &lt;li&gt;much data in RDF, queried with SPARQL&lt;/li&gt;
+ &lt;li&gt;But data increasingly diverse&lt;/li&gt;
+ &lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;RDF, XML, JSON, CSV formats
+ &lt;ul&gt;
+ &lt;li&gt;accessible as dumps, query endpoints and APIs&lt;/li&gt;
+ &lt;li&gt;Powerful if integrated and queried effectively&lt;/li&gt;
+ &lt;li&gt;reuse and extend existing declarative SPARQL&lt;/li&gt;
+ &lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;	   
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h3&gt;SPARQL Functions&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Modularize SPARQL&lt;/li&gt;
+&lt;li&gt;&quot;museums with some type of exhibit&quot;&lt;/li&gt;
+&lt;pre style=&quot;font-size: 40px; align:left;&quot;&gt;
+function museumsWith(?type -&amp;gt;
+                     ?museum ?lat ?long)
+{
+  ?museum has ?type .
+  ?museum at ?loc .
+  ?loc geo:lat ?lat .
+  ?loc geo:long ?long .
+}
+&lt;/pre&gt;
+&lt;/ul&gt;
+&lt;/section&gt;
 &lt;section&gt;
 &lt;h3&gt;Web Service Example&lt;/h3&gt;
 &lt;ul&gt;
@@ -143,8 +281,29 @@ service get http://ip-api.com/xml [] -&amp;gt; xml
 &lt;/pre&gt;
 &lt;li&gt;&lt;code&gt;getPosition&lt;/code&gt; used with &lt;em&gt;bind&lt;/em&gt;&lt;/li&gt;
 &lt;pre style=&quot;font-size: 40px; align:left;&quot;&gt;
-select ?lat ?long where {
-  bind ?lat ?long as geo:getPosition()
+select ?museum where {
+  bind ?museum ?lat1 ?long1
+    as museumsWith(Minoan) .
+  bind ?lat2 ?long2 as geo:getPosition()
+  FILTER(?lat2-?lat1&amp;lt;5 &amp;amp;&amp;amp; ?long2-?long1&amp;lt;5)
+}
+&lt;/pre&gt;
+&lt;/ul&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h3&gt;Combining Disparate Data&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&quot;Nearby Minoan exhibits&quot;&lt;/li&gt;
+&lt;li&gt;RDF museums, &lt;code&gt;http://ip-api.com&lt;/code&gt; locations&lt;/li&gt;
+&lt;pre style=&quot;font-size: 40px; align:left;&quot;&gt;
+select ?museum where {
+  ?museum has Minoan .
+  ?museum at ?loc .
+  ?loc geo:lat ?lat1 .
+  ?loc geo:long ?long1 .
+  bind ?lat2 ?long2 as geo:getPosition()
+  FILTER(?lat2-?lat1&amp;lt;5 &amp;amp;&amp;amp; ?long2-?long1&amp;lt;5)
 }
 &lt;/pre&gt;
 &lt;/ul&gt;
