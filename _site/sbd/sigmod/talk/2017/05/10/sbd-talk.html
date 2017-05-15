@@ -147,7 +147,7 @@ R(a,b) \in A \implies R(f(a), f(b)) \in A'
 </section>
 
 <section>
-<h4>Query Answer</h4>
+<h4>Initial Query Answer</h4>
 <img class="plain" height="90%" src="/images/QueryClash.png" border="0" align="center" />
 </section>
 
@@ -168,6 +168,11 @@ R(s,t) \in J \wedge\\
 <section>
 <h4>Query Refinement</h4>
 <img class="plain" src="/images/RefiningClash.png" border="0" align="center" />
+</section>
+
+<section>
+<h4>Refined Query Answer</h4>
+<img class="plain" src="/images/ResolvedClash.png" border="0" align="center" />
 </section>
 
 <section>
@@ -308,19 +313,22 @@ l3 &amp; type &amp; Location &amp; lat &amp; 40.7 &amp; long &amp; -74.0\\ \hlin
 </section>
 
 <section>
-<h3>SPARQL Functions</h3>
+<h3>Modularize SPARQL with Functions</h3>
 <ul>
-<li>Modularize SPARQL</li>
 <li>"museums with some type of exhibit"</li>
 <pre style="font-size: 40px; align:left;">
 function museumsWith(?type -&gt;
-                     ?museum ?lat ?long)
-{
+                     ?museum ?lat ?long) {
   ?museum has ?type .
   ?museum at ?loc .
   ?loc geo:lat ?lat .
   ?loc geo:long ?long .
 }
+</pre>
+<li>Functions called with <em>bind</em></li>
+<pre style="font-size: 40px; align:left;">
+bind ?museum ?lat ?long
+  as museumsWith(Minoan) .
 </pre>
 </ul>
 </section>
@@ -335,11 +343,8 @@ service get http://ip-api.com/xml [] -&gt; xml
 </pre>
 <li><code>getPosition</code> used with <em>bind</em></li>
 <pre style="font-size: 40px; align:left;">
-select ?museum where {
-  bind ?museum ?lat1 ?long1
-    as museumsWith(Minoan) .
-  bind ?lat2 ?long2 as geo:getPosition()
-  FILTER(?lat2-?lat1&lt;5 &amp;&amp; ?long2-?long1&lt;5)
+select ?lat ?long where {
+  bind ?lat ?long as geo:getPosition()
 }
 </pre>
 </ul>
@@ -353,9 +358,8 @@ select ?museum where {
 <pre style="font-size: 40px; align:left;">
 select ?museum where {
   ?museum has Minoan .
-  ?museum at ?loc .
-  ?loc geo:lat ?lat1 .
-  ?loc geo:long ?long1 .
+  bind ?museum ?lat1 ?long1
+    as museumsWith(Minoan) .
   bind ?lat2 ?long2 as geo:getPosition()
   FILTER(?lat2-?lat1&lt;5 &amp;&amp; ?long2-?long1&lt;5)
 }
