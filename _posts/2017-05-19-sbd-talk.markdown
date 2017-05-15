@@ -327,7 +327,7 @@ l3 & type & Location & lat & 40.7 & long & -74.0\\ \hline
 
 <section>
 <h3>Quetzal Results</h3>
-<img class="plain" src="/images/PRBenchLong.png" border="0" align="center"/>
+<img class="plain" src="/images/LUBM.png" border="0" align="center"/>
 </section>
 
 <section>
@@ -429,7 +429,7 @@ select ?museum where {
  <ul>
  <li>put summarization, refinement into quetzal</li>
  <li>exploit entity-oriented schema for summarization</li>
- <li>would lover others to get involved</li>
+ <li>would love others to get involved</li>
  </ul>
 <li>Reasoning is not necessarily DL</li>
  <ul>

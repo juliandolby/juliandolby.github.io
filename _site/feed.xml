@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.4.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-05-15T15:00:58-04:00</updated><id>http://localhost:4000/</id><title type="html">Julian Dolby, IBM Thomas J. Watson Research Center</title><subtitle>Presentations</subtitle><entry><title type="html">Toward Scalable Semantic Big Data</title><link href="http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk.html" rel="alternate" type="text/html" title="Toward Scalable Semantic Big Data" /><published>2017-05-10T13:45:00-04:00</published><updated>2017-05-10T13:45:00-04:00</updated><id>http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk</id><content type="html" xml:base="http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk.html">&lt;section style=&quot;text-align: center;&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.4.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-05-15T15:17:57-04:00</updated><id>http://localhost:4000/</id><title type="html">Julian Dolby, IBM Thomas J. Watson Research Center</title><subtitle>Presentations</subtitle><entry><title type="html">Toward Scalable Semantic Big Data</title><link href="http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk.html" rel="alternate" type="text/html" title="Toward Scalable Semantic Big Data" /><published>2017-05-10T13:45:00-04:00</published><updated>2017-05-10T13:45:00-04:00</updated><id>http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk</id><content type="html" xml:base="http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk.html">&lt;section style=&quot;text-align: center;&quot;&gt;
 &lt;h3 style=&quot;margin-top: 0;&quot;&gt;Toward Scalable Semantic Big Data&lt;/h3&gt;
 &lt;br /&gt;
 &lt;br /&gt;
@@ -317,7 +317,7 @@ l3 &amp;amp; type &amp;amp; Location &amp;amp; lat &amp;amp; 40.7 &amp;amp; long
 
 &lt;section&gt;
 &lt;h3&gt;Quetzal Results&lt;/h3&gt;
-&lt;img class=&quot;plain&quot; src=&quot;/images/PRBenchLong.png&quot; border=&quot;0&quot; align=&quot;center&quot; /&gt;
+&lt;img class=&quot;plain&quot; src=&quot;/images/LUBM.png&quot; border=&quot;0&quot; align=&quot;center&quot; /&gt;
 &lt;/section&gt;
 
 &lt;section&gt;
@@ -419,7 +419,7 @@ select ?museum where {
  &lt;ul&gt;
  &lt;li&gt;put summarization, refinement into quetzal&lt;/li&gt;
  &lt;li&gt;exploit entity-oriented schema for summarization&lt;/li&gt;
- &lt;li&gt;would lover others to get involved&lt;/li&gt;
+ &lt;li&gt;would love others to get involved&lt;/li&gt;
  &lt;/ul&gt;
 &lt;li&gt;Reasoning is not necessarily DL&lt;/li&gt;
  &lt;ul&gt;
