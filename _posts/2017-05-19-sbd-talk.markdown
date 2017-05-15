@@ -309,7 +309,7 @@ NCT00419068 & 4794 & 78.8 & no \\ \hline
 
 <section style="align: center;">
 <h3>Example Entity-Oriented Table</h3>
-${\scriptsize \begin{array}{|r|l|l|l|l|l|l|}\hline
+${\tiny \begin{array}{|r|l|l|l|l|l|l|}\hline
 {\rm{subject}} & {\rm{p1}} & {\rm{v1}} & {\rm{p2}} & {\rm{v2}} & {\rm{p3}} & {\rm{v3}}\\ \hline
 LaParisienne & type & Minoan & & & &\\
 DeathMask & type & Mycenean & & & &\\
