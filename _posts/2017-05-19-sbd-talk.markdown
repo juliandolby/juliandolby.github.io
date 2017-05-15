@@ -326,7 +326,7 @@ l3 & type & Location & lat & 40.7 & long & -74.0\\ \hline
 </section>
 
 <section>
-<h3>Quetzal Results</h3>
+<h3>Quetzal Results on LUBM</h3>
 <img class="plain" src="/images/LUBM.png" border="0" align="center"/>
 </section>
 
