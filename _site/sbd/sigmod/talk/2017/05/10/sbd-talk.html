@@ -181,6 +181,7 @@ R(a,b) \in A \implies R(f(a), f(b)) \in A'
 <section>
 <h3>Refinement</h3>
 <ul>
+<li><em>J</em> is the <em>justification</em>, i.e. the conflict</li>
 <li><em>Partition</em> summary nodes by edges in justification
 <br />
 $key(a) \equiv \left\{ R(s, t) \left| \begin{array}{l}
@@ -444,6 +445,40 @@ select ?museum where {
   FILTER(?lat2-?lat1&lt;5 &amp;&amp; ?long2-?long1&lt;5)
 }
 </pre>
+</ul>
+</section>
+
+<section>
+<h3>Ongoing Work: BigQuery</h3>
+<ul>
+<li>Adapt entity-oriented schema to column store</li>
+ <ul>
+ <li>Use columm per predicate when possible</li>
+ <li>Use repeated columns instead of secondary table</li>
+ <li>No reverse tables</li>
+ </ul>
+<li>Current status: schema implemented</li>
+ <ul>
+ <li>Loader using Apache Beam pipeline</li>
+ <li>Parts of Quetzal functional</li>
+ </ul>
+</ul>
+</section>
+
+<section>
+<h3>The Future</h3>
+<ul>
+<li>Semantic big data means reasoning</li>
+ <ul>
+ <li>put summarization, refinement into quetzal</li>
+ <li>exploit entity-oriented schema for summarization</li>
+ <li>would lover others to get involved</li>
+ </ul>
+<li>Reasoning is not necessarily DL</li>
+ <ul>
+ <li>explore SPARQL entailment regimes</li>
+ <li>explore alternate logics</li>
+ </ul>
 </ul>
 </section>
 

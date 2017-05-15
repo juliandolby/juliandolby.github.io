@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.4.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-05-15T13:26:33-04:00</updated><id>http://localhost:4000/</id><title type="html">Julian Dolby, IBM Thomas J. Watson Research Center</title><subtitle>Presentations</subtitle><entry><title type="html">Toward Scalable Semantic Big Data</title><link href="http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk.html" rel="alternate" type="text/html" title="Toward Scalable Semantic Big Data" /><published>2017-05-10T13:45:00-04:00</published><updated>2017-05-10T13:45:00-04:00</updated><id>http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk</id><content type="html" xml:base="http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk.html">&lt;section style=&quot;text-align: center;&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.4.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-05-15T14:29:34-04:00</updated><id>http://localhost:4000/</id><title type="html">Julian Dolby, IBM Thomas J. Watson Research Center</title><subtitle>Presentations</subtitle><entry><title type="html">Toward Scalable Semantic Big Data</title><link href="http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk.html" rel="alternate" type="text/html" title="Toward Scalable Semantic Big Data" /><published>2017-05-10T13:45:00-04:00</published><updated>2017-05-10T13:45:00-04:00</updated><id>http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk</id><content type="html" xml:base="http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk.html">&lt;section style=&quot;text-align: center;&quot;&gt;
 &lt;h3 style=&quot;margin-top: 0;&quot;&gt;Toward Scalable Semantic Big Data&lt;/h3&gt;
 &lt;br /&gt;
 &lt;br /&gt;
@@ -127,6 +127,7 @@ R(a,b) \in A \implies R(f(a), f(b)) \in A'
 &lt;section&gt;
 &lt;h3&gt;Refinement&lt;/h3&gt;
 &lt;ul&gt;
+&lt;li&gt;&lt;em&gt;J&lt;/em&gt; is the &lt;em&gt;justification&lt;/em&gt;, i.e. the conflict&lt;/li&gt;
 &lt;li&gt;&lt;em&gt;Partition&lt;/em&gt; summary nodes by edges in justification
 &lt;br /&gt;
 $key(a) \equiv \left\{ R(s, t) \left| \begin{array}{l}
@@ -390,6 +391,40 @@ select ?museum where {
   FILTER(?lat2-?lat1&amp;lt;5 &amp;amp;&amp;amp; ?long2-?long1&amp;lt;5)
 }
 &lt;/pre&gt;
+&lt;/ul&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h3&gt;Ongoing Work: BigQuery&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Adapt entity-oriented schema to column store&lt;/li&gt;
+ &lt;ul&gt;
+ &lt;li&gt;Use columm per predicate when possible&lt;/li&gt;
+ &lt;li&gt;Use repeated columns instead of secondary table&lt;/li&gt;
+ &lt;li&gt;No reverse tables&lt;/li&gt;
+ &lt;/ul&gt;
+&lt;li&gt;Current status: schema implemented&lt;/li&gt;
+ &lt;ul&gt;
+ &lt;li&gt;Loader using Apache Beam pipeline&lt;/li&gt;
+ &lt;li&gt;Parts of Quetzal functional&lt;/li&gt;
+ &lt;/ul&gt;
+&lt;/ul&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h3&gt;The Future&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Semantic big data means reasoning&lt;/li&gt;
+ &lt;ul&gt;
+ &lt;li&gt;put summarization, refinement into quetzal&lt;/li&gt;
+ &lt;li&gt;exploit entity-oriented schema for summarization&lt;/li&gt;
+ &lt;li&gt;would lover others to get involved&lt;/li&gt;
+ &lt;/ul&gt;
+&lt;li&gt;Reasoning is not necessarily DL&lt;/li&gt;
+ &lt;ul&gt;
+ &lt;li&gt;explore SPARQL entailment regimes&lt;/li&gt;
+ &lt;li&gt;explore alternate logics&lt;/li&gt;
+ &lt;/ul&gt;
 &lt;/ul&gt;
 &lt;/section&gt;</content><author><name></name></author><summary type="html">Toward Scalable Semantic Big Data Julian Dolby IBM Thomas J. Watson Research Center Semantic Big Data, SIGMOD, Chicago, May 2017</summary></entry><entry><title type="html">Welcome to Jekyll!</title><link href="http://localhost:4000/jekyll/update/2017/05/09/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2017-05-09T15:53:08-04:00</published><updated>2017-05-09T15:53:08-04:00</updated><id>http://localhost:4000/jekyll/update/2017/05/09/welcome-to-jekyll</id><content type="html" xml:base="http://localhost:4000/jekyll/update/2017/05/09/welcome-to-jekyll.html">&lt;section style=&quot;text-align: left;&quot;&gt;
 &lt;h1&gt;Toward Scalable Semantic Big Data&lt;/h1&gt;
