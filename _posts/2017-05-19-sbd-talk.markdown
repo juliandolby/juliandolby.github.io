@@ -259,9 +259,10 @@ NCT00419068 & 4794 & 78.8 & no \\ \hline
  <li>transaction support</li>
  <li>concurrency</li>
  </ul>
-<li>DB2RDF</li>
+<li>Quetzal</li>
  <ul>
- <li>In DB2 v10.1</li>
+ <li><a href="https://github.com/Quetzal-RDF/quetzal">https://github.com/Quetzal-RDF/quetzal</a></li>
+ <li>Loosely-derived code in DB2 v10.1</li>
  </ul>
 </ul>
 </section>
@@ -273,12 +274,12 @@ NCT00419068 & 4794 & 78.8 & no \\ \hline
  <ul>
  <li>Set of properties depends on dataset</li>
  <li>RDBMS require fixed schema</li>
- <li>DB2RDF tailors schema for each RDF dataset</li>
+ <li>Quetzal tailors schema for each RDF dataset</li>
  </ul>
 <li>SPARQL queries</li>
  <ul>
  <li>Declarative graph query language</li>
- <li>DB2RDF translates SPARQL to SQL</li>
+ <li>Quetzal translates SPARQL to SQL</li>
  <li>Retain benefits from DB technology</li>
  </ul>
 </ul>
@@ -290,7 +291,7 @@ NCT00419068 & 4794 & 78.8 & no \\ \hline
 </section>
 
 <section>
-<h3>DB2RDF Schema</h3>
+<h3>Quetzal Schema</h3>
 <ul>
 <li><em>Entity-oriented</em> schema</li>
  <ul>
@@ -325,7 +326,7 @@ l3 & type & Location & lat & 40.7 & long & -74.0\\ \hline
 </section>
 
 <section>
-<h3>DB2RDF Results</h3>
+<h3>Quetzal Results</h3>
 <img class="plain" src="/images/PRBenchLong.png" border="0" align="center"/>
 </section>
 

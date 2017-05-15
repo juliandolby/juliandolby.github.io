@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.4.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-05-15T14:29:34-04:00</updated><id>http://localhost:4000/</id><title type="html">Julian Dolby, IBM Thomas J. Watson Research Center</title><subtitle>Presentations</subtitle><entry><title type="html">Toward Scalable Semantic Big Data</title><link href="http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk.html" rel="alternate" type="text/html" title="Toward Scalable Semantic Big Data" /><published>2017-05-10T13:45:00-04:00</published><updated>2017-05-10T13:45:00-04:00</updated><id>http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk</id><content type="html" xml:base="http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk.html">&lt;section style=&quot;text-align: center;&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.4.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-05-15T14:57:20-04:00</updated><id>http://localhost:4000/</id><title type="html">Julian Dolby, IBM Thomas J. Watson Research Center</title><subtitle>Presentations</subtitle><entry><title type="html">Toward Scalable Semantic Big Data</title><link href="http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk.html" rel="alternate" type="text/html" title="Toward Scalable Semantic Big Data" /><published>2017-05-10T13:45:00-04:00</published><updated>2017-05-10T13:45:00-04:00</updated><id>http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk</id><content type="html" xml:base="http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk.html">&lt;section style=&quot;text-align: center;&quot;&gt;
 &lt;h3 style=&quot;margin-top: 0;&quot;&gt;Toward Scalable Semantic Big Data&lt;/h3&gt;
 &lt;br /&gt;
 &lt;br /&gt;
@@ -249,9 +249,10 @@ NCT00419068 &amp;amp; 4794 &amp;amp; 78.8 &amp;amp; no \\ \hline
  &lt;li&gt;transaction support&lt;/li&gt;
  &lt;li&gt;concurrency&lt;/li&gt;
  &lt;/ul&gt;
-&lt;li&gt;DB2RDF&lt;/li&gt;
+&lt;li&gt;Quetzal&lt;/li&gt;
  &lt;ul&gt;
- &lt;li&gt;In DB2 v10.1&lt;/li&gt;
+ &lt;li&gt;&lt;a href=&quot;https://github.com/Quetzal-RDF/quetzal&quot;&gt;https://github.com/Quetzal-RDF/quetzal&lt;/a&gt;&lt;/li&gt;
+ &lt;li&gt;Loosely-derived code in DB2 v10.1&lt;/li&gt;
  &lt;/ul&gt;
 &lt;/ul&gt;
 &lt;/section&gt;
@@ -263,12 +264,12 @@ NCT00419068 &amp;amp; 4794 &amp;amp; 78.8 &amp;amp; no \\ \hline
  &lt;ul&gt;
  &lt;li&gt;Set of properties depends on dataset&lt;/li&gt;
  &lt;li&gt;RDBMS require fixed schema&lt;/li&gt;
- &lt;li&gt;DB2RDF tailors schema for each RDF dataset&lt;/li&gt;
+ &lt;li&gt;Quetzal tailors schema for each RDF dataset&lt;/li&gt;
  &lt;/ul&gt;
 &lt;li&gt;SPARQL queries&lt;/li&gt;
  &lt;ul&gt;
  &lt;li&gt;Declarative graph query language&lt;/li&gt;
- &lt;li&gt;DB2RDF translates SPARQL to SQL&lt;/li&gt;
+ &lt;li&gt;Quetzal translates SPARQL to SQL&lt;/li&gt;
  &lt;li&gt;Retain benefits from DB technology&lt;/li&gt;
  &lt;/ul&gt;
 &lt;/ul&gt;
@@ -280,7 +281,7 @@ NCT00419068 &amp;amp; 4794 &amp;amp; 78.8 &amp;amp; no \\ \hline
 &lt;/section&gt;
 
 &lt;section&gt;
-&lt;h3&gt;DB2RDF Schema&lt;/h3&gt;
+&lt;h3&gt;Quetzal Schema&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;em&gt;Entity-oriented&lt;/em&gt; schema&lt;/li&gt;
  &lt;ul&gt;
@@ -315,7 +316,7 @@ l3 &amp;amp; type &amp;amp; Location &amp;amp; lat &amp;amp; 40.7 &amp;amp; long
 &lt;/section&gt;
 
 &lt;section&gt;
-&lt;h3&gt;DB2RDF Results&lt;/h3&gt;
+&lt;h3&gt;Quetzal Results&lt;/h3&gt;
 &lt;img class=&quot;plain&quot; src=&quot;/images/PRBenchLong.png&quot; border=&quot;0&quot; align=&quot;center&quot; /&gt;
 &lt;/section&gt;
 
