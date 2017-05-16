@@ -229,7 +229,7 @@ $Patient00419068 \sqsubseteq \exists{associatedObservation}.\\
 </section>
 
 <section>
-<h3>Clincal Trials Results</h3>
+<h3>Clinical Trials Results</h3>
 $${\scriptsize \begin{array}{|l|r|r|l| } 
 \hline 
 Query & Matches & Time (m) & Weakened\\ \hline 
@@ -399,7 +399,7 @@ bind ?museum ?lat ?long
 <section>
 <h3>Web Service Example</h3>
 <ul>
-<li>Web service to return lattitude and longitude</li>
+<li>Web service to return latitude and longitude</li>
 <pre style="font-size: 40px; align:left;">
 function geo:getPosition( -> ?lat ?long)
 service get http://ip-api.com/xml [] -> xml
@@ -441,7 +441,7 @@ select ?museum where {
 <ul>
 <li>Adapt entity-oriented schema to column store</li>
  <ul>
- <li>Use columm per predicate when possible</li>
+ <li>Use column per predicate when possible</li>
  <li>Use repeated columns instead of secondary table</li>
  <li>No reverse tables</li>
  </ul>
