@@ -425,7 +425,8 @@ select ?museum where {
   bind ?museum ?lat1 ?long1
     as museumsWith(Minoan) .
   bind ?lat2 ?long2 as geo:getPosition()
-  FILTER(?lat2-?lat1<5 && ?long2-?long1<5)
+  FILTER(?lat2-?lat1 < .1 &&
+         ?long2-?long1 < .1)
 }
 </pre>
 </ul>
