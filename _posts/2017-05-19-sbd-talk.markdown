@@ -251,7 +251,7 @@ NCT00419068 & 4794 & 78.8 & no \\ \hline
 <li>Numerous large RDF data sources</li>
  <ul>
  <li>DBPedia (>300M triples)</li>
- <li>Web data (>1B triples from BTC)</li>
+ <li>Web data (>3B triples from BTC)</li>
  </ul>
 <li>Exploit scalable RDBMS technology</li>
  <ul>
@@ -370,6 +370,32 @@ bind ?museum ?lat ?long
 </pre>
 </ul>
 </section>
+
+<section>
+<h3>Web Service <code>http://ip-api.com/</code></h3>
+<ul>
+<li>Web service returns IP-based information</li>
+<pre style="font-size: 25px; align:left;">
+&lt;query&gt;
+ &lt;status>&lt;![CDATA[success]]>&lt;/status>
+ &lt;country><![CDATA[United States]]>&lt;/country>
+ &lt;countryCode><![CDATA[US]]>&lt;/countryCode>
+ &lt;region><![CDATA[IL]]>&lt;/region>
+ &lt;regionName><![CDATA[Illinois]]>&lt;/regionName>
+ &lt;city><![CDATA[Chicago]]>&lt;/city>
+ &lt;zip><![CDATA[60605]]>&lt;/zip>
+ &lt;lat>&lt;![CDATA[41.8632]]>&lt;/lat>
+ &lt;lon><![CDATA[-87.6198]]>&lt;/lon>
+ &lt;timezone>&lt;![CDATA[America/Chicago]]>&&lt;/timezone>
+ &lt;isp><![CDATA[AT&T Services]]>&lt;/isp>
+ &lt;org>&lt;![CDATA[Hilton Hotels Corporation]]>&lt;/org>
+ &lt;as><![CDATA[AS7018 AT&T Services, Inc.]]>&lt;/as>
+ &lt;query><![CDATA[12.218.232.8]]>&lt;/query>
+&lt;/query&gt;
+</pre>
+</ul>
+</section>
+
 <section>
 <h3>Web Service Example</h3>
 <ul>

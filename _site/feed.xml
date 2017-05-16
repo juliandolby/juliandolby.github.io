@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.4.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-05-15T15:24:57-04:00</updated><id>http://localhost:4000/</id><title type="html">Julian Dolby, IBM Thomas J. Watson Research Center</title><subtitle>Presentations</subtitle><entry><title type="html">Toward Scalable Semantic Big Data</title><link href="http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk.html" rel="alternate" type="text/html" title="Toward Scalable Semantic Big Data" /><published>2017-05-10T13:45:00-04:00</published><updated>2017-05-10T13:45:00-04:00</updated><id>http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk</id><content type="html" xml:base="http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk.html">&lt;section style=&quot;text-align: center;&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.4.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-05-15T21:30:03-04:00</updated><id>http://localhost:4000/</id><title type="html">Julian Dolby, IBM Thomas J. Watson Research Center</title><subtitle>Presentations</subtitle><entry><title type="html">Toward Scalable Semantic Big Data</title><link href="http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk.html" rel="alternate" type="text/html" title="Toward Scalable Semantic Big Data" /><published>2017-05-10T13:45:00-04:00</published><updated>2017-05-10T13:45:00-04:00</updated><id>http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk</id><content type="html" xml:base="http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk.html">&lt;section style=&quot;text-align: center;&quot;&gt;
 &lt;h3 style=&quot;margin-top: 0;&quot;&gt;Toward Scalable Semantic Big Data&lt;/h3&gt;
 &lt;br /&gt;
 &lt;br /&gt;
@@ -241,7 +241,7 @@ NCT00419068 &amp;amp; 4794 &amp;amp; 78.8 &amp;amp; no \\ \hline
 &lt;li&gt;Numerous large RDF data sources&lt;/li&gt;
  &lt;ul&gt;
  &lt;li&gt;DBPedia (&amp;gt;300M triples)&lt;/li&gt;
- &lt;li&gt;Web data (&amp;gt;1B triples from BTC)&lt;/li&gt;
+ &lt;li&gt;Web data (&amp;gt;3B triples from BTC)&lt;/li&gt;
  &lt;/ul&gt;
 &lt;li&gt;Exploit scalable RDBMS technology&lt;/li&gt;
  &lt;ul&gt;
@@ -360,6 +360,32 @@ bind ?museum ?lat ?long
 &lt;/pre&gt;
 &lt;/ul&gt;
 &lt;/section&gt;
+
+&lt;section&gt;
+&lt;h3&gt;Web Service &lt;code&gt;http://ip-api.com/&lt;/code&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Web service returns IP-based information&lt;/li&gt;
+&lt;pre style=&quot;font-size: 25px; align:left;&quot;&gt;
+&amp;lt;query&amp;gt;
+ &amp;lt;status&amp;gt;&amp;lt;![CDATA[success]]&amp;gt;&amp;lt;/status&amp;gt;
+ &amp;lt;country&amp;gt;&amp;lt;![CDATA[United States]]&amp;gt;&amp;lt;/country&amp;gt;
+ &amp;lt;countryCode&amp;gt;&amp;lt;![CDATA[US]]&amp;gt;&amp;lt;/countryCode&amp;gt;
+ &amp;lt;region&amp;gt;&amp;lt;![CDATA[IL]]&amp;gt;&amp;lt;/region&amp;gt;
+ &amp;lt;regionName&amp;gt;&amp;lt;![CDATA[Illinois]]&amp;gt;&amp;lt;/regionName&amp;gt;
+ &amp;lt;city&amp;gt;&amp;lt;![CDATA[Chicago]]&amp;gt;&amp;lt;/city&amp;gt;
+ &amp;lt;zip&amp;gt;&amp;lt;![CDATA[60605]]&amp;gt;&amp;lt;/zip&amp;gt;
+ &amp;lt;lat&amp;gt;&amp;lt;![CDATA[41.8632]]&amp;gt;&amp;lt;/lat&amp;gt;
+ &amp;lt;lon&amp;gt;&amp;lt;![CDATA[-87.6198]]&amp;gt;&amp;lt;/lon&amp;gt;
+ &amp;lt;timezone&amp;gt;&amp;lt;![CDATA[America/Chicago]]&amp;gt;&amp;amp;&amp;lt;/timezone&amp;gt;
+ &amp;lt;isp&amp;gt;&amp;lt;![CDATA[AT&amp;amp;T Services]]&amp;gt;&amp;lt;/isp&amp;gt;
+ &amp;lt;org&amp;gt;&amp;lt;![CDATA[Hilton Hotels Corporation]]&amp;gt;&amp;lt;/org&amp;gt;
+ &amp;lt;as&amp;gt;&amp;lt;![CDATA[AS7018 AT&amp;amp;T Services, Inc.]]&amp;gt;&amp;lt;/as&amp;gt;
+ &amp;lt;query&amp;gt;&amp;lt;![CDATA[12.218.232.8]]&amp;gt;&amp;lt;/query&amp;gt;
+&amp;lt;/query&amp;gt;
+&lt;/pre&gt;
+&lt;/ul&gt;
+&lt;/section&gt;
+
 &lt;section&gt;
 &lt;h3&gt;Web Service Example&lt;/h3&gt;
 &lt;ul&gt;

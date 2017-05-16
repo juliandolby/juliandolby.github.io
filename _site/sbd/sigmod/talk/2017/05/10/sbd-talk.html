@@ -295,7 +295,7 @@ NCT00419068 &amp; 4794 &amp; 78.8 &amp; no \\ \hline
 <li>Numerous large RDF data sources</li>
  <ul>
  <li>DBPedia (&gt;300M triples)</li>
- <li>Web data (&gt;1B triples from BTC)</li>
+ <li>Web data (&gt;3B triples from BTC)</li>
  </ul>
 <li>Exploit scalable RDBMS technology</li>
  <ul>
@@ -414,6 +414,32 @@ bind ?museum ?lat ?long
 </pre>
 </ul>
 </section>
+
+<section>
+<h3>Web Service <code>http://ip-api.com/</code></h3>
+<ul>
+<li>Web service returns IP-based information</li>
+<pre style="font-size: 25px; align:left;">
+&lt;query&gt;
+ &lt;status&gt;&lt;![CDATA[success]]&gt;&lt;/status&gt;
+ &lt;country&gt;&lt;![CDATA[United States]]&gt;&lt;/country&gt;
+ &lt;countryCode&gt;&lt;![CDATA[US]]&gt;&lt;/countryCode&gt;
+ &lt;region&gt;&lt;![CDATA[IL]]&gt;&lt;/region&gt;
+ &lt;regionName&gt;&lt;![CDATA[Illinois]]&gt;&lt;/regionName&gt;
+ &lt;city&gt;&lt;![CDATA[Chicago]]&gt;&lt;/city&gt;
+ &lt;zip&gt;&lt;![CDATA[60605]]&gt;&lt;/zip&gt;
+ &lt;lat&gt;&lt;![CDATA[41.8632]]&gt;&lt;/lat&gt;
+ &lt;lon&gt;&lt;![CDATA[-87.6198]]&gt;&lt;/lon&gt;
+ &lt;timezone&gt;&lt;![CDATA[America/Chicago]]&gt;&amp;&lt;/timezone&gt;
+ &lt;isp&gt;&lt;![CDATA[AT&amp;T Services]]&gt;&lt;/isp&gt;
+ &lt;org&gt;&lt;![CDATA[Hilton Hotels Corporation]]&gt;&lt;/org&gt;
+ &lt;as&gt;&lt;![CDATA[AS7018 AT&amp;T Services, Inc.]]&gt;&lt;/as&gt;
+ &lt;query&gt;&lt;![CDATA[12.218.232.8]]&gt;&lt;/query&gt;
+&lt;/query&gt;
+</pre>
+</ul>
+</section>
+
 <section>
 <h3>Web Service Example</h3>
 <ul>
