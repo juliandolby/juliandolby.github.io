@@ -82,7 +82,7 @@ $\begin{array}{l}
 has(Athens,DeathMask),has(MOMA,StarryNight)\\
 has(Heraklion,LaParisienne)
 \end{array}$ </li>
-<li> Axioms
+<li> Axioms (TGDs)
 <br>
 $\begin{array}{l}
 Minoan \sqsubseteq \exists{creationSite.Crete}\\
@@ -98,6 +98,7 @@ Mycenaean \sqsubseteq \exists{creationSite.Mycenae}
 
 <section>
 <h3>The Summary ABox</h3>
+<br/>
 <ul>
 <li>Map ABox $A$ to $A'$ for scalability using $f$
 <br>
@@ -107,6 +108,16 @@ R(a,b) \in A \implies R(f(a), f(b)) \in A'
 \end{array}$</li>
 <li> We choose <em>concept sets</em> as f</li>
 </ul>
+<br/>
+<br/>
+<br/>
+<div style="text-align: left;">
+<small>
+J. Dolby, A. Fokoue, A. Kalyanpur, A. Kershenbaum, E. Schonberg, K. Srinivas, L. Ma<br/>
+Scalable Semantic Retrieval through Summarization and Refinement.<br/>
+AAAI 2007
+</small>
+</div>
 </section>
 
 <section>
@@ -188,6 +199,12 @@ SHER & UOBM30  & 34.7 &  63.5 & 11.6-391.1 \\ \hline
  <li>Criteria as queries against medical knowledge</li>
  </ul>
 </ul>
+<div style="text-align: left;">
+<br/>
+<small>
+C. Patel et al, Matching Patient Records to Clinical Trials Using Ontologies, ISWC/ASWC 2007
+</small>
+</div>
 </section>
 
 <section>
@@ -265,6 +282,12 @@ NCT00419068 & 4794 & 78.8 & no \\ \hline
  <li>Loosely-derived code in DB2 v10.1</li>
  </ul>
 </ul>
+<br/>
+<div style="text-align: left;">
+<small>
+M. Bornea et al., Building an efficient RDF store over a relational database. SIGMOD 2013
+</small>
+</div>
 </section>
 
 <section>
@@ -347,17 +370,24 @@ l3 & type & Location & lat & 40.7 & long & -74.0\\ \hline
  <li>reuse and extend existing declarative SPARQL</li>
  </ul>
 </li>
-</ul>	   
+</ul>
+<br/>
+<br/>
+<div style="text-align: left;">
+<small>
+J. Dolby et al., Extending SPARQL for Data Analytic Tasks. ISWC 2016
+</small>
+</div>
 </section>
-
 <section>
-<h3>Modularize SPARQL with Functions</h3>
+<h4>Modularize SPARQL with Functions</h4>
 <ul>
 <li>"museums with some type of exhibit"</li>
-<pre style="font-size: 40px; align:left;">
+<pre style="font-size: 35px; align:left;">
 function museumsWith(?type ->
                      ?museum ?lat ?long) {
-  ?museum has ?type .
+  ?museum has ?art .
+  ?art type ?type .
   ?museum at ?loc .
   ?loc geo:lat ?lat .
   ?loc geo:long ?long .
@@ -421,7 +451,6 @@ select ?lat ?long where {
 <li>RDF museums, <code>http://ip-api.com</code> locations</li>
 <pre style="font-size: 40px; align:left;">
 select ?museum where {
-  ?museum has Minoan .
   bind ?museum ?lat1 ?long1
     as museumsWith(Minoan) .
   bind ?lat2 ?long2 as geo:getPosition()
@@ -446,7 +475,7 @@ select ?museum where {
  <li>Use repeated columns instead of secondary table</li>
  <li>No reverse tables</li>
  </ul>
-<li>Current status: schema implemented</li>
+<li>Currently, Google BigQuery schema implemented</li>
  <ul>
  <li>Loader using Apache Beam pipeline</li>
  <li>Parts of Quetzal functional</li>
@@ -464,7 +493,7 @@ select ?museum where {
  </ul>
 <li>Semantic big data means reasoning</li>
  <ul>
- <li>put summarization, refinement into quetzal</li>
+ <li>put summarization, refinement into Quetzal</li>
  <li>exploit entity-oriented schema for summarization</li>
  </ul>
 <li>Would love others to get involved</li>
