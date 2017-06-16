@@ -1,0 +1,368 @@
+---
+layout: slide
+title: "WALA Everywhere"
+description: SOAP talk titled "WALA Everywhere"
+date: 2017-05-10 12:45:00 -0500
+theme: black
+transition: slide
+categories: PLDI SOAP talk
+---
+
+<section style="text-align: center;">
+<h3 style="margin-top: 0;">WALA Everywhere</h3>
+<br />
+<br />
+<br />
+<p>Julian Dolby</p>
+<p>IBM Thomas J. Watson Research Center</p>
+<br />
+<br />
+<br />
+<br />
+<p><small>SOAP, PLDI, Barcelona, June 2017</small></p>
+</section>
+
+<section>
+<h1>Dramatis personæ</h1>
+<div class="row">
+ <div style="float: left;">
+  <ul>
+  <li>Karim Ali</li>
+  <li>Stephen Fink</li>
+  <li>Jürgen Graf</li>
+  <li>Jim Laredo</li>
+  <li>Sungho Lee (이성호)</li>
+  <li>Martin Mohr</li>
+  <li>Brian Pfretzschner</li>
+  <li>Sukyoung Ryu (류석영)</li>
+  </ul>
+ </div>
+ <div style="float: right;">
+  <ul>
+  <li>Max Schaefer</li>
+  <li>Aleksander Slominski</li>
+  <li>Manu Sridharan</li>
+  <li>Noah Weninger</li>
+  <li>Eric Wittern</li>
+  <li>Annie Ying</li>
+  <li>Christofer Young</li>
+  <li>Yunhui Zheng</li>
+  </ul>
+ </div>
+</div>
+</section>
+
+<section>
+<h3>Analyze Everything</h3>
+<img src="/images/WalaEverywhere/WalaEverywhere.001.jpeg" border="0" style="border-width: 0px;"/>
+</section>
+
+<section>
+<h3>Analyze Everywhere</h3>
+<img src="/images/WalaEverywhere/WalaEverywhere.002.jpeg" style="border-width: 0px;"/>
+</section>
+
+<section markdown="1">
+<h3>WALA Everywhere</h3>
+
+* Illustrate a small sample of being everywhere
+
+  * hybrid apps
+
+  * WALA on Web browsers
+
+  * Swift
+
+</section>
+
+<section>
+<h3>Hybrid Apps</h3>
+<img src="/images/WalaEverywhere/WalaEverywhere.005.jpeg" style="border-width: 0px;"/>
+</section>
+
+<section markdown="1">
+<h3>Hybrid Apps</h3>
+
+* Promote portability of apps
+  * "write once, run everywhere"
+  * minimize cost of app across multiple platforms
+  
+* Different semantics complicates programming
+* Static vs. dynamic types
+  * cannot check all type errors syntactically
+  * no overloading in JavaScript
+* Argument count flexible in JavaScript
+  * try to pass wrong number of arguments to Java
+
+</section>
+
+<section>
+<h3>Syntax Issues</h3>
+<img src="/images/WalaEverywhere/WalaEverywhere.006.jpeg" style="border-width: 0px;"/>
+</section>
+
+<section markdown="1">
+<h3>HybridDroid</h3>
+
+
+* Soundy analysis framework for Android hybrid apps
+
+  * support for most implicit inter-language flows 
+    (Backed by APIs and Dalvik VM source code)
+  
+  * support most type compatibility in browsers
+    (backed by experiments with trials & errors)
+
+* Implementation on top of WALA
+
+* Uses generic WALA cross-language support
+
+</section>
+
+<section>
+<h3>Syntax Checking Results</h3>
+<img src="/images/WalaEverywhere/WalaEverywhere.004.jpeg" style="border-width: 0px;"/>
+</section>
+
+<section>
+<h3>Why run WALA on the Client?</h3>
+<ul>
+<li>Integrate with Rich Client interfaces
+ <ul>
+ <li>simplify integration</li>
+ <li>avoid network round trips</li>
+ <li>use client compute resources</li>
+ <li>already in prototype application inside IBM</li>
+ </ul></li>
+<li>Client-side applications
+ <ul>
+ <li>analyze dynamically-loaded scripts</li>
+ <li>support IDE's like Eclipse Orion</li>
+ </ul></li>
+<li>Browsers are everywhere</li>
+</ul>
+</section>
+
+<section>
+<h3>How to Run WALA on the Client?</h3>
+<a href="http://teavm.org">http://teavm.org</a>
+<br/>
+<ul>
+<li>TeaVM compiles Java to JavaScript
+ <ul>
+ <li>compiles JVM bytecode to JavaScript</li>
+ <li>reachability analysis to choose code to compile</li>
+ <li>Java 8, including lambdas</li>
+ </ul></li>
+<li>Significant but limited library support
+ <ul>
+ <li>collections and key libraries implemented</li>
+ <li>I/O libraries very limited</li>
+ <li>little reflection support</li>
+ </ul></li>
+</ul>
+</section>
+
+<section>
+<h3>WALA on TeaVM</h3>
+<ul>
+<li>Core of WALA compiles with TeaVM
+ <ul>
+ <li>avoid esoteric features like soft references</li>
+ <li>avoid the file system</li>
+ <li>avoid any use of reflection</li>
+ </ul></li>
+<li>Basic program analysis works
+ <ul>
+ <li>read JavaScript</li>
+ <li>call graphs</li>
+ <li>system dependence graphs</li>
+ </ul></li>
+<li>Enough for flow-sensitive taint analysis</li>
+</ul>
+</section>
+ 
+<section>
+<h3>WALA Client Demo</h3>
+<pre>
+function Document_prototype_write(x) {
+
+}
+
+function id(x) {
+    <span style="color: red;">return x</span>;
+}
+
+var o = { URL: "whatever" };
+var url = <span style="color: red;">id(o.URL);</span>
+<span style="color: red;">Document_prototype_write(url);</span>
+
+var notUrl = id("not a url");
+Document_prototype_write(notUrl);
+</pre>
+</section>
+
+<section>
+<h3>WALA Client Demo</h3>
+
+<iframe src="/walademo/index.html" frameborder="0" height="1000" width="3500"></iframe>
+
+</section>
+
+<section markdown="1">
+<h3>WALA for Swift</h3>
+
+* Apple a dominant mobile platform
+
+  * likely most popular phone in the audience
+  
+  * Swift primary programming language
+
+* WALA meant to be flexible
+
+  * analyzing new language Swift a test
+
+  * support Apple-IBM alliance
+
+* Use WALA to analyze Swift
+
+  * this work in early stage
+
+</section>
+
+<section markdown="1">
+<h3>Leverage Apple Infrastructure</h3>
+
+
+* Use open source Apple code
+
+  * up-to-date with evolving language
+
+  * written largely in C++, unlike WALA
+
+* Bridge C++ code to WALA
+
+  * large code base, so explicit JNI tedious
+
+  * generate wrappers with SWIG
+
+* Expose Apple Swift code to Java
+
+</section>
+
+
+<section markdown="1">
+<h3>SWIG</h3>
+<div class="row">
+ <div style="float: left;" markdown="1">
+
+
+~~~~~
+%module example     
+int fact();      
+~~~~~
+
+~~~~~~~
+public class example {
+
+  public static int fact() {
+    return exampleJNI.fact();   
+  }
+
+}
+~~~~~~~~
+
+
+ </div>
+ <div style="float: right;" markdown="1">
+
+~~~~~~
+public class exampleJNI {
+  static native int fact();
+}
+~~~~~~
+
+~~~~~~
+...Java_exampleJNI_fact(...) {
+  jint jresult = 0 ;
+  int result;
+  
+  (void)jenv;
+  (void)jcls;
+  result = (int)fact();
+  jresult = (jint)result; 
+  return jresult;
+}
+~~~~~~~
+
+ </div>
+</div>
+
+* SWIG generates "normal" Java code around JNI
+
+</section>
+
+
+<section markdown="1">
+<h3>WALA using SWIG</h3>
+
+
+~~~~~~~
+ instance.performParseOnly();
+ if (instance.getASTContext().hadError())
+     System.out.println("Parse error");
+ ModuleDecl module = instance.getMainModule();
+ ASTWalker walker = new ASTWalker() {
+     @Override
+     public boolean walkToDeclPre(Decl s) {
+         // visited a declaration
+         return true;
+     }
+     // ...
+ };
+ module.walk(walker);
+~~~~~~
+
+* Java code calling Apple C++ code
+  * resembles WALA JavaScript Rhino code
+  * ugliness hidden by SWIG
+  
+</section>
+
+<section markdown="1">
+<h3>Status</h3>
+
+* Beginnings of SWIG interface working
+
+  * SWIG integrated into Apple build process
+
+  * both AST and SIL partially wrapped
+
+* Interface not just for WALA
+
+  * other Java tools could benefit
+
+  * would love collaborators
+
+
+</section>
+
+
+<section markdown="1">
+<h3>WALA Everywhere</h3>
+
+
+* World getting less monolingual, not more
+
+  * domains have favorites, e.g. Python for ML
+
+  * new languages like Swift arise
+
+* Analysis frameworks must adapt
+
+  * need to analyze code people use
+
+  * WALA has proven flexible
+
+
+</section>
