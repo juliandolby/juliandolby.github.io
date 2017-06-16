@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Main page</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <script type="text/javascript" charset="utf-8" src="teavm/runtime.js"></script>
+    <script type="text/javascript" charset="utf-8" src="teavm/classes.js"></script>
+
+<script>
+String.prototype.hashCode = function() {
+  var hash = 0, i, chr, len;
+  if (this.length === 0) return hash;
+  for (i = 0, len = this.length; i < len; i++) {
+    chr   = this.charCodeAt(i);
+    hash  = ((hash << 5) - hash) + chr;
+    hash |= 0; // Convert to 32bit integer
+  }
+  return hash;
+};
+
+Object.prototype.hashCode = function() {
+  return this.toSource().hashCode();
+}
+</script>
+
+<script>
+var analyzer;
+
+var name = "";
+var script = "";
+var prologue = "";
+
+function setFile(id, setter) {
+  var x = document.getElementById(id); 
+  var fr = new FileReader();
+  console.log(x); 
+  console.log(x.files); 
+  fr.onload = function(e) {
+    setter(e.target.result, x.files[0]);
+  };
+  fr.readAsText(x.files[0]); 
+}
+
+function setPrologue() {
+  setFile("prologueChooser", function (x) { prologue = x; });  
+}
+ 
+function setScript() {
+  setFile("scriptChooser", function (x, y) { script = x; name = y.name; });  
+}
+ 
+function analyze() {
+  console.log(analyzer); 
+  analyzer(name, script); 
+}
+    </script>
+  </head>
+<body onload="main()" style="color: white; font-size: 250%;">
+
+    Choose script file <input type="file" id="scriptChooser" onchange="setScript()"/>
+    <br>
+    Choose prologue file <input type="file" id="prologueChooser" onchange="setPrologue()"/>
+    <hr>
+    <button 
+       id="analyze"
+       onclick="analyze()">
+Analyze code</button>
+    <hr>
+
+    <!-- TODO: add HTML content -->
+  </body>
+</html>
