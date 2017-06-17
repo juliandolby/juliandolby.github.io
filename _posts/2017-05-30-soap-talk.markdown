@@ -190,12 +190,12 @@ function Document_prototype_write(x) {
 }
 
 function id(x) {
-    <span style="color: red;">return x</span>;
+    <span style="color: red;">return x <em>// line 6</em></span>;
 }
 
-var o = { URL: "whatever" };
-var url = <span style="color: red;">id(o.URL);</span>
-<span style="color: red;">Document_prototype_write(url);</span>
+var document = { URL: "whatever" };
+var url = <span style="color: red;">id(document.URL); <em>// line 10</em></span>
+<span style="color: red;">Document_prototype_write(url); <em>// line 11</em></span>
 
 var notUrl = id("not a url");
 Document_prototype_write(notUrl);
