@@ -333,7 +333,7 @@ void run() {
 <section markdown="1">
 <h3>Status</h3>
 
-* WALA JNI interface working
+* WALA-Swift JNI interface working
 
   * integrated into Apple build process
 
