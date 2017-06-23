@@ -32,9 +32,9 @@ categories: IMDEA talk
  <div style="float: left;">
   <ul>
   <li>Karim Ali</li>
+  <li>Devin Coughlin</li>
   <li>Stephen Fink</li>
   <li>Jürgen Graf</li>
-  <li>Jim Laredo</li>
   <li>Sungho Lee (이성호)</li>
   <li>Martin Mohr</li>
   <li>Brian Pfretzschner</li>
@@ -103,6 +103,7 @@ categories: IMDEA talk
 <section markdown="1">
 <h3>Hybrid Apps</h3>
 
+* JavaScript and native code together
 * Promote portability of apps
   * "write once, run everywhere"
   * minimize cost of app across multiple platforms
