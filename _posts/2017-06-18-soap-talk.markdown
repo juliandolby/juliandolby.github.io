@@ -1,8 +1,8 @@
 ---
 layout: slide
-title: "WALA Everywhere"
+title: "WALA Everywhere (SOAP)"
 description: SOAP talk titled "WALA Everywhere"
-date: 2017-05-10 12:45:00 -0500
+date: 2017-06-18 12:45:00 -0500
 theme: black
 transition: slide
 categories: PLDI SOAP talk
