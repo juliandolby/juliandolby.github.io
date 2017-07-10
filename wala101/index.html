@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Main page</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <script type="text/javascript" charset="utf-8" src="teavm/runtime.js"></script>
+    <script type="text/javascript" charset="utf-8" src="teavm/classes.js"></script>
+
+<script>
+String.prototype.hashCode = function() {
+  var hash = 0, i, chr, len;
+  if (this.length === 0) return hash;
+  for (i = 0, len = this.length; i < len; i++) {
+    chr   = this.charCodeAt(i);
+    hash  = ((hash << 5) - hash) + chr;
+    hash |= 0; // Convert to 32bit integer
+  }
+  return hash;
+};
+
+Object.prototype.hashCode = function() {
+  return this.toSource().hashCode();
+}
+</script>
+
+<script>
+var analyzer;
+
+var name = "";
+var script = "";
+var prologue = "";
+var taintAnalysis = false;
+var dumpIr = false;
+var dumpCAst = false;
+
+function setTaint() {
+  var x = document.getElementById("doTaint"); 
+  taintAnalysis = x.checked;
+}
+
+function setDumpIR() {
+  var x = document.getElementById("doDumpIR"); 
+  dumpIr = x.checked;
+}
+
+function setDumpCAst() {
+  var x = document.getElementById("doDumpCAst"); 
+  dumpCAst = x.checked;
+}
+
+function setFile(id, setter) {
+  var x = document.getElementById(id); 
+  var fr = new FileReader();
+  console.log(x); 
+  console.log(x.files); 
+  fr.onload = function(e) {
+    setter(e.target.result, x.files[0]);
+  };
+  fr.readAsText(x.files[0]); 
+}
+
+function setScript(f) {
+  setFile("scriptChooser", function (x, y) {
+    script = x; name = y.name; f();
+  });  
+}
+
+function load(url, f) {
+  function handler () {
+    f(this.responseText);
+  }
+ 
+  var oReq = new XMLHttpRequest();
+  oReq.addEventListener("load", handler);
+  oReq.open("GET", url);
+  oReq.send();
+}
+
+function loadPrologue(f) {
+  load("prologue.js", function(text) { prologue = text; f() });
+}
+
+function loadScript(f) {
+  var url = document.getElementById('scriptUrl').value;
+  name = url.split('/').pop();
+  load(url, function(text) { script = text; f(); });
+}
+
+function analyze() {
+  loadPrologue(function () { analyzer(name, script); });
+};
+
+function analyzeFile() {
+  console.log(analyzer);
+  setScript(analyze);
+}
+
+function analyzeScript() {
+  console.log(analyzer); 
+  loadScript(analyze);
+}
+    </script>
+  </head>
+<body onload="main()" style="color: white; font-size: 250%;">
+
+    <button onclick="analyzeFile()">Analyze</button> Choose script file <input type="file" id="scriptChooser"/> 
+    <br>
+    <button onclick="analyzeScript()">Analyze</button> Enter script url <input type="text" id="scriptUrl"/>  
+    <hr>
+    do taint anaysis? <input type="checkbox" id="doTaint" onchange="setTaint()"/>
+    dump IR? <input type="checkbox" id="doDumpIR" onchange="setDumpIR()"/>
+    dump CAst? <input type="checkbox" id="doDumpCAst" onchange="setDumpCAst()"/>
+    <hr>
+</body>
+</html>

@@ -1,0 +1,1288 @@
+---
+layout: slide
+title: "WALA 101"
+description: Tutorial titled "WALA 101"
+date: 2017-07-03 00:00:00 -0500
+theme: black
+transition: slide
+categories: wala 101 tutorial
+---
+
+<style>
+.step {
+line-height: 24px;
+font-weight: normal;
+color: white;
+padding: 0;
+margin: 0;
+width: 15px;
+height: 15px;
+margin:auto;
+display: inline_block;
+border: 2px solid white;
+vertical-align: middle;
+border-radius: 2px;
+background: orange;
+}
+</style>
+
+<section style="background: white;">
+<img src="/images/WALA.png" border="0" style="border-width: 0px;"/>
+</section>
+
+<section style="text-align: center;">
+<h3 style="margin-top: 0;"><a href="https://github.com/wala/WALA">WALA</a> 101</h3>
+<br/>
+<br />
+<br />
+<p><a href="http://researcher.watson.ibm.com/researcher/view.php?person=us-dolby">Julian Dolby</a></p>
+<p>IBM Thomas J. Watson Research Center</p>
+<br />
+<br />
+<br />
+<p><small>July 2017</small></p>
+</section>
+
+<section markdown="1">
+<h3>Outline</h3>
+<br/>
+
+* Introduction
+* Running example
+* WALA JavaScript IR
+* WALA JavaScript HTML
+* Call graph construction
+* Pointer analysis
+* Taint analysis
+
+<br/>
+</section>
+
+<section>
+<h3>WALA Everywhere</h3>
+<img src="/images/WalaEverywhere/WalaEverywhere.001.jpeg" border="0" style="border-width: 0px;"/>
+</section>
+
+<section>
+<h3>WALA Everywhere</h3>
+<img src="/images/WalaEverywhere/WalaEverywhere.002.jpeg" style="border-width: 0px;"/>
+</section>
+
+<section markdown="1">
+<h3>World of WALA</h3>
+<img src="/images/WorldOfWala.jpg" border="0" style="border-width: 0px;"/>
+</section>
+
+<section markdown="1">
+<h2>WALA</h2>
+
+* Open source program analysis toolbox
+  * code: <a href="https://github.com/wala/WALA">https://github.com/wala/WALA</a>
+  * testing: <a href="https://travis-ci.org/wala/WALA">https://travis-ci.org/wala/WALA</a>
+
+* Academic community supported code base
+  * started at Thomas J. Watson Research Center
+  * selected contributors (of many):
+    * Karlsruher Institut für Technologie
+    * Technischen Universität Darmstadt
+    * 한국과학기술원(KAIST) 전산학부
+    * University of California, Berkeley
+    * Univeristy of Wisconsin, Madison
+
+</section>
+
+<section markdown="1">
+<h3>WALA</h3>
+
+* Over 100 publications use WALA, e.g.
+
+  * <small>S. Huang, J. Huang, *Speeding Up Maximal Causality Reduction with Static Dependency Analysis*, ECOOP 17
+
+   * <small>E. Wittern et al., *Statically checking web API requests in JavaScript*, ICSE 2017</small>
+  
+  * <small>M. Rapoport et al., *Who you gonna call? Analyzing Web Requests in Android Applications*, MSR 2017</small>
+
+  * <small>S. Lee et al., *HybriDroid: static analysis framework for Android hybrid applications*, ASE 2016</small>
+
+  * <small>W. Huang et al., *Scalable and precise taint analysis for Android*, ISSTA 2015</small>
+
+  * <small>Y. Ko et al., *Practically Tunable Static Analysis Framework for Large-Scale JavaScript Applications*, ASE 2015
+  
+</section>
+
+<section markdown="1">
+<h2>WALA</h2>
+
+* Code base used in IBM products
+  * AppScan
+  * API Harmony
+  * Watson Conversations (experimental)
+
+* Multiple uses within AppScan
+  * JavaScript analysis
+    * Web scanning: AppScan Standard
+    * Source scanning: AppScan Source
+  * Java and .NET
+    * Framework models: F4F
+  
+</section>
+
+<section markdown="1" style="font-size: 80%;">
+<h2 style="font-size: 125%">Selected History</h2>
+
+|-----:|:----:|:------------------------------|
+| 2004 | ASTk | J2EE optimization |
+|======+======+===============================|
+| 2005 | ITM  | Tivoli JavaScript to DB queries |
+|======+======+===============================|
+| 2006 |      | **Open source release** |
+|======+======+===============================|
+| 2008 | GBS | ABAP analysis + tooling |
+|======+======+===============================|
+| 2010 | AppScan | JSA security analysis |
+|======+======+===============================|
+| 2012 | ECOOP | Correlation tracking |
+|======+======+===============================|
+| 2013 | ICSE | Approximate call graphs |
+|======+======+===============================|
+| 2013 |      | Android analysis support
+|======+======+===============================|
+| 2014 | AppScan | Approximate call graphs in AppScan |
+|======+======+===============================|
+| 2016 | ICSE+API Harmony | Web API bug detection |
+|======+======+===============================|
+| 2017 | WCS  | Dialog bug finding analysis |
+|======+======+===============================|
+
+</section>
+
+<section markdown="1">
+<h3>WALA JavaScript</h3>
+<br/>
+<img src="/images/WalaJSDiagram.jpg" border="0" style="border-width: 0px;"/>
+<br/>
+
+1. Third party parser translates JavaScript to an AST
+2. WALA translates that AST to its Common AST (CAst)
+3. WALA translates CAst to the WALA IR
+4. Analyses are performed on the WALA IR
+
+<br/>
+</section>
+
+<section markdown="1">
+<h3>WALA Running Example</h3>
+
+
+~~~~
+var document = { URL: "whatever",
+  write: function Document_prototype_write(x) { } };
+var id = function _id(x) { return x; };
+function Id() { this.id = id; }
+function SubId() { }; SubId.prototype = new Id();
+
+if (Math.random.call(null) > 0) {
+    var id1 = new Id();
+    var text = id1.id.call(document, document.URL);
+} else {
+    var id2 = new SubId();
+    var text = id2.id("not a url");
+}
+document.write(text);
+~~~~
+
+</section>
+
+<section markdown="1">
+<h3>WALA Common AST (CAst)</h3>
+
+* Abstract Syntax Tree (AST) specialized for WALA
+  * cross-language AST
+  * first part of translation to IR
+  * WALA supports rewrites at the CAst level
+  * hide details of third-party front ends
+  * make language details explicit
+* CAst for JavaScript
+  * lift local variable declarations
+  * expand shorthands like object literals
+  * explicit handling of "method" calls
+
+</section>
+
+<section>
+<h3>WALA Running - CAst</h3>
+
+<iframe src="/wala101/index.html" frameborder="0" height="1000" width="3500"></iframe>
+
+</section>
+
+<section>
+<h3>CAst Example</h3>
+<div class="row">
+ <div style="float: left;">
+<pre>
+BLOCK
+  BLOCK
+    ...
+    FUNCTION_STMT
+      "CAst: Id"
+    ...<span style="color: yellow;">
+    DECL_STMT
+      "text"
+      VAR "undefined"</span>
+  BLOCK
+    ASSIGN
+      VAR "document"<span style="color: orange;">
+      OBJECT_LITERAL
+        CALL
+          VAR "Object"
+          "ctor"
+        "URL"
+        "whatever"
+        "write"
+        FUNCTION_EXPR
+          "CAst: ..._write"</span>
+  ...
+</pre>
+</div>
+ <div style="float: right;">
+ <pre>
+  IF_STMT
+    BINARY_EXPR
+      ">"
+      SCOPE
+        ...<span style="color: cyan;">
+          BLOCK_EXPR
+            ASSIGN
+              VAR "$$destructure$rcvr1"
+              OBJECT_REF
+                VAR "Math"
+                "random"
+            ASSIGN
+              VAR "$$destructure$elt1"
+              "call"
+          CALL
+            VAR "$$destructure$elt1"
+            "dispatch"
+            VAR "$$destructure$rcvr1"
+            CONSTANT</span>
+      "0.0"
+   ...
+</pre>
+ </div>
+</div>
+</section>
+
+<section markdown="1">
+<h3>CAst translation to IR</h3>
+
+* Create WALA IR from CAst
+  * cross-language core functionality
+  * construct Control Flow Graph (CFG)
+  * convert to simple `SSAInstruction`s
+  * convert to Static Single Assignment (SSA) form
+* JavaScript-specific extension
+  * same extension handles both JavaScript parsers
+  * translate JavaScript idiosyncracies
+    * e.g. weird "method" calls
+    * e.g. non-existent variables are globals
+
+</section>
+
+<section markdown="1">
+<h3>Background: SSA</h3>
+<br/>
+
+* Static Single Assignment (SSA) form
+  * every variable has *one* definition
+  * "𝜙 nodes" used where definitions merge
+  * variables become values
+* Heart of WALA IR
+  * SSA form is the only form used in analysis
+  * eliminates "reaching definitions" analysis
+  * simplifies expressing dataflow analyses
+
+<br/>
+</section>
+
+<section markdown="1">
+<h3>Background: SSA</h3>
+
+~~~~
+if (Math.random.call(null) > 0) {
+    var id1 = new Id();
+    var text = id1.id.call(document, document.URL);
+} else {
+    var id2 = new Id();
+    var text = id2.id("not a url");
+}
+document.write(text);
+~~~~
+~~~~
+if (Math.random.call(null) > 0) {
+    var id1 = new Id();
+    var text1 = id1.id.call(document, document.URL);
+} else {
+    var id2 = new Id();
+    var text2 = id2.id("not a url");
+}
+text3 = 𝜙(text1, text2);
+document.write(text3);
+~~~~
+
+* Illustrative only: WALA does SSA on the IR
+
+</section>
+
+<section>
+<h3>WALA Running - IR</h3>
+
+<iframe src="/wala101/index.html" frameborder="0" height="1000" width="3500"></iframe>
+
+</section>
+
+<section>
+<h3>WALA IR Example</h3>
+<pre>
+BB1<span style="color: yellow;">
+0   v2 = new <JavaScriptLoader,LArray>@0     [1:4]->[14:19] [2=[arguments]]</span>
+...<span style="color: skyblue;">
+4   lexical:id@Ldemo2.js = v6                [1:4]->[14:19]</span>
+...
+8   v16 = global:global Function             [1:4]->[14:19]<span style="color: yellow;">
+9   v13 = construct v16@9 v15:#Ldemo2.js/SubId exception:v14[1:4]->[14:19]</span>
+10   global:global SubId = v13               [1:4]->[14:19]
+...
+19   v27 = global:global Object              [1:22]->[2:41]
+...<span style="color: yellow;">
+21   v25 = construct v27@21 exception:v28    [1:22]->[2:41] [25=[document]]</span>
+BB3
+22   fieldref v25.v29:#URL = v30:#whatever   [1:22]->[2:41] [25=[document]]
+...<span style="color: yellow;">
+28   v36 = construct v39@28 v38:#Ldemo2.js/_id exception:v37[3:18]->[3:20]</span><span style="color: skyblue;">
+29   lexical:id@Ldemo2.js = v36              [3:4]->[3:5]</span>
+...<span style="color: chartreuse;">
+35   fieldref v44.v45:#prototype = v41       [5:38]->[5:38]</span>
+</pre>
+</section>
+
+<section>
+<h3>WALA IR Example</h3>
+<pre>
+38   v51 = global:global Math                [7:4]->[7:7]
+...<span style="color: chartreuse;">
+41   v5 = prototype_values(v51)              [7:4]->[7:14]</span>
+42   v49 = getfield ...random... v5          [7:4]->[7:14]
+BB11<span style="color: magenta;">
+45   v55 = dispatch v54:#call@45 v49,v40:#null exception:v56[7:4]->[7:25]</span>
+BB12
+46   v46 = binaryop(gt) v55 , v57:#0.0       [7:4]->[7:29]
+47   conditional branch(eq, to iindex=65) v46,v58:#0[7:0]->[7:1]
+...
+65   v72 = global:global SubId               [11:18]->[11:22]
+...<span style="color: yellow;">
+67   v71 = construct v72@67 exception:v73    [11:18]->[11:22] [71=[id2]]</span>
+BB21<span style="color: magenta;">
+73   v76 = dispatch v65:#id@73 v71,v77:#not a url exception:v78[12:15]->[12:33] [76=[text]71=[id2]]</span>
+BB23<span style="color: tomato;">
+           v23 = phi  v67,v76</span><span style="color: magenta;">
+79   v81 = dispatch v31:#write@79 v25,v23 exception:v82[14:0]->[14:19] [25=[document]23=[text]]</span>
+</pre>
+</section>
+
+<section>
+<h3>WALA Running - IR</h3>
+
+<iframe src="/wala101/index.html" frameborder="0" height="1000" width="3500"></iframe>
+
+</section>
+
+<section markdown="1">
+<h3>IR Features</h3>
+<br/>
+
+1. <span style="color: yellow;">Object Creation</span>
+2. <span style="color: skyblue;">Lexical scoping</span>
+3. <span style="color: chartreuse;">Prototype chain</span>
+4. <span style="color: magenta;">"Method" calls</span>
+5. <span style="color: tomato;">SSA</span>
+
+<br/>
+</section>
+
+<section markdown="1">
+<h3><span style="color: yellow;">Object Creation</span></h3>
+
+* `new` takes an expression, not type
+~~~~~~
+var x = (...)? Object: Array;
+var y = new x();
+~~~~~~
+* `new` has diverse semantics
+
+  |-----------------:|-|:------------------------------|
+| new Object()     |→| fresh object |
+|==================+=+=============|
+| new Object(5)    |→| the value 5 |
+|==================+=+===============================|
+| new Array(3)     |→| array of length 3 |
+|==================+=+===============================|
+| new Array(1,2,3) |→| array containing [1, 2, 3] |
+|==================+=+===============================|
+
+<br/>
+</section>
+
+<section markdown="1">
+<h3><span style="color: yellow;">Object Creation</span></h3>
+<br/>
+
+* Model `new` expressions as special calls
+  * interpret `new` expressions as call expressions
+  * type-dependent dispatch
+  * argument-count-dependent dispatch
+
+* `JavaScriptConstructorFunctions`
+  * model constructor behavior based on spec
+  * primitive and user "types"
+  * generate WALA IR explicitly
+  
+<br/>
+</section>
+
+<section markdown="1">
+<h3><span style="color: yellow;">Object Creation</span></h3>
+
+* `JavaScriptConstructorFunctions`
+
+```
+private IMethod makeUnaryObjectConstructor(IClass cls) {
+  JSInstructionFactory insts = (JSInstructionFactory)
+    cls.getClassLoader().getInstructionFactory();
+  MethodReference ref =
+    JavaScriptMethods
+      .makeCtorReference(JavaScriptTypes.Object);
+  JavaScriptSummary S = new JavaScriptSummary(ref, 2);
+  S.addStatement(
+    insts.ReturnInstruction(
+      S.getNumberOfStatements(), 2, false));
+  S.getNextProgramCounter(); 
+  return new JavaScriptConstructor(ref, S, cls,
+    cha.lookupClass(JavaScriptTypes.Object));
+}
+```
+
+<br/>
+</section>
+
+<section>
+<h3><span style="color: yellow;">User Object Creation</span></h3>
+<br/>
+<pre>
+0   v2 = new <JavaScriptLoader,LArray>@0     
+BB1<span style="color: chartreuse;">
+1   v4 = getfield ...prototype... v1</span>
+BB2<span style="color: yellow;">
+2   v5 = new <JavaScriptLoader,LObject>@2</span>
+BB3<span style="color: chartreuse;">
+3   set_prototype(v5, v4)</span>          
+4   v7 = invoke v1@4 v5 exception:v8         
+BB4
+5   conditional branch(eq, to iindex=7) v7,v9
+BB5
+6   return v7                                
+BB6
+7   return v5
+</pre>
+<br/>
+</section>
+
+<section markdown="1">
+<h3><span style="color: skyblue;">Lexical Scoping</span></h3>
+
+* Access to enclosing function state
+  * read and write support, unlike Java
+  * allows “upward funargs”:
+  ```
+function Obj(x) {
+  var state = x;
+  this.get = function() { return state; } ;
+};
+var obj = new Obj(function(){return 3;});
+var test1 = ( obj.get() )();
+  ```
+* WALA models as heap locations
+  * reads and writes are flow insensitive
+  * does not do SSA renaming for them
+
+</section>
+
+<section markdown="1">
+<h3><span style="color: skyblue;">Lexical Scoping</span></h3>
+
+* IR of `function Id`
+  * uses 'id' value from script `demo2.js`
+  * specified as a name and creator
+  * value modeled in function object
+  
+<pre>
+BB0
+BB1
+0   v3 = new <JavaScriptLoader,LArray>@0  [4:9]->[4:10] [3=[arguments]]<span style="color: skyblue;">
+1   v5 = lexical:id@Ldemo2.js             [4:26]->[4:27]</span>
+2   check v5                              [4:26]->[4:27]
+BB2
+3   fieldref v2.v6:#id = v5               [4:24]->[4:24] [2=[this]]
+BB3
+</pre>
+
+</section>
+
+<section markdown="1">
+<h3><span style="color: chartreuse;">Prototype chain</span></h3>
+
+* JavaScript uses prototype-based inheritance
+  * objects point a ‘prototype’
+  * properties can be found in prototype
+  ```
+  function Id() { this.id = id; }
+  function SubId() { };
+  SubId.prototype = new Id();
+  ```
+* Flow-insensitive model of all prototypes
+  * conservative model of inheritance
+  * no model for must-override
+  ```
+  if (...) { SubId.prototype = new Id(); }
+  ```
+
+</section>
+
+
+<section markdown="1">
+<h3><span style="color: chartreuse;">Prototype chain</span></h3>
+<pre>
+30   v42 = global:global Id                  [5:44]->[5:45]
+...<span style="color: yellow;">
+32   v41 = construct v42@32 exception:v43    [5:44]->[5:45]</span>
+...
+33   v44 = global:global SubId               [5:22]->[5:26]
+...<span style="color: chartreuse;">
+35   fieldref v44.v45:#prototype = v41       [5:38]->[5:38]</span>
+...
+65   v72 = global:global SubId               [11:18]->[11:22]
+...<span style="color: yellow;">
+67   v71 = construct v72@67 exception:v73    [11:18]->[11:22] [71=[id2]]</span>
+BB21<span style="color: magenta;">
+73   v76 = dispatch v65:#id@73 v71,v77:#not a url exception:v78[12:15]->[12:33] [76=[text]71=[id2]]</span>
+</pre>
+
+1. `id` assigned as property of `Id`
+2. an `Id` prototype of `SubId`
+3. `id` called as method on a `SubId`
+
+</section>
+
+<section markdown="1">
+<h3><span style="color: magenta;">"Method" calls</span></h3>
+<br/>
+<div class="row">
+ <div style="float: left;" markdown="1">
+ * method call
+ ```
+ var x = new SubId();
+ var y = x.id("not a url");
+ ```
+ * `this`
+ ```
+ id2
+ ```
+ </div>
+ <div style="float: right;" markdown="1">
+ * function call
+ ```
+ var x = new SubId();
+ var f = x.id;
+ var y = f("not a url");
+ ```
+ * this
+ ```
+ Global object
+ ```
+ </div>
+</div>
+<br/>
+* WALA represents methods explicitly for precision
+</section>
+
+<section markdown="1">
+<h3><span style="color: magenta;">"Method" call imprecision</span></h3>
+<br/>
+<div class="row">
+ <div style="float: left;" markdown="1">
+ * method call
+ ```
+if (...) {
+ var x = new Id();
+} else {
+ var x = new SubId();
+}
+var y = x.id("not a url");
+ ```
+ </div>
+ <div style="float: right;" markdown="1">
+ * function call
+ ```
+if (...) {
+ var x = new Id();
+} else {
+ var x = new SubId();
+}
+var f = x.id;
+var y = f.call(x, "not a url");
+ ```
+ </div>
+</div>
+<br/>
+* function call could have 4 possibilities
+  * 2 values for 'this'
+  * 2 values for 'f'
+</section>
+
+<section markdown="1">
+<h3><span style="color: magenta;">"Method" call implementation</span></h3>
+<br/>
+<pre>
+65   v72 = global:global SubId               [11:18]->[11:22]
+...<span style="color: yellow;">
+67   v71 = construct v72@67 exception:v73    [11:18]->[11:22] [71=[id2]]</span>
+BB21<span style="color: magenta;">
+73   v76 = dispatch v65:#id@73 v71,v77:#not a url exception:v78[12:15]->[12:33] [76=[text]71=[id2]]</span>
+</pre>
+<br/>
+* `dispatch` instruction links `this` and method
+  * avoid imprecision of reading, calling function
+  * only calls each method with corresponding `this`
+<br/>
+</section>
+
+<section markdown="1">
+<h3><span style="color: tomato;">SSA</span></h3>
+<br/>
+<div class="row">
+ <div style="float: left;" markdown="1">
+```
+var id2 = new SubId();
+var text = id2.id("not a url");
+```
+ </div>
+ <div style="float: right;" markdown="1">
+```
+var x = new SubId();
+var id2 = x;
+var text = id2.id("not a url");
+```
+ </div>
+</div>
+
+* WALA SSA implements copy propagation
+  * removes unnecessary assignments
+  * replaces uses with right hand side
+
+```
+var x = new SubId();
+// var id2 = x;
+var text = x.id("not a url");
+```
+* Illustrative only: WALA operates on IR
+
+<br/>
+</section>
+
+<section markdown="1">
+<h3>Call Graph Construction</h3>
+<br/>
+
+* Call graphs denote what functions calls call
+  * e.g. the `_id` function is called here:
+  ```
+  var text = id2.id("not a url");
+  ```
+
+* Key question is estimating targets
+  * languages like Java have types to help
+  * JavaScript does not
+  * Must track functions from creations to calls
+  
+<br/>
+</section>
+
+<section markdown="1">
+<h3>Tracking Functions</h3>
+
+<div class="row">
+ <div style="float: left;">
+<pre>
+...
+
+<span class="step">var id = function _id(x) {
+  return x;
+};</span>
+function Id() {
+  this.id = id;
+}
+function SubId() { };
+SubId.prototype = new Id();
+
+...
+
+var id2 = new SubId();
+var text = id2.id("not a url");
+</pre>
+ </div>
+ <div style="float: right;" markdown="1">
+
+ 1. *_id created*
+ 
+ </div>
+</div>
+
+* Track propagation of functions to call sites
+
+</section>
+
+<section markdown="1">
+<h3>Tracking Functions</h3>
+
+<div class="row">
+ <div style="float: left;">
+<pre>
+...
+
+var id = function _id(x) {
+  return x;
+};
+<span class="step">function Id() {
+  this.id = id;
+}</span>
+function SubId() { };
+SubId.prototype = new Id();
+
+...
+
+var id2 = new SubId();
+var text = id2.id("not a url");
+</pre>
+ </div>
+ <div style="float: right;" markdown="1">
+
+ 1. *_id created*
+ 2. *Id created*
+ 
+ </div>
+</div>
+
+* Track propagation of functions to call sites
+
+</section>
+<section markdown="1">
+<h3>Tracking Functions</h3>
+
+<div class="row">
+ <div style="float: left;">
+<pre>
+...
+
+var id = function _id(x) {
+  return x;
+};
+function Id() {
+  this.id = id;
+}
+<span class="step">function SubId() { };</span>
+SubId.prototype = new Id();
+
+...
+
+var id2 = new SubId();
+var text = id2.id("not a url");
+</pre>
+ </div>
+ <div style="float: right;" markdown="1">
+
+ 1. *_id created*
+ 2. *Id created*
+ 3. *SubId created*
+ 
+ </div>
+</div>
+
+* Track propagation of functions to call sites
+
+</section>
+
+<section markdown="1">
+<h3>Tracking Functions</h3>
+
+<div class="row">
+ <div style="float: left;">
+<pre>
+...
+
+var id = function _id(x) {
+  return x;
+};
+function Id() {
+  this.id = id;
+}
+function SubId() { };
+SubId.prototype = <span class="step">new Id()</span>;
+
+...
+
+var id2 = new SubId();
+var text = id2.id("not a url");
+</pre>
+ </div>
+ <div style="float: right;" markdown="1">
+
+ 1. *_id created*
+ 2. *Id created*
+ 3. *SubId created*
+ 4. *Id constructed*
+ 
+ </div>
+</div>
+
+* Track propagation of functions to call sites
+
+</section>
+
+<section markdown="1">
+<h3>Tracking Functions</h3>
+
+<div class="row">
+ <div style="float: left;">
+<pre>
+...
+
+var id = function _id(x) {
+  return x;
+};
+function Id() {
+  <span class="step">this.id = id;</span>
+}
+function SubId() { };
+SubId.prototype = new Id();
+
+...
+
+var id2 = new SubId();
+var text = id2.id("not a url");
+</pre>
+ </div>
+ <div style="float: right;" markdown="1">
+
+ 1. *_id created*
+ 2. *Id created*
+ 3. *SubId created*
+ 4. *Id constructed*
+ 5. *id assigned*
+ 
+ </div>
+</div>
+
+* Track propagation of functions to call sites
+
+</section>
+<section markdown="1">
+<h3>Tracking Functions</h3>
+
+<div class="row">
+ <div style="float: left;">
+<pre>
+...
+
+var id = function _id(x) {
+  return x;
+};
+function Id() {
+  this.id = id;
+}
+function SubId() { };
+<span class="step">SubId.prototype = new Id();</span>
+
+...
+
+var id2 = new SubId();
+var text = id2.id("not a url");
+</pre>
+ </div>
+ <div style="float: right;" markdown="1">
+
+ 1. *_id created*
+ 2. *Id created*
+ 3. *SubId created*
+ 4. *Id constructed*
+ 5. *id assigned*
+ 6. *prototype set*
+ 
+ </div>
+</div>
+
+* Track propagation of functions to call sites
+
+</section>
+
+<section markdown="1">
+<h3>Tracking Functions</h3>
+
+<div class="row">
+ <div style="float: left;">
+<pre>
+...
+
+var id = function _id(x) {
+  return x;
+};
+function Id() {
+  this.id = id;</span>
+}
+function SubId() { };
+SubId.prototype = new Id();
+
+...
+
+<span class="step">var id2 = new SubId();</span>
+var text = id2.id("not a url");
+</pre>
+ </div>
+ <div style="float: right;" markdown="1">
+
+ 1. *_id created*
+ 2. *Id created*
+ 3. *SubId created*
+ 4. *Id constructed*
+ 5. *id assigned*
+ 6. *prototype set*
+ 7. *SubId constructed*
+ 
+ </div>
+</div>
+
+* Track propagation of functions to call sites
+
+</section>
+<section markdown="1">
+<h3>Tracking Functions</h3>
+
+<div class="row">
+ <div style="float: left;">
+<pre>
+...
+
+var id = function _id(x) {
+  return x;
+};
+function Id() {
+  this.id = id;
+}
+function SubId() { };
+<span class="step">SubId.prototype</span> = new Id();
+
+...
+
+var id2 = new SubId();
+var text = <span class="step">id2.id</span>("not a url");
+</pre>
+ </div>
+ <div style="float: right;" markdown="1">
+
+ 1. *_id created*
+ 2. *Id created*
+ 3. *SubId created*
+ 4. *Id constructed*
+ 5. *id assigned*
+ 6. *prototype set*
+ 7. *SubId constructed*
+ 8. *id read*
+ 
+ </div>
+</div>
+
+* Track propagation of functions to call sites
+
+</section>
+
+<section markdown="1">
+<h3>WALA Call Graphs</h3>
+<br/>
+
+* "Propagation-based" call graph construction
+  * track data flow in the program
+  * language semantics determines calls
+
+* "Field-based" approximate call graphs
+  * approximate data flow for scalability
+  * currently used in product
+
+</section>
+
+<section markdown="1">
+<h3>Propagation-Based Call Graphs</h3>
+<br/>
+~~~
+JSCFABuilder B =
+  JSCallGraphBuilderUtil
+    .makeScriptCGBuilder(..., file);
+CallGraph CG =
+  B.makeCallGraph(B.getOptions());
+~~~
+
+* JavaScript traditional call graphs
+  * tracks propagation of data through the program
+  * flexible control of *context sensitivity*
+
+<br/>
+</section>
+
+<section markdown="1">
+<h3>"Call" Handling</h3>
+<br/>
+
+* `Function.call` call on function objects
+  * "first class" function call
+  * analogous to `Method.call` in Java  
+  * common in JavaScript frameworks
+  ~~~
+  var id1 = new Id();
+  var text = id1.id.call(document, document.URL);
+  ~~~
+* Modeled in WALA with trampoline function
+  * natural to handle with data flow
+  * `this` object in trampoline is function to call  
+<br/>
+</section>
+
+<section markdown="1">
+<h3>Context Sensitivity</h3>
+<br/>
+
+* Separate anaylses of different calls to same function
+  * potentially better precision
+  * unpredictable impact on cost
+  ~~~
+if (Math.random.call(null) > 0) {
+  var id1 = new Id();
+  var text = id1.id.call(document, document.URL);
+} else {
+  var id2 = new SubId();
+  var text = id2.id("not a url");
+}
+  ~~~
+  * one or two analyses of `_id`
+<br/>
+</section>
+
+<section markdown="1">
+<h3>Framework Scalability Issues</h3>
+<div class="row">
+ <div style="float: left;" markdown="1">
+* the *extend* idiom
+~~~
+var o1 = { a: 1, b: 2 };
+var o2 = { }
+for(var p in o1) {
+  var x = o1[p];
+  o2[p] = x;
+}
+~~~
+</div>
+ <div style="float: right;" markdown="1">
+* value estimates by data flow
+
+|:---------|:-------------|
+| var      | values       |
+|----------+--------------|
+| o1       | *o1*         |
+|----------+--------------|
+| o2       | *o2*         |
+|----------+--------------|
+| p        | "a", "b"     |
+|----------+--------------|
+| x        | 1, 2         |
+|==========+==============|
+
+ </div>
+</div>
+
+* imprecise estimates for $o2$: $o2.p \subseteq \{1, 2\}$
+
+</section>
+
+<section markdown="1">
+<h3>Framework Scalability Issues</h3>
+<div class="row">
+ <div style="float: left;" markdown="1">
+* the *extend* idiom
+~~~
+var o1 = { a: 1, b: 2 };
+var o2 = { }
+for(var p in o1) {
+  var x = o1[p];
+  // o2[p] = x;
+}
+~~~
+</div>
+ <div style="float: right;" markdown="1">
+* value estimates by data flow
+
+|:---------|:-------------|
+| var      | values       |
+|----------+--------------|
+| o1       | *o*          |
+|----------+--------------|
+| o2       | *o*          |
+|----------+--------------|
+| p        | "a", "b"     |
+|----------+--------------|
+| x        | 1, 2         |
+|==========+==============|
+
+ </div>
+</div>
+
+
+* precise estimates for $o$: $o.p = 1$
+
+</section>
+
+<section>
+<h3>WALA Running - Call Graph</h3>
+
+<iframe src="/wala101/index.html" frameborder="0" height="1000" width="3500"></iframe>
+
+</section>
+
+<section markdown="1">
+<h3>Taint Analysis Example</h3>
+<br/>
+
+* Analysis to find bad dataflow
+  * start from arbitrary "sources"
+  * end at arbitrary "sinks"
+
+* Simplified version of product
+  * illustrate WALA data structures
+  * illustrate data flow mechanisms
+
+</section>
+
+<section markdown="1">
+<h3>System Dependence Graph (SDG)</h3>
+<br/>
+
+* Dependence between program points
+  * control, data, or both
+  * WALA SDG built from call graph
+* Abstracts (most) language details
+  * generic notion of Statement
+  * normal notion of graph edges for dependence
+* `com.ibm.wala.ipa.slicer`
+  * `SDG`
+  * `Statement`
+
+</section>
+
+<section markdown="1">
+<h3>Creating the SDG</h3>
+<br/>
+
+~~~
+final JSCallGraph cg =
+ cgBuilder.extract(interpreter, flowGraph, eps, monitor);
+...
+PointerAnalysis<ObjectVertex> ptrs =
+ flowGraph.getPointerAnalysis(cg, cache, monitor);
+
+SDG<ObjectVertex> sdg =
+ new SDG<ObjectVertex>(cg, ptrs,
+  DataDependenceOptions.NO_BASE_NO_HEAP_NO_EXCEPTIONS,
+  ControlDependenceOptions.NONE);
+~~~
+
+</section>
+
+<section markdown="1">
+<h3>Finding Tainted Sources</h3>
+<br/>
+~~~
+public static EndpointFinder<Statement> documentUrlSource =
+ (Statement s) -> {
+ if (s.getKind()==Kind.NORMAL) {
+  NormalStatement ns = (NormalStatement) s;
+  SSAInstruction inst = ns.getInstruction();
+  if (inst instanceof SSAGetInstruction) {
+   if (((SSAGetInstruction)inst)
+        .getDeclaredField().getName()
+	  .toString().equals("URL")) {
+    return true;
+ } } }
+ return false;
+};
+~~~
+~~~
+    var text = id1.id.call(document, document.URL);
+~~~
+* Field reads of the URL property
+</section>
+
+<section markdown="1">
+<h3>Finding Tainted Sinks</h3>
+<br/>
+~~~
+public static EndpointFinder<Statement> documentWriteSink =
+ (Statement s) -> {
+ if (s.getKind()==Kind.PARAM_CALLEE) {
+  String ref = ((ParamCallee)s).getNode()
+   .getMethod().toString();
+  if (ref.contains("Document_prototype_write")) {
+   return true; } }
+ return false;
+};
+~~~
+~~~
+document.write(text);
+~~~
+* Calls to document.write
+</section>
+
+<section markdown="1">
+<h3>Finding Tainted Paths</h3>
+<br/>
+~~~
+public static <T> Set<List<T>> getPaths(Graph<T> G, EndpointFinder<T> sources, EndpointFinder<T> sinks) {
+ Set<List<T>> result = HashSetFactory.make();
+ for(T src : G) {
+  if (sources.endpoint(src)) {
+   for(final T dst : G) {
+    if (sinks.endpoint(dst)) {
+     BFSPathFinder<T> paths = 
+      new BFSPathFinder<T>(G, new NonNullSingletonIterator<T>(src), new Predicate<T>() {
+       public boolean test(T t) {
+        return t.equals(dst); }});
+     List<T> path;
+     if ((path = paths.find()) != null) {
+      result.add(path); }}}}}
+ return result; }
+~~~
+* Search over SDG for paths from source to sink
+</section>
+
+<section>
+<h3>WALA Running - Taint Analysis</h3>
+
+<iframe src="/wala101/index.html" frameborder="0" height="1000" width="3500"></iframe>
+
+</section>
+

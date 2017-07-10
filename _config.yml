@@ -26,6 +26,12 @@ markdown: kramdown
 theme: minima
 gems:
   - jekyll-feed
+  - jekyll-citation
 exclude:
   - Gemfile
   - Gemfile.lock
+plugins_dir: [citeproc-ruby, bibtex-ruby]
+# BibTex Citation plugin
+citation:
+    citation_style: apa
+    citation_locale: en

@@ -1,4 +1,3144 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.4.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-05-18T07:39:29-04:00</updated><id>http://localhost:4000/</id><title type="html">Julian Dolby, IBM Thomas J. Watson Research Center</title><subtitle>Presentations</subtitle><entry><title type="html">Toward Scalable Semantic Big Data</title><link href="http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk.html" rel="alternate" type="text/html" title="Toward Scalable Semantic Big Data" /><published>2017-05-10T13:45:00-04:00</published><updated>2017-05-10T13:45:00-04:00</updated><id>http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk</id><content type="html" xml:base="http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk.html">&lt;section style=&quot;text-align: center;&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.4.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-07-09T14:44:19-04:00</updated><id>http://localhost:4000/</id><title type="html">Julian Dolby, IBM Thomas J. Watson Research Center</title><subtitle>Presentations</subtitle><entry><title type="html">WALA 101</title><link href="http://localhost:4000/wala/101/tutorial/2017/07/03/wala-101.html" rel="alternate" type="text/html" title="WALA 101" /><published>2017-07-03T01:00:00-04:00</published><updated>2017-07-03T01:00:00-04:00</updated><id>http://localhost:4000/wala/101/tutorial/2017/07/03/wala-101</id><content type="html" xml:base="http://localhost:4000/wala/101/tutorial/2017/07/03/wala-101.html">&lt;style&gt;
+.step {
+line-height: 24px;
+font-weight: normal;
+color: white;
+padding: 0;
+margin: 0;
+width: 15px;
+height: 15px;
+margin:auto;
+display: inline_block;
+border: 2px solid white;
+vertical-align: middle;
+border-radius: 2px;
+background: orange;
+}
+&lt;/style&gt;
+
+&lt;section style=&quot;background: white;&quot;&gt;
+&lt;img src=&quot;/images/WALA.png&quot; border=&quot;0&quot; style=&quot;border-width: 0px;&quot; /&gt;
+&lt;/section&gt;
+
+&lt;section style=&quot;text-align: center;&quot;&gt;
+&lt;h3 style=&quot;margin-top: 0;&quot;&gt;&lt;a href=&quot;https://github.com/wala/WALA&quot;&gt;WALA&lt;/a&gt; 101&lt;/h3&gt;
+&lt;br /&gt;
+&lt;br /&gt;
+&lt;br /&gt;
+&lt;p&gt;&lt;a href=&quot;http://researcher.watson.ibm.com/researcher/view.php?person=us-dolby&quot;&gt;Julian Dolby&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;IBM Thomas J. Watson Research Center&lt;/p&gt;
+&lt;br /&gt;
+&lt;br /&gt;
+&lt;br /&gt;
+&lt;p&gt;&lt;small&gt;July 2017&lt;/small&gt;&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;Outline&lt;/h3&gt;
+  &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;Introduction&lt;/li&gt;
+    &lt;li&gt;Running example&lt;/li&gt;
+    &lt;li&gt;WALA JavaScript IR&lt;/li&gt;
+    &lt;li&gt;WALA JavaScript HTML&lt;/li&gt;
+    &lt;li&gt;Call graph construction&lt;/li&gt;
+    &lt;li&gt;Pointer analysis&lt;/li&gt;
+    &lt;li&gt;Taint analysis&lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h3&gt;WALA Everywhere&lt;/h3&gt;
+&lt;img src=&quot;/images/WalaEverywhere/WalaEverywhere.001.jpeg&quot; border=&quot;0&quot; style=&quot;border-width: 0px;&quot; /&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h3&gt;WALA Everywhere&lt;/h3&gt;
+&lt;img src=&quot;/images/WalaEverywhere/WalaEverywhere.002.jpeg&quot; style=&quot;border-width: 0px;&quot; /&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;World of WALA&lt;/h3&gt;
+  &lt;p&gt;&lt;img src=&quot;/images/WorldOfWala.jpg&quot; border=&quot;0&quot; style=&quot;border-width: 0px;&quot; /&gt;&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h2&gt;WALA&lt;/h2&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;Open source program analysis toolbox
+      &lt;ul&gt;
+        &lt;li&gt;code: &lt;a href=&quot;https://github.com/wala/WALA&quot;&gt;https://github.com/wala/WALA&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;testing: &lt;a href=&quot;https://travis-ci.org/wala/WALA&quot;&gt;https://travis-ci.org/wala/WALA&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Academic community supported code base
+      &lt;ul&gt;
+        &lt;li&gt;started at Thomas J. Watson Research Center&lt;/li&gt;
+        &lt;li&gt;selected contributors (of many):
+          &lt;ul&gt;
+            &lt;li&gt;Karlsruher Institut für Technologie&lt;/li&gt;
+            &lt;li&gt;Technischen Universität Darmstadt&lt;/li&gt;
+            &lt;li&gt;한국과학기술원(KAIST) 전산학부&lt;/li&gt;
+            &lt;li&gt;University of California, Berkeley&lt;/li&gt;
+            &lt;li&gt;Univeristy of Wisconsin, Madison&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;WALA&lt;/h3&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;p&gt;Over 100 publications use WALA, e.g.&lt;/p&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;p&gt;&lt;small&gt;S. Huang, J. Huang, &lt;em&gt;Speeding Up Maximal Causality Reduction with Static Dependency Analysis&lt;/em&gt;, ECOOP 17&lt;/small&gt;&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;&lt;small&gt;E. Wittern et al., &lt;em&gt;Statically checking web API requests in JavaScript&lt;/em&gt;, ICSE 2017&lt;/small&gt;&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;&lt;small&gt;M. Rapoport et al., &lt;em&gt;Who you gonna call? Analyzing Web Requests in Android Applications&lt;/em&gt;, MSR 2017&lt;/small&gt;&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;&lt;small&gt;S. Lee et al., &lt;em&gt;HybriDroid: static analysis framework for Android hybrid applications&lt;/em&gt;, ASE 2016&lt;/small&gt;&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;&lt;small&gt;W. Huang et al., &lt;em&gt;Scalable and precise taint analysis for Android&lt;/em&gt;, ISSTA 2015&lt;/small&gt;&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;&lt;small&gt;Y. Ko et al., &lt;em&gt;Practically Tunable Static Analysis Framework for Large-Scale JavaScript Applications&lt;/em&gt;, ASE 2015&lt;/small&gt;&lt;/p&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h2&gt;WALA&lt;/h2&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;Code base used in IBM products
+      &lt;ul&gt;
+        &lt;li&gt;AppScan&lt;/li&gt;
+        &lt;li&gt;API Harmony&lt;/li&gt;
+        &lt;li&gt;Watson Conversations (experimental)&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Multiple uses within AppScan
+      &lt;ul&gt;
+        &lt;li&gt;JavaScript analysis
+          &lt;ul&gt;
+            &lt;li&gt;Web scanning: AppScan Standard&lt;/li&gt;
+            &lt;li&gt;Source scanning: AppScan Source&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;Java and .NET
+          &lt;ul&gt;
+            &lt;li&gt;Framework models: F4F&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+
+&lt;section style=&quot;font-size: 80%;&quot;&gt;
+  &lt;h2 style=&quot;font-size: 125%&quot;&gt;Selected History&lt;/h2&gt;
+
+  &lt;table&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;2004&lt;/td&gt;
+        &lt;td&gt;ASTk&lt;/td&gt;
+        &lt;td&gt;J2EE optimization&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;2005&lt;/td&gt;
+        &lt;td&gt;ITM&lt;/td&gt;
+        &lt;td&gt;Tivoli JavaScript to DB queries&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;2006&lt;/td&gt;
+        &lt;td&gt; &lt;/td&gt;
+        &lt;td&gt;&lt;strong&gt;Open source release&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;2008&lt;/td&gt;
+        &lt;td&gt;GBS&lt;/td&gt;
+        &lt;td&gt;ABAP analysis + tooling&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;2010&lt;/td&gt;
+        &lt;td&gt;AppScan&lt;/td&gt;
+        &lt;td&gt;JSA security analysis&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;2012&lt;/td&gt;
+        &lt;td&gt;ECOOP&lt;/td&gt;
+        &lt;td&gt;Correlation tracking&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;2013&lt;/td&gt;
+        &lt;td&gt;ICSE&lt;/td&gt;
+        &lt;td&gt;Approximate call graphs&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;2013&lt;/td&gt;
+        &lt;td&gt; &lt;/td&gt;
+        &lt;td&gt;Android analysis support&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;2014&lt;/td&gt;
+        &lt;td&gt;AppScan&lt;/td&gt;
+        &lt;td&gt;Approximate call graphs in AppScan&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;2016&lt;/td&gt;
+        &lt;td&gt;ICSE+API Harmony&lt;/td&gt;
+        &lt;td&gt;Web API bug detection&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;2017&lt;/td&gt;
+        &lt;td&gt;WCS&lt;/td&gt;
+        &lt;td&gt;Dialog bug finding analysis&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;WALA JavaScript&lt;/h3&gt;
+  &lt;p&gt;&lt;br /&gt;
+&lt;img src=&quot;/images/WalaJSDiagram.jpg&quot; border=&quot;0&quot; style=&quot;border-width: 0px;&quot; /&gt;
+&lt;br /&gt;&lt;/p&gt;
+
+  &lt;ol&gt;
+    &lt;li&gt;Third party parser translates JavaScript to an AST&lt;/li&gt;
+    &lt;li&gt;WALA translates that AST to its Common AST (CAst)&lt;/li&gt;
+    &lt;li&gt;WALA translates CAst to the WALA IR&lt;/li&gt;
+    &lt;li&gt;Analyses are performed on the WALA IR&lt;/li&gt;
+  &lt;/ol&gt;
+
+  &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;WALA Running Example&lt;/h3&gt;
+
+  &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;var document = { URL: &quot;whatever&quot;,
+  write: function Document_prototype_write(x) { } };
+var id = function _id(x) { return x; };
+function Id() { this.id = id; }
+function SubId() { }; SubId.prototype = new Id();
+
+if (Math.random.call(null) &amp;gt; 0) {
+    var id1 = new Id();
+    var text = id1.id.call(document, document.URL);
+} else {
+    var id2 = new SubId();
+    var text = id2.id(&quot;not a url&quot;);
+}
+document.write(text);
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/div&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;WALA Common AST (CAst)&lt;/h3&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;Abstract Syntax Tree (AST) specialized for WALA
+      &lt;ul&gt;
+        &lt;li&gt;cross-language AST&lt;/li&gt;
+        &lt;li&gt;first part of translation to IR&lt;/li&gt;
+        &lt;li&gt;WALA supports rewrites at the CAst level&lt;/li&gt;
+        &lt;li&gt;hide details of third-party front ends&lt;/li&gt;
+        &lt;li&gt;make language details explicit&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;CAst for JavaScript
+      &lt;ul&gt;
+        &lt;li&gt;lift local variable declarations&lt;/li&gt;
+        &lt;li&gt;expand shorthands like object literals&lt;/li&gt;
+        &lt;li&gt;explicit handling of “method” calls&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h3&gt;WALA Running - CAst&lt;/h3&gt;
+
+&lt;iframe src=&quot;/wala101/index.html&quot; frameborder=&quot;0&quot; height=&quot;1000&quot; width=&quot;3500&quot;&gt;&lt;/iframe&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h3&gt;CAst Example&lt;/h3&gt;
+&lt;div class=&quot;row&quot;&gt;
+ &lt;div style=&quot;float: left;&quot;&gt;
+&lt;pre&gt;
+BLOCK
+  BLOCK
+    ...
+    FUNCTION_STMT
+      &quot;CAst: Id&quot;
+    ...&lt;span style=&quot;color: yellow;&quot;&gt;
+    DECL_STMT
+      &quot;text&quot;
+      VAR &quot;undefined&quot;&lt;/span&gt;
+  BLOCK
+    ASSIGN
+      VAR &quot;document&quot;&lt;span style=&quot;color: orange;&quot;&gt;
+      OBJECT_LITERAL
+        CALL
+          VAR &quot;Object&quot;
+          &quot;ctor&quot;
+        &quot;URL&quot;
+        &quot;whatever&quot;
+        &quot;write&quot;
+        FUNCTION_EXPR
+          &quot;CAst: ..._write&quot;&lt;/span&gt;
+  ...
+&lt;/pre&gt;
+&lt;/div&gt;
+ &lt;div style=&quot;float: right;&quot;&gt;
+ &lt;pre&gt;
+  IF_STMT
+    BINARY_EXPR
+      &quot;&amp;gt;&quot;
+      SCOPE
+        ...&lt;span style=&quot;color: cyan;&quot;&gt;
+          BLOCK_EXPR
+            ASSIGN
+              VAR &quot;$$destructure$rcvr1&quot;
+              OBJECT_REF
+                VAR &quot;Math&quot;
+                &quot;random&quot;
+            ASSIGN
+              VAR &quot;$$destructure$elt1&quot;
+              &quot;call&quot;
+          CALL
+            VAR &quot;$$destructure$elt1&quot;
+            &quot;dispatch&quot;
+            VAR &quot;$$destructure$rcvr1&quot;
+            CONSTANT&lt;/span&gt;
+      &quot;0.0&quot;
+   ...
+&lt;/pre&gt;
+ &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;CAst translation to IR&lt;/h3&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;Create WALA IR from CAst
+      &lt;ul&gt;
+        &lt;li&gt;cross-language core functionality&lt;/li&gt;
+        &lt;li&gt;construct Control Flow Graph (CFG)&lt;/li&gt;
+        &lt;li&gt;convert to simple &lt;code class=&quot;highlighter-rouge&quot;&gt;SSAInstruction&lt;/code&gt;s&lt;/li&gt;
+        &lt;li&gt;convert to Static Single Assignment (SSA) form&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;JavaScript-specific extension
+      &lt;ul&gt;
+        &lt;li&gt;same extension handles both JavaScript parsers&lt;/li&gt;
+        &lt;li&gt;translate JavaScript idiosyncracies
+          &lt;ul&gt;
+            &lt;li&gt;e.g. weird “method” calls&lt;/li&gt;
+            &lt;li&gt;e.g. non-existent variables are globals&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;Background: SSA&lt;/h3&gt;
+  &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;Static Single Assignment (SSA) form
+      &lt;ul&gt;
+        &lt;li&gt;every variable has &lt;em&gt;one&lt;/em&gt; definition&lt;/li&gt;
+        &lt;li&gt;“𝜙 nodes” used where definitions merge&lt;/li&gt;
+        &lt;li&gt;variables become values&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Heart of WALA IR
+      &lt;ul&gt;
+        &lt;li&gt;SSA form is the only form used in analysis&lt;/li&gt;
+        &lt;li&gt;eliminates “reaching definitions” analysis&lt;/li&gt;
+        &lt;li&gt;simplifies expressing dataflow analyses&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;Background: SSA&lt;/h3&gt;
+
+  &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;if (Math.random.call(null) &amp;gt; 0) {
+    var id1 = new Id();
+    var text = id1.id.call(document, document.URL);
+} else {
+    var id2 = new Id();
+    var text = id2.id(&quot;not a url&quot;);
+}
+document.write(text);
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;if (Math.random.call(null) &amp;gt; 0) {
+    var id1 = new Id();
+    var text1 = id1.id.call(document, document.URL);
+} else {
+    var id2 = new Id();
+    var text2 = id2.id(&quot;not a url&quot;);
+}
+text3 = 𝜙(text1, text2);
+document.write(text3);
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/div&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;Illustrative only: WALA does SSA on the IR&lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h3&gt;WALA Running - IR&lt;/h3&gt;
+
+&lt;iframe src=&quot;/wala101/index.html&quot; frameborder=&quot;0&quot; height=&quot;1000&quot; width=&quot;3500&quot;&gt;&lt;/iframe&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h3&gt;WALA IR Example&lt;/h3&gt;
+&lt;pre&gt;
+BB1&lt;span style=&quot;color: yellow;&quot;&gt;
+0   v2 = new &amp;lt;JavaScriptLoader,LArray&amp;gt;@0     [1:4]-&amp;gt;[14:19] [2=[arguments]]&lt;/span&gt;
+...&lt;span style=&quot;color: skyblue;&quot;&gt;
+4   lexical:id@Ldemo2.js = v6                [1:4]-&amp;gt;[14:19]&lt;/span&gt;
+...
+8   v16 = global:global Function             [1:4]-&amp;gt;[14:19]&lt;span style=&quot;color: yellow;&quot;&gt;
+9   v13 = construct v16@9 v15:#Ldemo2.js/SubId exception:v14[1:4]-&amp;gt;[14:19]&lt;/span&gt;
+10   global:global SubId = v13               [1:4]-&amp;gt;[14:19]
+...
+19   v27 = global:global Object              [1:22]-&amp;gt;[2:41]
+...&lt;span style=&quot;color: yellow;&quot;&gt;
+21   v25 = construct v27@21 exception:v28    [1:22]-&amp;gt;[2:41] [25=[document]]&lt;/span&gt;
+BB3
+22   fieldref v25.v29:#URL = v30:#whatever   [1:22]-&amp;gt;[2:41] [25=[document]]
+...&lt;span style=&quot;color: yellow;&quot;&gt;
+28   v36 = construct v39@28 v38:#Ldemo2.js/_id exception:v37[3:18]-&amp;gt;[3:20]&lt;/span&gt;&lt;span style=&quot;color: skyblue;&quot;&gt;
+29   lexical:id@Ldemo2.js = v36              [3:4]-&amp;gt;[3:5]&lt;/span&gt;
+...&lt;span style=&quot;color: chartreuse;&quot;&gt;
+35   fieldref v44.v45:#prototype = v41       [5:38]-&amp;gt;[5:38]&lt;/span&gt;
+&lt;/pre&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h3&gt;WALA IR Example&lt;/h3&gt;
+&lt;pre&gt;
+38   v51 = global:global Math                [7:4]-&amp;gt;[7:7]
+...&lt;span style=&quot;color: chartreuse;&quot;&gt;
+41   v5 = prototype_values(v51)              [7:4]-&amp;gt;[7:14]&lt;/span&gt;
+42   v49 = getfield ...random... v5          [7:4]-&amp;gt;[7:14]
+BB11&lt;span style=&quot;color: magenta;&quot;&gt;
+45   v55 = dispatch v54:#call@45 v49,v40:#null exception:v56[7:4]-&amp;gt;[7:25]&lt;/span&gt;
+BB12
+46   v46 = binaryop(gt) v55 , v57:#0.0       [7:4]-&amp;gt;[7:29]
+47   conditional branch(eq, to iindex=65) v46,v58:#0[7:0]-&amp;gt;[7:1]
+...
+65   v72 = global:global SubId               [11:18]-&amp;gt;[11:22]
+...&lt;span style=&quot;color: yellow;&quot;&gt;
+67   v71 = construct v72@67 exception:v73    [11:18]-&amp;gt;[11:22] [71=[id2]]&lt;/span&gt;
+BB21&lt;span style=&quot;color: magenta;&quot;&gt;
+73   v76 = dispatch v65:#id@73 v71,v77:#not a url exception:v78[12:15]-&amp;gt;[12:33] [76=[text]71=[id2]]&lt;/span&gt;
+BB23&lt;span style=&quot;color: tomato;&quot;&gt;
+           v23 = phi  v67,v76&lt;/span&gt;&lt;span style=&quot;color: magenta;&quot;&gt;
+79   v81 = dispatch v31:#write@79 v25,v23 exception:v82[14:0]-&amp;gt;[14:19] [25=[document]23=[text]]&lt;/span&gt;
+&lt;/pre&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h3&gt;WALA Running - IR&lt;/h3&gt;
+
+&lt;iframe src=&quot;/wala101/index.html&quot; frameborder=&quot;0&quot; height=&quot;1000&quot; width=&quot;3500&quot;&gt;&lt;/iframe&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;IR Features&lt;/h3&gt;
+  &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+  &lt;ol&gt;
+    &lt;li&gt;&lt;span style=&quot;color: yellow;&quot;&gt;Object Creation&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span style=&quot;color: skyblue;&quot;&gt;Lexical scoping&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span style=&quot;color: chartreuse;&quot;&gt;Prototype chain&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span style=&quot;color: magenta;&quot;&gt;“Method” calls&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span style=&quot;color: tomato;&quot;&gt;SSA&lt;/span&gt;&lt;/li&gt;
+  &lt;/ol&gt;
+
+  &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;&lt;span style=&quot;color: yellow;&quot;&gt;Object Creation&lt;/span&gt;&lt;/h3&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;new&lt;/code&gt; takes an expression, not type
+      &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;var x = (...)? Object: Array;
+var y = new x();
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;new&lt;/code&gt; has diverse semantics&lt;/p&gt;
+
+      &lt;table&gt;
+        &lt;tbody&gt;
+          &lt;tr&gt;
+            &lt;td&gt;new Object()&lt;/td&gt;
+            &lt;td&gt;→&lt;/td&gt;
+            &lt;td&gt;fresh object&lt;/td&gt;
+          &lt;/tr&gt;
+        &lt;/tbody&gt;
+        &lt;tbody&gt;
+          &lt;tr&gt;
+            &lt;td&gt;new Object(5)&lt;/td&gt;
+            &lt;td&gt;→&lt;/td&gt;
+            &lt;td&gt;the value 5&lt;/td&gt;
+          &lt;/tr&gt;
+        &lt;/tbody&gt;
+        &lt;tbody&gt;
+          &lt;tr&gt;
+            &lt;td&gt;new Array(3)&lt;/td&gt;
+            &lt;td&gt;→&lt;/td&gt;
+            &lt;td&gt;array of length 3&lt;/td&gt;
+          &lt;/tr&gt;
+        &lt;/tbody&gt;
+        &lt;tbody&gt;
+          &lt;tr&gt;
+            &lt;td&gt;new Array(1,2,3)&lt;/td&gt;
+            &lt;td&gt;→&lt;/td&gt;
+            &lt;td&gt;array containing [1, 2, 3]&lt;/td&gt;
+          &lt;/tr&gt;
+        &lt;/tbody&gt;
+      &lt;/table&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;&lt;span style=&quot;color: yellow;&quot;&gt;Object Creation&lt;/span&gt;&lt;/h3&gt;
+  &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;Model &lt;code class=&quot;highlighter-rouge&quot;&gt;new&lt;/code&gt; expressions as special calls
+      &lt;ul&gt;
+        &lt;li&gt;interpret &lt;code class=&quot;highlighter-rouge&quot;&gt;new&lt;/code&gt; expressions as call expressions&lt;/li&gt;
+        &lt;li&gt;type-dependent dispatch&lt;/li&gt;
+        &lt;li&gt;argument-count-dependent dispatch&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;JavaScriptConstructorFunctions&lt;/code&gt;
+      &lt;ul&gt;
+        &lt;li&gt;model constructor behavior based on spec&lt;/li&gt;
+        &lt;li&gt;primitive and user “types”&lt;/li&gt;
+        &lt;li&gt;generate WALA IR explicitly&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;&lt;span style=&quot;color: yellow;&quot;&gt;Object Creation&lt;/span&gt;&lt;/h3&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;JavaScriptConstructorFunctions&lt;/code&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;private IMethod makeUnaryObjectConstructor(IClass cls) {
+  JSInstructionFactory insts = (JSInstructionFactory)
+    cls.getClassLoader().getInstructionFactory();
+  MethodReference ref =
+    JavaScriptMethods
+      .makeCtorReference(JavaScriptTypes.Object);
+  JavaScriptSummary S = new JavaScriptSummary(ref, 2);
+  S.addStatement(
+    insts.ReturnInstruction(
+      S.getNumberOfStatements(), 2, false));
+  S.getNextProgramCounter(); 
+  return new JavaScriptConstructor(ref, S, cls,
+    cha.lookupClass(JavaScriptTypes.Object));
+}
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/div&gt;
+
+  &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h3&gt;&lt;span style=&quot;color: yellow;&quot;&gt;User Object Creation&lt;/span&gt;&lt;/h3&gt;
+&lt;br /&gt;
+&lt;pre&gt;
+0   v2 = new &amp;lt;JavaScriptLoader,LArray&amp;gt;@0     
+BB1&lt;span style=&quot;color: chartreuse;&quot;&gt;
+1   v4 = getfield ...prototype... v1&lt;/span&gt;
+BB2&lt;span style=&quot;color: yellow;&quot;&gt;
+2   v5 = new &amp;lt;JavaScriptLoader,LObject&amp;gt;@2&lt;/span&gt;
+BB3&lt;span style=&quot;color: chartreuse;&quot;&gt;
+3   set_prototype(v5, v4)&lt;/span&gt;          
+4   v7 = invoke v1@4 v5 exception:v8         
+BB4
+5   conditional branch(eq, to iindex=7) v7,v9
+BB5
+6   return v7                                
+BB6
+7   return v5
+&lt;/pre&gt;
+&lt;br /&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;&lt;span style=&quot;color: skyblue;&quot;&gt;Lexical Scoping&lt;/span&gt;&lt;/h3&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;Access to enclosing function state
+      &lt;ul&gt;
+        &lt;li&gt;read and write support, unlike Java&lt;/li&gt;
+        &lt;li&gt;allows “upward funargs”:
+          &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;function Obj(x) {
+var state = x;
+this.get = function() { return state; } ;
+};
+var obj = new Obj(function(){return 3;});
+var test1 = ( obj.get() )();
+&lt;/code&gt;&lt;/pre&gt;
+          &lt;/div&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;WALA models as heap locations
+      &lt;ul&gt;
+        &lt;li&gt;reads and writes are flow insensitive&lt;/li&gt;
+        &lt;li&gt;does not do SSA renaming for them&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;&lt;span style=&quot;color: skyblue;&quot;&gt;Lexical Scoping&lt;/span&gt;&lt;/h3&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;IR of &lt;code class=&quot;highlighter-rouge&quot;&gt;function Id&lt;/code&gt;
+      &lt;ul&gt;
+        &lt;li&gt;uses ‘id’ value from script &lt;code class=&quot;highlighter-rouge&quot;&gt;demo2.js&lt;/code&gt;&lt;/li&gt;
+        &lt;li&gt;specified as a name and creator&lt;/li&gt;
+        &lt;li&gt;value modeled in function object&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;pre&gt;
+BB0
+BB1
+0   v3 = new &amp;lt;JavaScriptLoader,LArray&amp;gt;@0  [4:9]-&amp;gt;[4:10] [3=[arguments]]&lt;span style=&quot;color: skyblue;&quot;&gt;
+1   v5 = lexical:id@Ldemo2.js             [4:26]-&amp;gt;[4:27]&lt;/span&gt;
+2   check v5                              [4:26]-&amp;gt;[4:27]
+BB2
+3   fieldref v2.v6:#id = v5               [4:24]-&amp;gt;[4:24] [2=[this]]
+BB3
+&lt;/pre&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;&lt;span style=&quot;color: chartreuse;&quot;&gt;Prototype chain&lt;/span&gt;&lt;/h3&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;JavaScript uses prototype-based inheritance
+      &lt;ul&gt;
+        &lt;li&gt;objects point a ‘prototype’&lt;/li&gt;
+        &lt;li&gt;properties can be found in prototype
+          &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;function Id() { this.id = id; }
+function SubId() { };
+SubId.prototype = new Id();
+&lt;/code&gt;&lt;/pre&gt;
+          &lt;/div&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Flow-insensitive model of all prototypes
+      &lt;ul&gt;
+        &lt;li&gt;conservative model of inheritance&lt;/li&gt;
+        &lt;li&gt;no model for must-override
+          &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;if (...) { SubId.prototype = new Id(); }
+&lt;/code&gt;&lt;/pre&gt;
+          &lt;/div&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;&lt;span style=&quot;color: chartreuse;&quot;&gt;Prototype chain&lt;/span&gt;&lt;/h3&gt;
+  &lt;pre&gt;
+30   v42 = global:global Id                  [5:44]-&amp;gt;[5:45]
+...&lt;span style=&quot;color: yellow;&quot;&gt;
+32   v41 = construct v42@32 exception:v43    [5:44]-&amp;gt;[5:45]&lt;/span&gt;
+...
+33   v44 = global:global SubId               [5:22]-&amp;gt;[5:26]
+...&lt;span style=&quot;color: chartreuse;&quot;&gt;
+35   fieldref v44.v45:#prototype = v41       [5:38]-&amp;gt;[5:38]&lt;/span&gt;
+...
+65   v72 = global:global SubId               [11:18]-&amp;gt;[11:22]
+...&lt;span style=&quot;color: yellow;&quot;&gt;
+67   v71 = construct v72@67 exception:v73    [11:18]-&amp;gt;[11:22] [71=[id2]]&lt;/span&gt;
+BB21&lt;span style=&quot;color: magenta;&quot;&gt;
+73   v76 = dispatch v65:#id@73 v71,v77:#not a url exception:v78[12:15]-&amp;gt;[12:33] [76=[text]71=[id2]]&lt;/span&gt;
+&lt;/pre&gt;
+
+  &lt;ol&gt;
+    &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;id&lt;/code&gt; assigned as property of &lt;code class=&quot;highlighter-rouge&quot;&gt;Id&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;an &lt;code class=&quot;highlighter-rouge&quot;&gt;Id&lt;/code&gt; prototype of &lt;code class=&quot;highlighter-rouge&quot;&gt;SubId&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;id&lt;/code&gt; called as method on a &lt;code class=&quot;highlighter-rouge&quot;&gt;SubId&lt;/code&gt;&lt;/li&gt;
+  &lt;/ol&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;&lt;span style=&quot;color: magenta;&quot;&gt;&quot;Method&quot; calls&lt;/span&gt;&lt;/h3&gt;
+  &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+  &lt;div class=&quot;row&quot;&gt;
+ &lt;div style=&quot;float: left;&quot;&gt;
+      &lt;ul&gt;
+        &lt;li&gt;method call
+          &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; var x = new SubId();
+ var y = x.id(&quot;not a url&quot;);
+&lt;/code&gt;&lt;/pre&gt;
+          &lt;/div&gt;
+        &lt;/li&gt;
+        &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;this&lt;/code&gt;
+          &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; id2
+&lt;/code&gt;&lt;/pre&gt;
+          &lt;/div&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+ &lt;div style=&quot;float: right;&quot;&gt;
+      &lt;ul&gt;
+        &lt;li&gt;function call
+          &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; var x = new SubId();
+ var f = x.id;
+ var y = f(&quot;not a url&quot;);
+&lt;/code&gt;&lt;/pre&gt;
+          &lt;/div&gt;
+        &lt;/li&gt;
+        &lt;li&gt;this
+          &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; Global object
+&lt;/code&gt;&lt;/pre&gt;
+          &lt;/div&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+  &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;WALA represents methods explicitly for precision&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;&lt;span style=&quot;color: magenta;&quot;&gt;&quot;Method&quot; call imprecision&lt;/span&gt;&lt;/h3&gt;
+  &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+  &lt;div class=&quot;row&quot;&gt;
+ &lt;div style=&quot;float: left;&quot;&gt;
+      &lt;ul&gt;
+        &lt;li&gt;method call
+          &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;if (...) {
+ var x = new Id();
+} else {
+ var x = new SubId();
+}
+var y = x.id(&quot;not a url&quot;);
+&lt;/code&gt;&lt;/pre&gt;
+          &lt;/div&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+ &lt;div style=&quot;float: right;&quot;&gt;
+      &lt;ul&gt;
+        &lt;li&gt;function call
+          &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;if (...) {
+ var x = new Id();
+} else {
+ var x = new SubId();
+}
+var f = x.id;
+var y = f.call(x, &quot;not a url&quot;);
+&lt;/code&gt;&lt;/pre&gt;
+          &lt;/div&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+  &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;function call could have 4 possibilities
+      &lt;ul&gt;
+        &lt;li&gt;2 values for ‘this’&lt;/li&gt;
+        &lt;li&gt;2 values for ‘f’&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;&lt;span style=&quot;color: magenta;&quot;&gt;&quot;Method&quot; call implementation&lt;/span&gt;&lt;/h3&gt;
+  &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+  &lt;pre&gt;
+65   v72 = global:global SubId               [11:18]-&amp;gt;[11:22]
+...&lt;span style=&quot;color: yellow;&quot;&gt;
+67   v71 = construct v72@67 exception:v73    [11:18]-&amp;gt;[11:22] [71=[id2]]&lt;/span&gt;
+BB21&lt;span style=&quot;color: magenta;&quot;&gt;
+73   v76 = dispatch v65:#id@73 v71,v77:#not a url exception:v78[12:15]-&amp;gt;[12:33] [76=[text]71=[id2]]&lt;/span&gt;
+&lt;/pre&gt;
+  &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;dispatch&lt;/code&gt; instruction links &lt;code class=&quot;highlighter-rouge&quot;&gt;this&lt;/code&gt; and method
+      &lt;ul&gt;
+        &lt;li&gt;avoid imprecision of reading, calling function&lt;/li&gt;
+        &lt;li&gt;only calls each method with corresponding &lt;code class=&quot;highlighter-rouge&quot;&gt;this&lt;/code&gt;
+&lt;br /&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;&lt;span style=&quot;color: tomato;&quot;&gt;SSA&lt;/span&gt;&lt;/h3&gt;
+  &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+  &lt;div class=&quot;row&quot;&gt;
+ &lt;div style=&quot;float: left;&quot;&gt;
+      &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;var id2 = new SubId();
+var text = id2.id(&quot;not a url&quot;);
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+ &lt;div style=&quot;float: right;&quot;&gt;
+      &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;var x = new SubId();
+var id2 = x;
+var text = id2.id(&quot;not a url&quot;);
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;WALA SSA implements copy propagation
+      &lt;ul&gt;
+        &lt;li&gt;removes unnecessary assignments&lt;/li&gt;
+        &lt;li&gt;replaces uses with right hand side&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;var x = new SubId();
+// var id2 = x;
+var text = x.id(&quot;not a url&quot;);
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/div&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Illustrative only: WALA operates on IR&lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;Call Graph Construction&lt;/h3&gt;
+  &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;Call graphs denote what functions calls call
+      &lt;ul&gt;
+        &lt;li&gt;e.g. the &lt;code class=&quot;highlighter-rouge&quot;&gt;_id&lt;/code&gt; function is called here:
+          &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;var text = id2.id(&quot;not a url&quot;);
+&lt;/code&gt;&lt;/pre&gt;
+          &lt;/div&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Key question is estimating targets
+      &lt;ul&gt;
+        &lt;li&gt;languages like Java have types to help&lt;/li&gt;
+        &lt;li&gt;JavaScript does not&lt;/li&gt;
+        &lt;li&gt;Must track functions from creations to calls&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;Tracking Functions&lt;/h3&gt;
+
+  &lt;div class=&quot;row&quot;&gt;
+ &lt;div style=&quot;float: left;&quot;&gt;
+&lt;pre&gt;
+...
+
+&lt;span class=&quot;step&quot;&gt;var id = function _id(x) {
+  return x;
+};&lt;/span&gt;
+function Id() {
+  this.id = id;
+}
+function SubId() { };
+SubId.prototype = new Id();
+
+...
+
+var id2 = new SubId();
+var text = id2.id(&quot;not a url&quot;);
+&lt;/pre&gt;
+ &lt;/div&gt;
+ &lt;div style=&quot;float: right;&quot;&gt;
+
+      &lt;ol&gt;
+        &lt;li&gt;&lt;em&gt;_id created&lt;/em&gt;&lt;/li&gt;
+      &lt;/ol&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;Track propagation of functions to call sites&lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;Tracking Functions&lt;/h3&gt;
+
+  &lt;div class=&quot;row&quot;&gt;
+ &lt;div style=&quot;float: left;&quot;&gt;
+&lt;pre&gt;
+...
+
+var id = function _id(x) {
+  return x;
+};
+&lt;span class=&quot;step&quot;&gt;function Id() {
+  this.id = id;
+}&lt;/span&gt;
+function SubId() { };
+SubId.prototype = new Id();
+
+...
+
+var id2 = new SubId();
+var text = id2.id(&quot;not a url&quot;);
+&lt;/pre&gt;
+ &lt;/div&gt;
+ &lt;div style=&quot;float: right;&quot;&gt;
+
+      &lt;ol&gt;
+        &lt;li&gt;&lt;em&gt;_id created&lt;/em&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;em&gt;Id created&lt;/em&gt;&lt;/li&gt;
+      &lt;/ol&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;Track propagation of functions to call sites&lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+&lt;section&gt;
+  &lt;h3&gt;Tracking Functions&lt;/h3&gt;
+
+  &lt;div class=&quot;row&quot;&gt;
+ &lt;div style=&quot;float: left;&quot;&gt;
+&lt;pre&gt;
+...
+
+var id = function _id(x) {
+  return x;
+};
+function Id() {
+  this.id = id;
+}
+&lt;span class=&quot;step&quot;&gt;function SubId() { };&lt;/span&gt;
+SubId.prototype = new Id();
+
+...
+
+var id2 = new SubId();
+var text = id2.id(&quot;not a url&quot;);
+&lt;/pre&gt;
+ &lt;/div&gt;
+ &lt;div style=&quot;float: right;&quot;&gt;
+
+      &lt;ol&gt;
+        &lt;li&gt;&lt;em&gt;_id created&lt;/em&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;em&gt;Id created&lt;/em&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;em&gt;SubId created&lt;/em&gt;&lt;/li&gt;
+      &lt;/ol&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;Track propagation of functions to call sites&lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;Tracking Functions&lt;/h3&gt;
+
+  &lt;div class=&quot;row&quot;&gt;
+ &lt;div style=&quot;float: left;&quot;&gt;
+&lt;pre&gt;
+...
+
+var id = function _id(x) {
+  return x;
+};
+function Id() {
+  this.id = id;
+}
+function SubId() { };
+SubId.prototype = &lt;span class=&quot;step&quot;&gt;new Id()&lt;/span&gt;;
+
+...
+
+var id2 = new SubId();
+var text = id2.id(&quot;not a url&quot;);
+&lt;/pre&gt;
+ &lt;/div&gt;
+ &lt;div style=&quot;float: right;&quot;&gt;
+
+      &lt;ol&gt;
+        &lt;li&gt;&lt;em&gt;_id created&lt;/em&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;em&gt;Id created&lt;/em&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;em&gt;SubId created&lt;/em&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;em&gt;Id constructed&lt;/em&gt;&lt;/li&gt;
+      &lt;/ol&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;Track propagation of functions to call sites&lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;Tracking Functions&lt;/h3&gt;
+
+  &lt;div class=&quot;row&quot;&gt;
+ &lt;div style=&quot;float: left;&quot;&gt;
+&lt;pre&gt;
+...
+
+var id = function _id(x) {
+  return x;
+};
+function Id() {
+  &lt;span class=&quot;step&quot;&gt;this.id = id;&lt;/span&gt;
+}
+function SubId() { };
+SubId.prototype = new Id();
+
+...
+
+var id2 = new SubId();
+var text = id2.id(&quot;not a url&quot;);
+&lt;/pre&gt;
+ &lt;/div&gt;
+ &lt;div style=&quot;float: right;&quot;&gt;
+
+      &lt;ol&gt;
+        &lt;li&gt;&lt;em&gt;_id created&lt;/em&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;em&gt;Id created&lt;/em&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;em&gt;SubId created&lt;/em&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;em&gt;Id constructed&lt;/em&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;em&gt;id assigned&lt;/em&gt;&lt;/li&gt;
+      &lt;/ol&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;Track propagation of functions to call sites&lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+&lt;section&gt;
+  &lt;h3&gt;Tracking Functions&lt;/h3&gt;
+
+  &lt;div class=&quot;row&quot;&gt;
+ &lt;div style=&quot;float: left;&quot;&gt;
+&lt;pre&gt;
+...
+
+var id = function _id(x) {
+  return x;
+};
+function Id() {
+  this.id = id;
+}
+function SubId() { };
+&lt;span class=&quot;step&quot;&gt;SubId.prototype = new Id();&lt;/span&gt;
+
+...
+
+var id2 = new SubId();
+var text = id2.id(&quot;not a url&quot;);
+&lt;/pre&gt;
+ &lt;/div&gt;
+ &lt;div style=&quot;float: right;&quot;&gt;
+
+      &lt;ol&gt;
+        &lt;li&gt;&lt;em&gt;_id created&lt;/em&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;em&gt;Id created&lt;/em&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;em&gt;SubId created&lt;/em&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;em&gt;Id constructed&lt;/em&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;em&gt;id assigned&lt;/em&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;em&gt;prototype set&lt;/em&gt;&lt;/li&gt;
+      &lt;/ol&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;Track propagation of functions to call sites&lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;Tracking Functions&lt;/h3&gt;
+
+  &lt;div class=&quot;row&quot;&gt;
+ &lt;div style=&quot;float: left;&quot;&gt;
+&lt;pre&gt;
+...
+
+var id = function _id(x) {
+  return x;
+};
+function Id() {
+  this.id = id;&amp;lt;/span&amp;gt;
+}
+function SubId() { };
+SubId.prototype = new Id();
+
+...
+
+&lt;span class=&quot;step&quot;&gt;var id2 = new SubId();&lt;/span&gt;
+var text = id2.id(&quot;not a url&quot;);
+&lt;/pre&gt;
+ &lt;/div&gt;
+ &lt;div style=&quot;float: right;&quot;&gt;
+
+      &lt;ol&gt;
+        &lt;li&gt;&lt;em&gt;_id created&lt;/em&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;em&gt;Id created&lt;/em&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;em&gt;SubId created&lt;/em&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;em&gt;Id constructed&lt;/em&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;em&gt;id assigned&lt;/em&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;em&gt;prototype set&lt;/em&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;em&gt;SubId constructed&lt;/em&gt;&lt;/li&gt;
+      &lt;/ol&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;Track propagation of functions to call sites&lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+&lt;section&gt;
+  &lt;h3&gt;Tracking Functions&lt;/h3&gt;
+
+  &lt;div class=&quot;row&quot;&gt;
+ &lt;div style=&quot;float: left;&quot;&gt;
+&lt;pre&gt;
+...
+
+var id = function _id(x) {
+  return x;
+};
+function Id() {
+  this.id = id;
+}
+function SubId() { };
+&lt;span class=&quot;step&quot;&gt;SubId.prototype&lt;/span&gt; = new Id();
+
+...
+
+var id2 = new SubId();
+var text = &lt;span class=&quot;step&quot;&gt;id2.id&lt;/span&gt;(&quot;not a url&quot;);
+&lt;/pre&gt;
+ &lt;/div&gt;
+ &lt;div style=&quot;float: right;&quot;&gt;
+
+      &lt;ol&gt;
+        &lt;li&gt;&lt;em&gt;_id created&lt;/em&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;em&gt;Id created&lt;/em&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;em&gt;SubId created&lt;/em&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;em&gt;Id constructed&lt;/em&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;em&gt;id assigned&lt;/em&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;em&gt;prototype set&lt;/em&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;em&gt;SubId constructed&lt;/em&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;em&gt;id read&lt;/em&gt;&lt;/li&gt;
+      &lt;/ol&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;Track propagation of functions to call sites&lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;WALA Call Graphs&lt;/h3&gt;
+  &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;“Propagation-based” call graph construction
+      &lt;ul&gt;
+        &lt;li&gt;track data flow in the program&lt;/li&gt;
+        &lt;li&gt;language semantics determines calls&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;“Field-based” approximate call graphs
+      &lt;ul&gt;
+        &lt;li&gt;approximate data flow for scalability&lt;/li&gt;
+        &lt;li&gt;currently used in product&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;Propagation-Based Call Graphs&lt;/h3&gt;
+  &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+  &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;JSCFABuilder B =
+  JSCallGraphBuilderUtil
+    .makeScriptCGBuilder(..., file);
+CallGraph CG =
+  B.makeCallGraph(B.getOptions());
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/div&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;JavaScript traditional call graphs
+      &lt;ul&gt;
+        &lt;li&gt;tracks propagation of data through the program&lt;/li&gt;
+        &lt;li&gt;flexible control of &lt;em&gt;context sensitivity&lt;/em&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;&quot;Call&quot; Handling&lt;/h3&gt;
+  &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Function.call&lt;/code&gt; call on function objects
+      &lt;ul&gt;
+        &lt;li&gt;“first class” function call&lt;/li&gt;
+        &lt;li&gt;analogous to &lt;code class=&quot;highlighter-rouge&quot;&gt;Method.call&lt;/code&gt; in Java&lt;/li&gt;
+        &lt;li&gt;common in JavaScript frameworks
+          &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;var id1 = new Id();
+var text = id1.id.call(document, document.URL);
+&lt;/code&gt;&lt;/pre&gt;
+          &lt;/div&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Modeled in WALA with trampoline function
+      &lt;ul&gt;
+        &lt;li&gt;natural to handle with data flow&lt;/li&gt;
+        &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;this&lt;/code&gt; object in trampoline is function to call&lt;br /&gt;
+&lt;br /&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;Context Sensitivity&lt;/h3&gt;
+  &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;Separate anaylses of different calls to same function
+      &lt;ul&gt;
+        &lt;li&gt;potentially better precision&lt;/li&gt;
+        &lt;li&gt;unpredictable impact on cost
+          &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;if (Math.random.call(null) &amp;gt; 0) {
+var id1 = new Id();
+var text = id1.id.call(document, document.URL);
+} else {
+var id2 = new SubId();
+var text = id2.id(&quot;not a url&quot;);
+}
+&lt;/code&gt;&lt;/pre&gt;
+          &lt;/div&gt;
+        &lt;/li&gt;
+        &lt;li&gt;one or two analyses of &lt;code class=&quot;highlighter-rouge&quot;&gt;_id&lt;/code&gt;
+&lt;br /&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;Framework Scalability Issues&lt;/h3&gt;
+  &lt;div class=&quot;row&quot;&gt;
+ &lt;div style=&quot;float: left;&quot;&gt;
+      &lt;ul&gt;
+        &lt;li&gt;the &lt;em&gt;extend&lt;/em&gt; idiom
+          &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;var o1 = { a: 1, b: 2 };
+var o2 = { }
+for(var p in o1) {
+var x = o1[p];
+o2[p] = x;
+}
+&lt;/code&gt;&lt;/pre&gt;
+          &lt;/div&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+ &lt;div style=&quot;float: right;&quot;&gt;
+      &lt;ul&gt;
+        &lt;li&gt;value estimates by data flow&lt;/li&gt;
+      &lt;/ul&gt;
+
+      &lt;table&gt;
+        &lt;thead&gt;
+          &lt;tr&gt;
+            &lt;th&gt;var&lt;/th&gt;
+            &lt;th&gt;values&lt;/th&gt;
+          &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+          &lt;tr&gt;
+            &lt;td&gt;o1&lt;/td&gt;
+            &lt;td&gt;&lt;em&gt;o1&lt;/em&gt;&lt;/td&gt;
+          &lt;/tr&gt;
+        &lt;/tbody&gt;
+        &lt;tbody&gt;
+          &lt;tr&gt;
+            &lt;td&gt;o2&lt;/td&gt;
+            &lt;td&gt;&lt;em&gt;o2&lt;/em&gt;&lt;/td&gt;
+          &lt;/tr&gt;
+        &lt;/tbody&gt;
+        &lt;tbody&gt;
+          &lt;tr&gt;
+            &lt;td&gt;p&lt;/td&gt;
+            &lt;td&gt;“a”, “b”&lt;/td&gt;
+          &lt;/tr&gt;
+        &lt;/tbody&gt;
+        &lt;tbody&gt;
+          &lt;tr&gt;
+            &lt;td&gt;x&lt;/td&gt;
+            &lt;td&gt;1, 2&lt;/td&gt;
+          &lt;/tr&gt;
+        &lt;/tbody&gt;
+      &lt;/table&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;imprecise estimates for $o2$: $o2.p \subseteq {1, 2}$&lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;Framework Scalability Issues&lt;/h3&gt;
+  &lt;div class=&quot;row&quot;&gt;
+ &lt;div style=&quot;float: left;&quot;&gt;
+      &lt;ul&gt;
+        &lt;li&gt;the &lt;em&gt;extend&lt;/em&gt; idiom
+          &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;var o1 = { a: 1, b: 2 };
+var o2 = { }
+for(var p in o1) {
+var x = o1[p];
+// o2[p] = x;
+}
+&lt;/code&gt;&lt;/pre&gt;
+          &lt;/div&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+ &lt;div style=&quot;float: right;&quot;&gt;
+      &lt;ul&gt;
+        &lt;li&gt;value estimates by data flow&lt;/li&gt;
+      &lt;/ul&gt;
+
+      &lt;table&gt;
+        &lt;thead&gt;
+          &lt;tr&gt;
+            &lt;th&gt;var&lt;/th&gt;
+            &lt;th&gt;values&lt;/th&gt;
+          &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+          &lt;tr&gt;
+            &lt;td&gt;o1&lt;/td&gt;
+            &lt;td&gt;&lt;em&gt;o&lt;/em&gt;&lt;/td&gt;
+          &lt;/tr&gt;
+        &lt;/tbody&gt;
+        &lt;tbody&gt;
+          &lt;tr&gt;
+            &lt;td&gt;o2&lt;/td&gt;
+            &lt;td&gt;&lt;em&gt;o&lt;/em&gt;&lt;/td&gt;
+          &lt;/tr&gt;
+        &lt;/tbody&gt;
+        &lt;tbody&gt;
+          &lt;tr&gt;
+            &lt;td&gt;p&lt;/td&gt;
+            &lt;td&gt;“a”, “b”&lt;/td&gt;
+          &lt;/tr&gt;
+        &lt;/tbody&gt;
+        &lt;tbody&gt;
+          &lt;tr&gt;
+            &lt;td&gt;x&lt;/td&gt;
+            &lt;td&gt;1, 2&lt;/td&gt;
+          &lt;/tr&gt;
+        &lt;/tbody&gt;
+      &lt;/table&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;precise estimates for $o$: $o.p = 1$&lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h3&gt;WALA Running - Call Graph&lt;/h3&gt;
+
+&lt;iframe src=&quot;/wala101/index.html&quot; frameborder=&quot;0&quot; height=&quot;1000&quot; width=&quot;3500&quot;&gt;&lt;/iframe&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;Taint Analysis Example&lt;/h3&gt;
+  &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;Analysis to find bad dataflow
+      &lt;ul&gt;
+        &lt;li&gt;start from arbitrary “sources”&lt;/li&gt;
+        &lt;li&gt;end at arbitrary “sinks”&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Simplified version of product
+      &lt;ul&gt;
+        &lt;li&gt;illustrate WALA data structures&lt;/li&gt;
+        &lt;li&gt;illustrate data flow mechanisms&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;System Dependence Graph (SDG)&lt;/h3&gt;
+  &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;Dependence between program points
+      &lt;ul&gt;
+        &lt;li&gt;control, data, or both&lt;/li&gt;
+        &lt;li&gt;WALA SDG built from call graph&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Abstracts (most) language details
+      &lt;ul&gt;
+        &lt;li&gt;generic notion of Statement&lt;/li&gt;
+        &lt;li&gt;normal notion of graph edges for dependence&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;com.ibm.wala.ipa.slicer&lt;/code&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;SDG&lt;/code&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Statement&lt;/code&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;Creating the SDG&lt;/h3&gt;
+  &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+  &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;final JSCallGraph cg =
+ cgBuilder.extract(interpreter, flowGraph, eps, monitor);
+...
+PointerAnalysis&amp;lt;ObjectVertex&amp;gt; ptrs =
+ flowGraph.getPointerAnalysis(cg, cache, monitor);
+
+SDG&amp;lt;ObjectVertex&amp;gt; sdg =
+ new SDG&amp;lt;ObjectVertex&amp;gt;(cg, ptrs,
+  DataDependenceOptions.NO_BASE_NO_HEAP_NO_EXCEPTIONS,
+  ControlDependenceOptions.NONE);
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/div&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;Finding Tainted Sources&lt;/h3&gt;
+  &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+  &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;public static EndpointFinder&amp;lt;Statement&amp;gt; documentUrlSource =
+ (Statement s) -&amp;gt; {
+ if (s.getKind()==Kind.NORMAL) {
+  NormalStatement ns = (NormalStatement) s;
+  SSAInstruction inst = ns.getInstruction();
+  if (inst instanceof SSAGetInstruction) {
+   if (((SSAGetInstruction)inst)
+        .getDeclaredField().getName()
+	  .toString().equals(&quot;URL&quot;)) {
+    return true;
+ } } }
+ return false;
+};
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    var text = id1.id.call(document, document.URL);
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/div&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Field reads of the URL property&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;Finding Tainted Sinks&lt;/h3&gt;
+  &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+  &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;public static EndpointFinder&amp;lt;Statement&amp;gt; documentWriteSink =
+ (Statement s) -&amp;gt; {
+ if (s.getKind()==Kind.PARAM_CALLEE) {
+  String ref = ((ParamCallee)s).getNode()
+   .getMethod().toString();
+  if (ref.contains(&quot;Document_prototype_write&quot;)) {
+   return true; } }
+ return false;
+};
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;document.write(text);
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/div&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Calls to document.write&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;Finding Tainted Paths&lt;/h3&gt;
+  &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+  &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;public static &amp;lt;T&amp;gt; Set&amp;lt;List&amp;lt;T&amp;gt;&amp;gt; getPaths(Graph&amp;lt;T&amp;gt; G, EndpointFinder&amp;lt;T&amp;gt; sources, EndpointFinder&amp;lt;T&amp;gt; sinks) {
+ Set&amp;lt;List&amp;lt;T&amp;gt;&amp;gt; result = HashSetFactory.make();
+ for(T src : G) {
+  if (sources.endpoint(src)) {
+   for(final T dst : G) {
+    if (sinks.endpoint(dst)) {
+     BFSPathFinder&amp;lt;T&amp;gt; paths = 
+      new BFSPathFinder&amp;lt;T&amp;gt;(G, new NonNullSingletonIterator&amp;lt;T&amp;gt;(src), new Predicate&amp;lt;T&amp;gt;() {
+       public boolean test(T t) {
+        return t.equals(dst); }});
+     List&amp;lt;T&amp;gt; path;
+     if ((path = paths.find()) != null) {
+      result.add(path); }}}}}
+ return result; }
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/div&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Search over SDG for paths from source to sink&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h3&gt;WALA Running - Taint Analysis&lt;/h3&gt;
+
+&lt;iframe src=&quot;/wala101/index.html&quot; frameborder=&quot;0&quot; height=&quot;1000&quot; width=&quot;3500&quot;&gt;&lt;/iframe&gt;
+
+&lt;/section&gt;</content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">WALA Everywhere (IMDEA)</title><link href="http://localhost:4000/imdea/talk/2017/06/23/imdea.html" rel="alternate" type="text/html" title="WALA Everywhere (IMDEA)" /><published>2017-06-23T01:00:00-04:00</published><updated>2017-06-23T01:00:00-04:00</updated><id>http://localhost:4000/imdea/talk/2017/06/23/imdea</id><content type="html" xml:base="http://localhost:4000/imdea/talk/2017/06/23/imdea.html">&lt;section style=&quot;background: white;&quot;&gt;
+&lt;img src=&quot;/images/WALA.png&quot; border=&quot;0&quot; style=&quot;border-width: 0px;&quot; /&gt;
+&lt;/section&gt;
+
+&lt;section style=&quot;text-align: center;&quot;&gt;
+&lt;h3 style=&quot;margin-top: 0;&quot;&gt;WALA Everywhere&lt;/h3&gt;
+&lt;br /&gt;
+&lt;br /&gt;
+&lt;br /&gt;
+&lt;p&gt;Julian Dolby&lt;/p&gt;
+&lt;p&gt;IBM Thomas J. Watson Research Center&lt;/p&gt;
+&lt;br /&gt;
+&lt;br /&gt;
+&lt;br /&gt;
+&lt;br /&gt;
+&lt;p&gt;&lt;small&gt;IMDEA, Madrid, June 2017&lt;/small&gt;&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h1&gt;Dramatis personæ&lt;/h1&gt;
+&lt;div class=&quot;row&quot;&gt;
+ &lt;div style=&quot;float: left;&quot;&gt;
+  &lt;ul&gt;
+  &lt;li&gt;Karim Ali&lt;/li&gt;
+  &lt;li&gt;Devin Coughlin&lt;/li&gt;
+  &lt;li&gt;Stephen Fink&lt;/li&gt;
+  &lt;li&gt;Jürgen Graf&lt;/li&gt;
+  &lt;li&gt;Sungho Lee (이성호)&lt;/li&gt;
+  &lt;li&gt;Martin Mohr&lt;/li&gt;
+  &lt;li&gt;Brian Pfretzschner&lt;/li&gt;
+  &lt;li&gt;Sukyoung Ryu (류석영)&lt;/li&gt;
+  &lt;/ul&gt;
+ &lt;/div&gt;
+ &lt;div style=&quot;float: right;&quot;&gt;
+  &lt;ul&gt;
+  &lt;li&gt;Max Schaefer&lt;/li&gt;
+  &lt;li&gt;Aleksander Slominski&lt;/li&gt;
+  &lt;li&gt;Manu Sridharan&lt;/li&gt;
+  &lt;li&gt;Noah Weninger&lt;/li&gt;
+  &lt;li&gt;Eric Wittern&lt;/li&gt;
+  &lt;li&gt;Annie Ying&lt;/li&gt;
+  &lt;li&gt;Christofer Young&lt;/li&gt;
+  &lt;li&gt;Yunhui Zheng&lt;/li&gt;
+  &lt;/ul&gt;
+ &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;WALA&lt;/h3&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;Java libraries for static and dynamic analysis
+      &lt;ul&gt;
+        &lt;li&gt;With some JavaScript libraries&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Started at IBM Thomas J. Watson Research Center
+      &lt;ul&gt;
+        &lt;li&gt;Open source in 2006 under Eclipse Public License&lt;/li&gt;
+        &lt;li&gt;https://github.com/wala/WALA&lt;/li&gt;
+        &lt;li&gt;Key design goals
+          &lt;ul&gt;
+            &lt;li&gt;Robustness&lt;/li&gt;
+            &lt;li&gt;Efficiency&lt;/li&gt;
+            &lt;li&gt;Extensibility&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h3&gt;Analyze Everything&lt;/h3&gt;
+&lt;img src=&quot;/images/WalaEverywhere/WalaEverywhere.001.jpeg&quot; border=&quot;0&quot; style=&quot;border-width: 0px;&quot; /&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h3&gt;Analyze Everywhere&lt;/h3&gt;
+&lt;img src=&quot;/images/WalaEverywhere/WalaEverywhere.002.jpeg&quot; style=&quot;border-width: 0px;&quot; /&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;WALA Everywhere&lt;/h3&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;p&gt;Illustrate a small sample of being everywhere&lt;/p&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;p&gt;hybrid apps&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;WALA on Web browsers&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;Swift&lt;/p&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h3&gt;Hybrid Apps&lt;/h3&gt;
+&lt;img src=&quot;/images/WalaEverywhere/WalaEverywhere.005.jpeg&quot; style=&quot;border-width: 0px;&quot; /&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;Hybrid Apps&lt;/h3&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;JavaScript and native code together&lt;/li&gt;
+    &lt;li&gt;Promote portability of apps
+      &lt;ul&gt;
+        &lt;li&gt;“write once, run everywhere”&lt;/li&gt;
+        &lt;li&gt;minimize cost of app across multiple platforms&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Different semantics complicates programming&lt;/li&gt;
+    &lt;li&gt;Static vs. dynamic types
+      &lt;ul&gt;
+        &lt;li&gt;cannot check all type errors syntactically&lt;/li&gt;
+        &lt;li&gt;no overloading in JavaScript&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Argument count flexible in JavaScript
+      &lt;ul&gt;
+        &lt;li&gt;try to pass wrong number of arguments to Java&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h3&gt;Semantics Issues&lt;/h3&gt;
+&lt;img src=&quot;/images/WalaEverywhere/WalaEverywhere.006.jpeg&quot; style=&quot;border-width: 0px;&quot; /&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;HybridDroid&lt;/h3&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;p&gt;Soundy analysis framework for Android hybrid apps&lt;/p&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;p&gt;support for most implicit inter-language flows 
+(Backed by APIs and Dalvik VM source code)&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;support most type compatibility in browsers
+(backed by experiments with trials &amp;amp; errors)&lt;/p&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;Implementation on top of WALA&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;Uses generic WALA cross-language support&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h3&gt;Semantics Checking Results&lt;/h3&gt;
+&lt;img src=&quot;/images/WalaEverywhere/WalaEverywhere.004.jpeg&quot; style=&quot;border-width: 0px;&quot; /&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h3&gt;Why run WALA on the Client?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Integrate with Rich Client interfaces
+ &lt;ul&gt;
+ &lt;li&gt;simplify integration&lt;/li&gt;
+ &lt;li&gt;avoid network round trips&lt;/li&gt;
+ &lt;li&gt;use client compute resources&lt;/li&gt;
+ &lt;li&gt;already in prototype application inside IBM&lt;/li&gt;
+ &lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Client-side applications
+ &lt;ul&gt;
+ &lt;li&gt;analyze dynamically-loaded scripts&lt;/li&gt;
+ &lt;li&gt;support IDE's like Eclipse Orion&lt;/li&gt;
+ &lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Browsers are everywhere&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h3&gt;How to Run WALA on the Client?&lt;/h3&gt;
+&lt;a href=&quot;http://teavm.org&quot;&gt;http://teavm.org&lt;/a&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;TeaVM compiles Java to JavaScript
+ &lt;ul&gt;
+ &lt;li&gt;compiles JVM bytecode to JavaScript&lt;/li&gt;
+ &lt;li&gt;reachability analysis to choose code to compile&lt;/li&gt;
+ &lt;li&gt;Java 8, including lambdas&lt;/li&gt;
+ &lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Significant but limited library support
+ &lt;ul&gt;
+ &lt;li&gt;collections and key libraries implemented&lt;/li&gt;
+ &lt;li&gt;I/O libraries very limited&lt;/li&gt;
+ &lt;li&gt;little reflection support&lt;/li&gt;
+ &lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h3&gt;WALA on TeaVM&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Core of WALA compiles with TeaVM
+ &lt;ul&gt;
+ &lt;li&gt;avoid esoteric features like soft references&lt;/li&gt;
+ &lt;li&gt;avoid the file system&lt;/li&gt;
+ &lt;li&gt;avoid any use of reflection&lt;/li&gt;
+ &lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Basic program analysis works
+ &lt;ul&gt;
+ &lt;li&gt;read JavaScript&lt;/li&gt;
+ &lt;li&gt;call graphs&lt;/li&gt;
+ &lt;li&gt;system dependence graphs&lt;/li&gt;
+ &lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Enough for flow-sensitive taint analysis&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h3&gt;WALA Client Demo&lt;/h3&gt;
+&lt;pre&gt;
+function Document_prototype_write(x) {
+
+}
+
+function id(x) {
+    &lt;span style=&quot;color: red;&quot;&gt;return x &lt;em&gt;// line 6&lt;/em&gt;&lt;/span&gt;;
+}
+
+var document = { URL: &quot;whatever&quot; };
+var url = &lt;span style=&quot;color: red;&quot;&gt;id(document.URL); &lt;em&gt;// line 10&lt;/em&gt;&lt;/span&gt;
+&lt;span style=&quot;color: red;&quot;&gt;Document_prototype_write(url); &lt;em&gt;// line 11&lt;/em&gt;&lt;/span&gt;
+
+var notUrl = id(&quot;not a url&quot;);
+Document_prototype_write(notUrl);
+&lt;/pre&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h3&gt;WALA Client Demo&lt;/h3&gt;
+
+&lt;iframe src=&quot;/walademo/index.html&quot; frameborder=&quot;0&quot; height=&quot;1000&quot; width=&quot;3500&quot;&gt;&lt;/iframe&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;WALA for Swift&lt;/h3&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;p&gt;Apple a dominant mobile platform&lt;/p&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;p&gt;likely most popular phone in the audience&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;Swift primary programming language&lt;/p&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;WALA meant to be flexible&lt;/p&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;p&gt;analyzing new language Swift a test&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;support Apple-IBM alliance&lt;/p&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;Use WALA to analyze Swift&lt;/p&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;this work in early stage&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;Leverage Apple Infrastructure&lt;/h3&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;p&gt;Use open source Apple code&lt;/p&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;p&gt;up-to-date with evolving language&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;written largely in C++, unlike WALA&lt;/p&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;Bridge C++ code to WALA&lt;/p&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;p&gt;large code base, so JNI to Swift tedious&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;exploit JNI interface to WALA&lt;/p&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;Expose WALA to Apple Swift code&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;WALA JNI&lt;/h3&gt;
+
+  &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;interface CAstNode {
+  ...
+  /** 
+   * What kind of node is this...
+  int getKind();
+  ...
+}
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;this-&amp;gt;_getKind = env-&amp;gt;GetMethodID(CAstNode, &quot;getKind&quot;, &quot;()I&quot;);
+THROW_ANY_EXCEPTION(java_ex);
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;int CAstWrapper::getKind(jobject castNode) {
+  jint result = env-&amp;gt;CallIntMethod(castNode, _getKind);
+  THROW_ANY_EXCEPTION(java_ex);
+  return result;
+}
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/div&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;C++ interface close as possible to WALA Java code&lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;New WALA JNI&lt;/h3&gt;
+
+  &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;JNIEnv *launch() {
+  ...
+  // Create the JVM
+  JNIEnv *jniEnv;
+  long flag = JNI_CreateJavaVM(&amp;amp;javaVM, (void**)
+    &amp;amp;jniEnv, &amp;amp;vmArgs);
+  ...
+}
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;void run() {
+  JNIEnv *java_env = launch();
+  TRY(exp, java_env)
+  
+  CAstWrapper CAst(java_env, exp, NULL);
+  THROW_ANY_EXCEPTION(exp);
+
+  CATCH()
+}
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/div&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;Create JVM to launch WALA from Swift compiler&lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;Status&lt;/h3&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;p&gt;WALA-Swift JNI interface working&lt;/p&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;p&gt;integrated into Apple build process&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;initial steps working as of WALA Hack-a-thon&lt;/p&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;Interface not just for WALA&lt;/p&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;p&gt;other Java tools could benefit&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;would love collaborators&lt;/p&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;WALA Everywhere&lt;/h3&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;p&gt;World getting less monolingual, not more&lt;/p&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;p&gt;domains have favorites, e.g. Python for ML&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;new languages like Swift arise&lt;/p&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;Analysis frameworks must adapt&lt;/p&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;p&gt;need to analyze code people use&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;WALA has proven flexible&lt;/p&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;</content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">WALA Everywhere (SOAP)</title><link href="http://localhost:4000/pldi/soap/talk/2017/06/18/soap-talk.html" rel="alternate" type="text/html" title="WALA Everywhere (SOAP)" /><published>2017-06-18T13:45:00-04:00</published><updated>2017-06-18T13:45:00-04:00</updated><id>http://localhost:4000/pldi/soap/talk/2017/06/18/soap-talk</id><content type="html" xml:base="http://localhost:4000/pldi/soap/talk/2017/06/18/soap-talk.html">&lt;section style=&quot;text-align: center;&quot;&gt;
+&lt;h3 style=&quot;margin-top: 0;&quot;&gt;WALA Everywhere&lt;/h3&gt;
+&lt;br /&gt;
+&lt;br /&gt;
+&lt;br /&gt;
+&lt;p&gt;Julian Dolby&lt;/p&gt;
+&lt;p&gt;IBM Thomas J. Watson Research Center&lt;/p&gt;
+&lt;br /&gt;
+&lt;br /&gt;
+&lt;br /&gt;
+&lt;br /&gt;
+&lt;p&gt;&lt;small&gt;SOAP, PLDI, Barcelona, June 2017&lt;/small&gt;&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h1&gt;Dramatis personæ&lt;/h1&gt;
+&lt;div class=&quot;row&quot;&gt;
+ &lt;div style=&quot;float: left;&quot;&gt;
+  &lt;ul&gt;
+  &lt;li&gt;Karim Ali&lt;/li&gt;
+  &lt;li&gt;Stephen Fink&lt;/li&gt;
+  &lt;li&gt;Jürgen Graf&lt;/li&gt;
+  &lt;li&gt;Jim Laredo&lt;/li&gt;
+  &lt;li&gt;Sungho Lee (이성호)&lt;/li&gt;
+  &lt;li&gt;Martin Mohr&lt;/li&gt;
+  &lt;li&gt;Brian Pfretzschner&lt;/li&gt;
+  &lt;li&gt;Sukyoung Ryu (류석영)&lt;/li&gt;
+  &lt;/ul&gt;
+ &lt;/div&gt;
+ &lt;div style=&quot;float: right;&quot;&gt;
+  &lt;ul&gt;
+  &lt;li&gt;Max Schaefer&lt;/li&gt;
+  &lt;li&gt;Aleksander Slominski&lt;/li&gt;
+  &lt;li&gt;Manu Sridharan&lt;/li&gt;
+  &lt;li&gt;Noah Weninger&lt;/li&gt;
+  &lt;li&gt;Eric Wittern&lt;/li&gt;
+  &lt;li&gt;Annie Ying&lt;/li&gt;
+  &lt;li&gt;Christofer Young&lt;/li&gt;
+  &lt;li&gt;Yunhui Zheng&lt;/li&gt;
+  &lt;/ul&gt;
+ &lt;/div&gt;
+&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h3&gt;Analyze Everything&lt;/h3&gt;
+&lt;img src=&quot;/images/WalaEverywhere/WalaEverywhere.001.jpeg&quot; border=&quot;0&quot; style=&quot;border-width: 0px;&quot; /&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h3&gt;Analyze Everywhere&lt;/h3&gt;
+&lt;img src=&quot;/images/WalaEverywhere/WalaEverywhere.002.jpeg&quot; style=&quot;border-width: 0px;&quot; /&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;WALA Everywhere&lt;/h3&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;p&gt;Illustrate a small sample of being everywhere&lt;/p&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;p&gt;hybrid apps&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;WALA on Web browsers&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;Swift&lt;/p&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h3&gt;Hybrid Apps&lt;/h3&gt;
+&lt;img src=&quot;/images/WalaEverywhere/WalaEverywhere.005.jpeg&quot; style=&quot;border-width: 0px;&quot; /&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;Hybrid Apps&lt;/h3&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;Promote portability of apps
+      &lt;ul&gt;
+        &lt;li&gt;“write once, run everywhere”&lt;/li&gt;
+        &lt;li&gt;minimize cost of app across multiple platforms&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Different semantics complicates programming&lt;/li&gt;
+    &lt;li&gt;Static vs. dynamic types
+      &lt;ul&gt;
+        &lt;li&gt;cannot check all type errors syntactically&lt;/li&gt;
+        &lt;li&gt;no overloading in JavaScript&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Argument count flexible in JavaScript
+      &lt;ul&gt;
+        &lt;li&gt;try to pass wrong number of arguments to Java&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h3&gt;Syntax Issues&lt;/h3&gt;
+&lt;img src=&quot;/images/WalaEverywhere/WalaEverywhere.006.jpeg&quot; style=&quot;border-width: 0px;&quot; /&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;HybridDroid&lt;/h3&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;p&gt;Soundy analysis framework for Android hybrid apps&lt;/p&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;p&gt;support for most implicit inter-language flows 
+(Backed by APIs and Dalvik VM source code)&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;support most type compatibility in browsers
+(backed by experiments with trials &amp;amp; errors)&lt;/p&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;Implementation on top of WALA&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;Uses generic WALA cross-language support&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h3&gt;Syntax Checking Results&lt;/h3&gt;
+&lt;img src=&quot;/images/WalaEverywhere/WalaEverywhere.004.jpeg&quot; style=&quot;border-width: 0px;&quot; /&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h3&gt;Why run WALA on the Client?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Integrate with Rich Client interfaces
+ &lt;ul&gt;
+ &lt;li&gt;simplify integration&lt;/li&gt;
+ &lt;li&gt;avoid network round trips&lt;/li&gt;
+ &lt;li&gt;use client compute resources&lt;/li&gt;
+ &lt;li&gt;already in prototype application inside IBM&lt;/li&gt;
+ &lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Client-side applications
+ &lt;ul&gt;
+ &lt;li&gt;analyze dynamically-loaded scripts&lt;/li&gt;
+ &lt;li&gt;support IDE's like Eclipse Orion&lt;/li&gt;
+ &lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Browsers are everywhere&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h3&gt;How to Run WALA on the Client?&lt;/h3&gt;
+&lt;a href=&quot;http://teavm.org&quot;&gt;http://teavm.org&lt;/a&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;TeaVM compiles Java to JavaScript
+ &lt;ul&gt;
+ &lt;li&gt;compiles JVM bytecode to JavaScript&lt;/li&gt;
+ &lt;li&gt;reachability analysis to choose code to compile&lt;/li&gt;
+ &lt;li&gt;Java 8, including lambdas&lt;/li&gt;
+ &lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Significant but limited library support
+ &lt;ul&gt;
+ &lt;li&gt;collections and key libraries implemented&lt;/li&gt;
+ &lt;li&gt;I/O libraries very limited&lt;/li&gt;
+ &lt;li&gt;little reflection support&lt;/li&gt;
+ &lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h3&gt;WALA on TeaVM&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Core of WALA compiles with TeaVM
+ &lt;ul&gt;
+ &lt;li&gt;avoid esoteric features like soft references&lt;/li&gt;
+ &lt;li&gt;avoid the file system&lt;/li&gt;
+ &lt;li&gt;avoid any use of reflection&lt;/li&gt;
+ &lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Basic program analysis works
+ &lt;ul&gt;
+ &lt;li&gt;read JavaScript&lt;/li&gt;
+ &lt;li&gt;call graphs&lt;/li&gt;
+ &lt;li&gt;system dependence graphs&lt;/li&gt;
+ &lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Enough for flow-sensitive taint analysis&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h3&gt;WALA Client Demo&lt;/h3&gt;
+&lt;pre&gt;
+function Document_prototype_write(x) {
+
+}
+
+function id(x) {
+    &lt;span style=&quot;color: red;&quot;&gt;return x &lt;em&gt;// line 6&lt;/em&gt;&lt;/span&gt;;
+}
+
+var document = { URL: &quot;whatever&quot; };
+var url = &lt;span style=&quot;color: red;&quot;&gt;id(document.URL); &lt;em&gt;// line 10&lt;/em&gt;&lt;/span&gt;
+&lt;span style=&quot;color: red;&quot;&gt;Document_prototype_write(url); &lt;em&gt;// line 11&lt;/em&gt;&lt;/span&gt;
+
+var notUrl = id(&quot;not a url&quot;);
+Document_prototype_write(notUrl);
+&lt;/pre&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+&lt;h3&gt;WALA Client Demo&lt;/h3&gt;
+
+&lt;iframe src=&quot;/walademo/index.html&quot; frameborder=&quot;0&quot; height=&quot;1000&quot; width=&quot;3500&quot;&gt;&lt;/iframe&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;WALA for Swift&lt;/h3&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;p&gt;Apple a dominant mobile platform&lt;/p&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;p&gt;likely most popular phone in the audience&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;Swift primary programming language&lt;/p&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;WALA meant to be flexible&lt;/p&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;p&gt;analyzing new language Swift a test&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;support Apple-IBM alliance&lt;/p&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;Use WALA to analyze Swift&lt;/p&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;this work in early stage&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;Leverage Apple Infrastructure&lt;/h3&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;p&gt;Use open source Apple code&lt;/p&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;p&gt;up-to-date with evolving language&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;written largely in C++, unlike WALA&lt;/p&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;Bridge C++ code to WALA&lt;/p&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;p&gt;large code base, so explicit JNI tedious&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;generate wrappers with SWIG&lt;/p&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;Expose Apple Swift code to Java&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;SWIG&lt;/h3&gt;
+  &lt;div class=&quot;row&quot;&gt;
+ &lt;div style=&quot;float: left;&quot;&gt;
+
+      &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;%module example     
+int fact();      
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;public class example {
+
+  public static int fact() {
+    return exampleJNI.fact();   
+  }
+
+}
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+
+    &lt;/div&gt;
+ &lt;div style=&quot;float: right;&quot;&gt;
+
+      &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;public class exampleJNI {
+  static native int fact();
+}
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;...Java_exampleJNI_fact(...) {
+  jint jresult = 0 ;
+  int result;
+  
+  (void)jenv;
+  (void)jcls;
+  result = (int)fact();
+  jresult = (jint)result; 
+  return jresult;
+}
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;SWIG generates “normal” Java code around JNI&lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;WALA using SWIG&lt;/h3&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-~&quot;&gt; instance.performParseOnly();
+ if (instance.getASTContext().hadError())
+     System.out.println(&quot;Parse error&quot;);
+ ModuleDecl module = instance.getMainModule();
+ ASTWalker walker = new ASTWalker() {
+     @Override
+     public boolean walkToDeclPre(Decl s) {
+         // visited a declaration
+         return true;
+     }
+     // ...
+ };
+ module.walk(walker);
+&lt;/code&gt;&lt;/pre&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;Java code calling Apple C++ code
+      &lt;ul&gt;
+        &lt;li&gt;resembles WALA JavaScript Rhino code&lt;/li&gt;
+        &lt;li&gt;ugliness hidden by SWIG&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;Status&lt;/h3&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;p&gt;Beginnings of SWIG interface working&lt;/p&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;p&gt;SWIG integrated into Apple build process&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;both AST and SIL partially wrapped&lt;/p&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;Interface not just for WALA&lt;/p&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;p&gt;other Java tools could benefit&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;would love collaborators&lt;/p&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;WALA Everywhere&lt;/h3&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;p&gt;World getting less monolingual, not more&lt;/p&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;p&gt;domains have favorites, e.g. Python for ML&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;new languages like Swift arise&lt;/p&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;Analysis frameworks must adapt&lt;/p&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;p&gt;need to analyze code people use&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;WALA has proven flexible&lt;/p&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;</content><author><name></name></author><summary type="html">WALA Everywhere Julian Dolby IBM Thomas J. Watson Research Center SOAP, PLDI, Barcelona, June 2017</summary></entry><entry><title type="html">The Story of WALA</title><link href="http://localhost:4000/ecoop/doctoral/symposium/talk/2017/06/18/ecoop-doctoral-symposium-talk.html" rel="alternate" type="text/html" title="The Story of WALA" /><published>2017-06-18T13:45:00-04:00</published><updated>2017-06-18T13:45:00-04:00</updated><id>http://localhost:4000/ecoop/doctoral/symposium/talk/2017/06/18/ecoop-doctoral-symposium-talk</id><content type="html" xml:base="http://localhost:4000/ecoop/doctoral/symposium/talk/2017/06/18/ecoop-doctoral-symposium-talk.html">&lt;section style=&quot;text-align: center;&quot;&gt;
+&lt;h2 style=&quot;margin-top: 0;&quot;&gt;The Story of WALA&lt;/h2&gt;
+&lt;br /&gt;
+&lt;br /&gt;
+&lt;br /&gt;
+&lt;p&gt;Julian Dolby&lt;/p&gt;
+&lt;p&gt;IBM Thomas J. Watson Research Center&lt;/p&gt;
+&lt;br /&gt;
+&lt;br /&gt;
+&lt;br /&gt;
+&lt;br /&gt;
+&lt;p&gt;&lt;small&gt;Doctoral Symposium, ECOOP, Barcelona, June 2017&lt;/small&gt;&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+
+  &lt;h2 id=&quot;wala-as-life-at-ibm&quot;&gt;WALA as Life at IBM&lt;/h2&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;p&gt;Blend of industry and academia&lt;/p&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;p&gt;Focus on research and publication&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;Focus on product deliverables&lt;/p&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;Balancing act&lt;/p&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;p&gt;Maintain core research focus&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;Follow corporate trends&lt;/p&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;Synergy&lt;/p&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;p&gt;Find research topics in real problems&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;Apply research results to real problems&lt;/p&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+
+&lt;section style=&quot;font-size: 80%;&quot;&gt;
+  &lt;h2 style=&quot;font-size: 125%&quot;&gt;Selected History&lt;/h2&gt;
+
+  &lt;table&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;2004&lt;/td&gt;
+        &lt;td&gt;ASTk&lt;/td&gt;
+        &lt;td&gt;J2EE optimization&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;2005&lt;/td&gt;
+        &lt;td&gt;ITM&lt;/td&gt;
+        &lt;td&gt;Tivoli JavaScript to DB queries&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;2006&lt;/td&gt;
+        &lt;td&gt; &lt;/td&gt;
+        &lt;td&gt;&lt;strong&gt;Open source release&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;2008&lt;/td&gt;
+        &lt;td&gt;GBS&lt;/td&gt;
+        &lt;td&gt;ABAP analysis + tooling&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;2010&lt;/td&gt;
+        &lt;td&gt;AppScan&lt;/td&gt;
+        &lt;td&gt;JSA security analysis&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;2012&lt;/td&gt;
+        &lt;td&gt;ECOOP&lt;/td&gt;
+        &lt;td&gt;Correlation tracking&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;2013&lt;/td&gt;
+        &lt;td&gt;ICSE&lt;/td&gt;
+        &lt;td&gt;Approximate call graphs&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;2013&lt;/td&gt;
+        &lt;td&gt; &lt;/td&gt;
+        &lt;td&gt;Android analysis support&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;2014&lt;/td&gt;
+        &lt;td&gt;AppScan&lt;/td&gt;
+        &lt;td&gt;Approximate call graphs in AppScan&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;2016&lt;/td&gt;
+        &lt;td&gt;ICSE+API Harmony&lt;/td&gt;
+        &lt;td&gt;Web API bug detection&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;2017&lt;/td&gt;
+        &lt;td&gt;WCS&lt;/td&gt;
+        &lt;td&gt;Dialog bug finding analysis&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h2&gt;Enterprise Traditions&lt;/h2&gt;
+
+  &lt;table&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;2004&lt;/td&gt;
+        &lt;td&gt;ASTk&lt;/td&gt;
+        &lt;td&gt;J2EE optimization&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;2005&lt;/td&gt;
+        &lt;td&gt;ITM&lt;/td&gt;
+        &lt;td&gt;Tivoli JavaScript to DB queries&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+
+  &lt;hr /&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;p&gt;WebSphere J2EE focus for enterprise customers&lt;/p&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;p&gt;Access relational databases from Java Web server&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;Program analysis to determine read-only aspects&lt;/p&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;IBM Tivoli Monitoring migration support&lt;/p&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;p&gt;Monitoring scripts written in JavaScript&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;Program analysis of monitoring semantics&lt;/p&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h2&gt;Enterprise Traditions&lt;/h2&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;p&gt;WALA was born analyzing J2EE applications&lt;/p&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;p&gt;Required flexibility to model J2EE semantics&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;Needed to handle large applications&lt;/p&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;JavaScript support created for Tivoli&lt;/p&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;p&gt;Adapt WALA for Tivoli analysis support&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;Created general framework, not one-off hack&lt;/p&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;Open Source Release&lt;/h3&gt;
+
+  &lt;table&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;2006&lt;/td&gt;
+        &lt;td&gt; &lt;/td&gt;
+        &lt;td&gt;&lt;strong&gt;Open source release&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;2013&lt;/td&gt;
+        &lt;td&gt; &lt;/td&gt;
+        &lt;td&gt;Android analysis support&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+
+  &lt;hr /&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;p&gt;WALA used in collaborations prior to release&lt;/p&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;p&gt;e.g. Refinement pointer analysis&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;paperwork for each project&lt;/p&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;WALA open source in 2006&lt;/p&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;p&gt;Encourage collaboration and outside users&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;Manage IP using Eclipse license&lt;/p&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;Open Source Release&lt;/h3&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;p&gt;IBM has embraced open source&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;WALA enhanced by contributions&lt;/p&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;p&gt;numerous fixes and code improvements&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;Java source language front end&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;Android application analysis support&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;nodejs analysis support&lt;/p&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h2&gt;Open Source Release&lt;/h2&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;p&gt;Encourage contributions to WALA&lt;/p&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;p&gt;Encourage code improvement contributions&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;Encourage research with product infrastructure&lt;/p&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;Raise awareness of program analysis at Watson&lt;/p&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;p&gt;Recruiting and interns&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;Release code for publications&lt;/p&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h2&gt;The Service Economy&lt;/h2&gt;
+
+  &lt;table&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;2008&lt;/td&gt;
+        &lt;td&gt;GBS&lt;/td&gt;
+        &lt;td&gt;ABAP analysis + tooling&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+
+  &lt;hr /&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;p&gt;ABAP powers a lot of business software&lt;/p&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;p&gt;Scripting language for dominant SAP products&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;IBM business upgrading ABAP applications&lt;/p&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;Exploit front end from JavaScript to do ABAP too&lt;/p&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;p&gt;Create ABAP grammar with ANTLR&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;Build simple WALA IR for ABAP constructs&lt;/p&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h2&gt;JavaScript Security&lt;/h2&gt;
+
+  &lt;table&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;2010&lt;/td&gt;
+        &lt;td&gt;AppScan&lt;/td&gt;
+        &lt;td&gt;JSA security analysis&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;2012&lt;/td&gt;
+        &lt;td&gt;ECOOP&lt;/td&gt;
+        &lt;td&gt;Correlation tracking&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;2013&lt;/td&gt;
+        &lt;td&gt;ICSE&lt;/td&gt;
+        &lt;td&gt;Approximate call graphs&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;2014&lt;/td&gt;
+        &lt;td&gt;AppScan&lt;/td&gt;
+        &lt;td&gt;&lt;span style=&quot;font-size: 80%&quot;&gt;Approximate call graphs in AppScan&lt;/span&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+
+  &lt;hr /&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;p&gt;WALA JavaScript analysis used for security&lt;/p&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;p&gt;WALA analysis used in AppScan products&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;Shipped series of research results in AppScan&lt;/p&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h2&gt;JavaScript Security&lt;/h2&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;p&gt;Problems first observed by customers&lt;/p&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;p&gt;Scalability issues in framework code&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;Problem narrowed by product developers&lt;/p&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;Anderson’s asymptotic complexity worse&lt;/p&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;p&gt;ECOOP solution: apply context sensitivity&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;ICSE solution: abstraction to avoid issue&lt;/p&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h2&gt;JavaScript Security&lt;/h2&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;Analysis imprecise in common for..in loops
+      &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;for(prop in source) {
+target[prop] = source[prop];
+}
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Flow-insensitive analysis
+      &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;target[?] = source[?];
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Correlation tracking
+      &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;if (p === &quot;x&quot;) {
+target[&quot;x&quot;] = source[&quot;x&quot;];
+} if (p === &quot;y&quot;) {
+target[&quot;y&quot;] = source[&quot;y&quot;];
+...
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h2&gt;Keeping up with the times&lt;/h2&gt;
+
+  &lt;table&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;2016&lt;/td&gt;
+        &lt;td&gt;&lt;span style=&quot;font-size: 80%;&quot;&gt;ICSE+API Harmony&lt;/span&gt;&lt;/td&gt;
+        &lt;td&gt;Web API bug detection&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;2017&lt;/td&gt;
+        &lt;td&gt;WCS&lt;/td&gt;
+        &lt;td&gt;Dialog bug finding analysis&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+
+  &lt;hr /&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;a href=&quot;http://www.ibm.com&quot;&gt;ibm.com&lt;/a&gt; is all about AI and cognitive computing&lt;/p&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;p&gt;Machine learning and “Watson” as a product&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;People still write code, and hence bugs&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;WALA technology applicable in new domains&lt;/p&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h2&gt;API Harmony bug finding&lt;/h2&gt;
+  &lt;p&gt;&lt;img class=&quot;plain&quot; border=&quot;0&quot; align=&quot;center&quot; src=&quot;/images/pa_moti_code.jpg&quot; width=&quot;110%&quot; /&gt;&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;WALA WCS Demo&lt;/h3&gt;
+
+  &lt;p&gt;&lt;img src=&quot;/images/WCS-Screen-Shot.png&quot; /&gt;&lt;/p&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h3&gt;WALA WCS Demo&lt;/h3&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;Watson Conversations dialogs have local variables&lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;iframe src=&quot;/wcsdemo/index.html&quot; frameborder=&quot;0&quot; height=&quot;1000&quot; width=&quot;3500&quot;&gt;&lt;/iframe&gt;
+
+&lt;/section&gt;
+
+&lt;section&gt;
+
+  &lt;h2 id=&quot;conclusions&quot;&gt;Conclusions&lt;/h2&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;p&gt;Blend of industry and academia&lt;/p&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;Products drive research and vice versa&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;Balancing act&lt;/p&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;WALA has been able to be useful as IBM changes&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;Synergy&lt;/p&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;Motivate research topics by real problems&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/section&gt;</content><author><name></name></author><summary type="html">The Story of WALA Julian Dolby IBM Thomas J. Watson Research Center Doctoral Symposium, ECOOP, Barcelona, June 2017</summary></entry><entry><title type="html">Toward Scalable Semantic Big Data</title><link href="http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk.html" rel="alternate" type="text/html" title="Toward Scalable Semantic Big Data" /><published>2017-05-10T13:45:00-04:00</published><updated>2017-05-10T13:45:00-04:00</updated><id>http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk</id><content type="html" xml:base="http://localhost:4000/sbd/sigmod/talk/2017/05/10/sbd-talk.html">&lt;section style=&quot;text-align: center;&quot;&gt;
 &lt;h3 style=&quot;margin-top: 0;&quot;&gt;Toward Scalable Semantic Big Data&lt;/h3&gt;
 &lt;br /&gt;
 &lt;br /&gt;
@@ -319,6 +3459,7 @@ M. Bornea et al., Building an efficient RDF store over a relational database. SI
  &lt;li&gt;spill onto multiple rows only when necessary&lt;/li&gt;
  &lt;/ul&gt;
 &lt;li&gt;Analogous tables for reverse direction&lt;/li&gt;
+&lt;li&gt;Reduces joins for &quot;star&quot; queries&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/section&gt;
 
@@ -488,20 +3629,21 @@ select ?museum where {
  &lt;/ul&gt;
 &lt;li&gt;Would love others to get involved&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/section&gt;</content><author><name></name></author><summary type="html">Toward Scalable Semantic Big Data Julian Dolby IBM Thomas J. Watson Research Center Semantic Big Data, SIGMOD, Chicago, May 2017</summary></entry><entry><title type="html">Welcome to Jekyll!</title><link href="http://localhost:4000/jekyll/update/2017/05/09/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2017-05-09T15:53:08-04:00</published><updated>2017-05-09T15:53:08-04:00</updated><id>http://localhost:4000/jekyll/update/2017/05/09/welcome-to-jekyll</id><content type="html" xml:base="http://localhost:4000/jekyll/update/2017/05/09/welcome-to-jekyll.html">&lt;section style=&quot;text-align: left;&quot;&gt;
-&lt;h1&gt;Toward Scalable Semantic Big Data&lt;/h1&gt;
+&lt;/section&gt;</content><author><name></name></author><summary type="html">Toward Scalable Semantic Big Data Julian Dolby IBM Thomas J. Watson Research Center Semantic Big Data, SIGMOD, Chicago, May 2017</summary></entry><entry><title type="html">Welcome to Jekyll!</title><link href="http://localhost:4000/jekyll/update/2017/05/09/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2017-05-09T15:53:08-04:00</published><updated>2017-05-09T15:53:08-04:00</updated><id>http://localhost:4000/jekyll/update/2017/05/09/welcome-to-jekyll</id><content type="html" xml:base="http://localhost:4000/jekyll/update/2017/05/09/welcome-to-jekyll.html">&lt;section data-markdown=&quot;&quot;&gt;
+|-----------------+------------+-----------------+----------------|
+| Default aligned |Left aligned| Center aligned  | Right aligned  |
+|-----------------|:-----------|:---------------:|---------------:|
+| First body part |Second cell | Third cell      | fourth cell    |
+| Second line     |foo         | **strong**      | baz            |
+| Third line      |quux        | baz             | bar            |
+|-----------------+------------+-----------------+----------------|
+| Second body     |            |                 |                |
+| 2 line          |            |                 |                |
+|=================+============+=================+================|
+| Footer row      |            |                 |                |
+|-----------------+------------+-----------------+----------------|
 &lt;/section&gt;
-
-&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
-
-&lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
 
 &lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints 'Hi, Tom' to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Check out the &lt;a href=&quot;https://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;</content><author><name></name></author><summary type="html">Toward Scalable Semantic Big Data</summary></entry></feed>
+&lt;p&gt;Check out the &lt;a href=&quot;https://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;</content><author><name></name></author><summary type="html">|-----------------+------------+-----------------+----------------| | Default aligned |Left aligned| Center aligned | Right aligned | |-----------------|:-----------|:---------------:|---------------:| | First body part |Second cell | Third cell | fourth cell | | Second line |foo | **strong** | baz | | Third line |quux | baz | bar | |-----------------+------------+-----------------+----------------| | Second body | | | | | 2 line | | | | |=================+============+=================+================| | Footer row | | | | |-----------------+------------+-----------------+----------------|</summary></entry></feed>
