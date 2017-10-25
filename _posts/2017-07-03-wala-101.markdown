@@ -26,7 +26,7 @@ background: orange;
 }
 </style>
 
-<section style="background: white;">
+<section>
 <img src="/images/WALA.png" border="0" style="border-width: 0px;"/>
 </section>
 
@@ -40,7 +40,6 @@ background: orange;
 <br />
 <br />
 <br />
-<p><small>July 2017</small></p>
 </section>
 
 <section markdown="1">
@@ -48,11 +47,10 @@ background: orange;
 <br/>
 
 * Introduction
+* WALA JavaScript
 * Running example
 * WALA JavaScript IR
-* WALA JavaScript HTML
 * Call graph construction
-* Pointer analysis
 * Taint analysis
 
 <br/>
@@ -335,13 +333,6 @@ document.write(text3);
 </section>
 
 <section>
-<h3>WALA Running - IR</h3>
-
-<iframe src="/wala101/index.html" frameborder="0" height="1000" width="3500"></iframe>
-
-</section>
-
-<section>
 <h3>WALA IR Example</h3>
 <pre>
 BB1<span style="color: yellow;">
@@ -595,7 +586,7 @@ BB21<span style="color: magenta;">
  ```
  * `this`
  ```
- id2
+ x
  ```
  </div>
  <div style="float: right;" markdown="1">
@@ -1176,6 +1167,26 @@ for(var p in o1) {
   * illustrate WALA data structures
   * illustrate data flow mechanisms
 
+</section>
+
+<section>
+<h3>WALA Taint Example</h3>
+<pre>
+var document = { URL: "whatever",
+  write: function Document_prototype_write(x) { } };
+var id = <span style="color: red;">function _id(x) { return x; };</span>
+function Id() { this.id = id; }
+function SubId() { }; SubId.prototype = new Id();
+
+if (Math.random.call(null) > 0) {
+    var id1 = new Id();
+    var text = <span style="color: red;">id1.id.call(document, document.URL);</span>
+} else {
+    var id2 = new SubId();
+    var text = id2.id("not a url");
+}<span style="color: red;">
+document.write(text);</span>
+</pre>
 </section>
 
 <section markdown="1">
