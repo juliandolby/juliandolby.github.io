@@ -1,0 +1,461 @@
+---
+layout: slide
+title: "Toward Scalable Semantic Big Data"
+description: SPLASH-I talk titled "Toward Scalable Semantic Big Data"
+date: 2017-10-24 20:00:00 -0700
+theme: black
+transition: slide
+categories: SPLASH-I talk
+---
+
+<section style="text-align: center;">
+<h3 style="margin-top: 0;">Toward Scalable Semantic Big Data</h3>
+<br />
+<br />
+<br />
+<p>Julian Dolby</p>
+<p>IBM Thomas J. Watson Research Center</p>
+<br />
+<br />
+<br />
+<br />
+<p><small>SPLASH-I, Vancouver, October 2017</small></p>
+</section>
+
+<section>
+<h3>Collaborative Work</h3>
+<div class="row">
+ <div style="float: left;">
+  <ul>
+  <li>Bishwaranjan Bhattacharjee</li>
+  <li>Mihaela Bornea</li>
+  <li>James Cimino</li>
+  <li>Patrick Dantressangle</li>
+  <li>Achille Fokoue</li>
+  <li>Aditya Kalyanpur</li>
+  <li>Anastasios Kementsietsidis</li>
+  </ul>
+ </div>
+ <div style="float: right;">
+  <ul>
+  <li>Aaron Kersehbaum</li>
+  <li>Li Ma</li>
+  <li>Chintan Patel</li>
+  <li>Edith Schonberg</li>
+  <li>Kavitha Srinivas</li>
+  <li>Octavian Udrea</li>
+  </ul>
+ </div>
+</div>
+</section>
+
+<section>
+<h3>Outline</h3>
+<ul>
+<li>Running Example</li>
+<li>Scalable expressive reasoning</li>
+<li>Storing RDF data in a database</li>
+<li>Integration of Web data</li>
+</ul>
+</section>
+
+<section>
+<h3>Running Example</h3>
+<h4>Objects in Our Universe</h4>
+<img src="/images/LaParisienne.jpg" width="20%"/>
+<img src="/images/MaskOfAgamemnon.jpg" width="31%"/>
+<img src="/images/StarryNight.jpg" width="38%"/>
+</section>
+
+<section>
+<h3>Example OWL Universe</h3>
+<ul>
+<li> Individuals
+<br>
+$\begin{array}{l}Museum(Athens), Museum(Heraklion), \\
+Museum(MOMA), Minoan(LaParisienne),\\
+Mycenean(DeathMask),VanGogh(StarryNight)\end{array}$</li>
+<li> Roles
+<br>
+$\begin{array}{l}
+has(Athens,DeathMask),has(MOMA,StarryNight)\\
+has(Heraklion,LaParisienne)
+\end{array}$ </li>
+<li> Axioms (TGDs)
+<br>
+$\begin{array}{l}
+Minoan \sqsubseteq \exists{creationSite.Crete}\\
+Mycenaean \sqsubseteq \exists{creationSite.Mycenae}
+\end{array}$</li>
+</ul>
+</section>
+
+<section>
+<h3>Example ABox $A$</h3>
+<img class="plain" src="/images/ABox.png" border="0" align="center"/>
+</section>
+
+<section>
+<h3>The Summary ABox</h3>
+<br/>
+<ul>
+<li>Map ABox $A$ to $A'$ for scalability using $f$
+<br>
+$\begin{array}{l}
+C(a) \in A \implies C(f(a)) \in A'\\
+R(a,b) \in A \implies R(f(a), f(b)) \in A'
+\end{array}$</li>
+<li> We choose <em>concept sets</em> as f</li>
+</ul>
+<br/>
+<br/>
+<br/>
+<div style="text-align: left;">
+<small>
+J. Dolby, A. Fokoue, A. Kalyanpur, A. Kershenbaum, E. Schonberg, K. Srinivas, L. Ma<br/>
+Scalable Semantic Retrieval through Summarization and Refinement.<br/>
+AAAI 2007
+</small>
+</div>
+</section>
+
+<section>
+<h3>Example Summary ABox $A'$</h3>
+<img class="plain" src="/images/SummaryABox.png" border="0" align="center"/>
+</section>
+
+<section markdown="1">
+<h3>Pointer Analysis Analogy</h3>
+
+~~~
+class Cell {
+ private Object datum;
+ Cell(Object d) { datum = d; }
+ 
+ static void catInTheHat() {
+  Cell x = new Cell("Thing 1");
+  Cell y = new Cell("Thing 2");
+ }
+}
+~~~
+
+<div class="row">
+<div style="float: left;">
+ <h4>Heap</h4>
+ <img src="/images/PointerAnalysisAnalogy-1.jpg"/>
+</div><div style="float: right;">
+ <h4>Type-Based Abstraction</h4>
+ <img src="/images/PointerAnalysisAnalogy-2.jpg"/>
+</div>
+</div>
+</section>
+
+<section>
+<h3>Example Query</h3>
+<ul>
+<li>"Museums that have works from Crete"</li>
+<li>Answer is <em>Heraklion</em> since has Minoan <em>LaParisienne</em></li>
+<li>DL
+ <ul>
+ <li>$Museum \wedge \exists{has.\exists{creationSite.Crete}}$</li>
+ <li>Negate query at each node, find contradictions</li>
+ <li>Entities, edges in contradiction called justification</li>
+ </ul></li>
+<li>Needs DL reasoning: <em>creationSite</em> edge is implicit</li>
+</ul>
+</section>
+
+<section>
+<h4>Initial Query Answer</h4>
+<img class="plain" height="90%" src="/images/QueryClash.png" border="0" align="center"/>
+</section>
+
+<section>
+<h3>Refinement</h3>
+<ul>
+<li><em>J</em> is the <em>justification</em>, i.e. the conflict</li>
+<li><em>Partition</em> summary nodes by edges in justification
+<br/>
+$key(a) \equiv \left\{ R(s, t) \left| \begin{array}{l}
+f(a) = s \wedge\\
+R(s,t) \in J \wedge\\
+\exists b \; R(a,b) \in A \wedge f(b) = t
+\end{array} \right. \right\}$
+</li>
+</ul>
+</section>
+
+<section>
+<h4>Query Refinement</h4>
+<img class="plain" src="/images/RefiningClash.png" border="0" align="center"/>
+</section>
+
+<section>
+<h4>Refined Query Answer</h4>
+<img class="plain" src="/images/ResolvedClash.png" border="0" align="center"/>
+</section>
+
+<section markdown="1">
+<h3>Pointer Analysis Analogy</h3>
+
+~~~
+class Cell {
+ private Object datum;
+ Cell(Object d) { datum = d; }
+ 
+ static void catInTheHat() {
+  Cell x = new Cell("Thing 1");
+  Cell y = new Cell("Thing 2");
+ }
+}
+~~~
+
+* Pointer analyis query: "what points to 'Thing 1'?"
+  - refinement in the style of Plevyak or Sridharan
+
+<img style="width: 30%;" src="/images/PointerAnalysisAnalogy-3.jpg"/>
+
+</section>
+
+<section>
+<h3>Reasoning Results</h3>
+$${\scriptsize \begin{array}{|l|l|l|l|l|l|}
+\hline
+Reasoner & Dataset  & Avg. Time  & St.Dev & Range \\ \hline
+KAON2 & UOBM1  & 20.7 &  1.2 & 18-37\\ \hline
+KAON2 & UOBM10 & 447.6 &  23.3 & 414.8-530\\ \hline
+SHER & UOBM1 & 4.2 & 3.8 & 2.4-23.8\\ \hline
+SHER & UOBM10  & 15.4 &  25.6 & 6.4-191.1 \\ \hline
+SHER & UOBM30  & 34.7 &  63.5 & 11.6-391.1 \\ \hline
+\end{array}}$$
+</section>
+
+<section>
+<h3>RDF in a Relational Store</h3>
+<ul>
+<li>Numerous large RDF data sources</li>
+ <ul>
+ <li>DBPedia (>300M triples)</li>
+ <li>Web data (>3B triples from BTC)</li>
+ </ul>
+<li>Exploit scalable RDBMS technology</li>
+ <ul>
+ <li>query optimization</li>
+ <li>transaction support</li>
+ <li>concurrency</li>
+ </ul>
+<li>Quetzal</li>
+ <ul>
+ <li><a href="https://github.com/Quetzal-RDF/quetzal">https://github.com/Quetzal-RDF/quetzal</a></li>
+ <li>Loosely-derived code in DB2 v10.1</li>
+ </ul>
+</ul>
+<br/>
+<div style="text-align: left;">
+<small>
+M. Bornea et al., Building an efficient RDF store over a relational database. SIGMOD 2013
+</small>
+</div>
+</section>
+
+<section>
+<h4>Museums with Locations</h4>
+<img class="plain" src="/images/GraphWithLocations.png" border="0" align="center"/>
+</section>
+
+<section>
+<h3>Quetzal Schema</h3>
+<ul>
+<li><em>Entity-oriented</em> schema</li>
+ <ul>
+ <li>properties for subject on single row</li>
+ <li>rows for predicates and values</li>
+ <li>secondary table for multi-valued predicates</li>
+ </ul>
+<li>Fit entities onto limited database rows</li>
+ <ul>
+ <li>generally more predicates than available rows</li>
+ <li><em>graph coloring</em> to maximize density</li>
+ <li>spill onto multiple rows only when necessary</li>
+ </ul>
+<li>Analogous tables for reverse direction</li>
+<li>Reduces joins for "star" queries</li>
+</ul>
+</section>
+
+<section style="align: center;">
+<h3>Example Entity-Oriented Table</h3>
+${\tiny \begin{array}{|r|l|l|l|l|l|l|}\hline
+{\rm{subject}} & {\rm{p1}} & {\rm{v1}} & {\rm{p2}} & {\rm{v2}} & {\rm{p3}} & {\rm{v3}}\\ \hline
+LaParisienne & type & Minoan & & & &\\
+DeathMask & type & Mycenean & & & &\\
+StarryNight & type & VanGogh & & & &\\
+Heraklion & type & Museum & has & La\dots & at & l1\\
+Athens & type & Museum & has & De\dots & at & l2\\
+MOMA & type & Museum & has & St\dots & at & l3\\
+l1 & type & Location & lat & 35.3 & long & 25.1\\
+l2 & type & Location & lat & 38.0 & long & 23.7\\
+l3 & type & Location & lat & 40.7 & long & -74.0\\ \hline
+\end{array}}$
+</section>
+
+<section markdown="1">
+<h3>Register Allocation Analogy</h3>
+<br/>
+<div class="row">
+ <div style="float: left;" markdown="1">
+
+* code fragment
+
+~~~
+var x = 7
+var y = x + 7     
+var z = 3
+y = y + z
+~~~
+
+ </div>
+ <div style="float: right;" markdown="1">
+ 
+ |-----:|:----:|:------:|
+ | code | reg 1 | reg 2 |
+ |======+:=====:+:=====:|
+ | <code>x = 7</code> | x | |
+ | <code>y = x + 7</code> | x | y |
+ | <code>x = 3</code> | z | y |
+ | <code>y = y + z</code> | z | y |
+ |======+======+======|
+
+ </div>
+</div>
+</section>
+
+<section>
+<h3>Quetzal Results on LUBM</h3>
+<img class="plain" src="/images/LUBM.png" border="0" align="center"/>
+</section>
+
+<section>
+<h3>Data Everywhere</h3>
+<ul>
+<li>Numerous structured data sources available
+ <ul>
+ <li>medical (Drugbank, Uniprot); general (DBpedia)</li>
+ <li>much data in RDF, queried with SPARQL</li>
+ <li>But data increasingly diverse</li>
+ </ul>
+</li>
+<li>RDF, XML, JSON, CSV formats
+ <ul>
+ <li>accessible as dumps, query endpoints and APIs</li>
+ <li>Powerful if integrated and queried effectively</li>
+ <li>reuse and extend existing declarative SPARQL</li>
+ </ul>
+</li>
+</ul>
+<br/>
+<br/>
+<div style="text-align: left;">
+<small>
+J. Dolby et al., Extending SPARQL for Data Analytic Tasks. ISWC 2016
+</small>
+</div>
+</section>
+<section>
+<h4>Modularize SPARQL with Functions</h4>
+<ul>
+<li>"museums with some type of exhibit"</li>
+<pre style="font-size: 35px; align:left;">
+function museumsWith(?type ->
+                     ?museum ?lat ?long) {
+  ?museum has ?art .
+  ?art type ?type .
+  ?museum at ?loc .
+  ?loc geo:lat ?lat .
+  ?loc geo:long ?long .
+}
+</pre>
+<li>Functions called with <em>bind</em></li>
+<pre style="font-size: 40px; align:left;">
+bind ?museum ?lat ?long
+  as museumsWith(Minoan) .
+</pre>
+</ul>
+</section>
+
+<section>
+<h3>Web Service <code>http://ip-api.com/</code></h3>
+<ul>
+<li>Web service returns IP-based information</li>
+<pre style="font-size: 25px; align:left;">
+&lt;query&gt;
+ &lt;status>&lt;![CDATA[success]]>&lt;/status>
+ &lt;country><![CDATA[United States]]>&lt;/country>
+ &lt;countryCode><![CDATA[US]]>&lt;/countryCode>
+ &lt;region><![CDATA[IL]]>&lt;/region>
+ &lt;regionName><![CDATA[Illinois]]>&lt;/regionName>
+ &lt;city><![CDATA[Chicago]]>&lt;/city>
+ &lt;zip><![CDATA[60605]]>&lt;/zip>
+ &lt;lat>&lt;![CDATA[41.8632]]>&lt;/lat>
+ &lt;lon><![CDATA[-87.6198]]>&lt;/lon>
+ &lt;timezone>&lt;![CDATA[America/Chicago]]>&&lt;/timezone>
+ &lt;isp><![CDATA[AT&T Services]]>&lt;/isp>
+ &lt;org>&lt;![CDATA[Hilton Hotels Corporation]]>&lt;/org>
+ &lt;as><![CDATA[AS7018 AT&T Services, Inc.]]>&lt;/as>
+ &lt;query><![CDATA[12.218.232.8]]>&lt;/query>
+&lt;/query&gt;
+</pre>
+</ul>
+</section>
+
+<section>
+<h3>Web Service Example</h3>
+<ul>
+<li>Web service to return latitude and longitude</li>
+<pre style="font-size: 40px; align:left;">
+function geo:getPosition( -> ?lat ?long)
+service get http://ip-api.com/xml [] -> xml
+"/query": "./lat" "./long"
+</pre>
+<li><code>getPosition</code> used with <em>bind</em></li>
+<pre style="font-size: 40px; align:left;">
+select ?lat ?long where {
+  bind ?lat ?long as geo:getPosition()
+}
+</pre>
+</ul>
+</section>
+
+<section>
+<h3>Combining Disparate Data</h3>
+<ul>
+<li>"Nearby Minoan exhibits"</li>
+<li>RDF museums, <code>http://ip-api.com</code> locations</li>
+<pre style="font-size: 40px; align:left;">
+select ?museum where {
+  bind ?museum ?lat1 ?long1
+    as museumsWith(Minoan) .
+  bind ?lat2 ?long2 as geo:getPosition()
+  FILTER(?lat2-?lat1 < .1 &&
+         ?long2-?long1 < .1)
+}
+</pre>
+</ul>
+</section>
+
+<section>
+<h3>The Future</h3>
+<ul>
+<li>Further extensions to SPARQL</li>
+ <ul>
+ <li>further modularization, e.g. module systems</li>
+ <li>potential for first-class functions</li>
+ </ul>
+<li>Semantic big data means reasoning</li>
+ <ul>
+ <li>put summarization, refinement into Quetzal</li>
+ <li>exploit entity-oriented schema for summarization</li>
+ </ul>
+<li>Would love others to get involved</li>
+</ul>
+</section>
