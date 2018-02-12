@@ -153,13 +153,17 @@ def conv_net(x_dict, n_classes, dropout, reuse, is_training):
     with tf.variable_scope('ConvNet', reuse=reuse):
         x = x_dict['images']
 ~~~~
+
 * Python data structures like dictionaries, objects
+
 ~~~~
 def model_fn(features, labels, mode):
     logits_train = conv_net(features, num_classes, dropout, reuse=False,
 is_training=True)
 ~~~~
+
 * Interprocedural control- and data-flow
+
 ~~~~
 model = tf.estimator.Estimator(model_fn)
 input_fn = tf.estimator.inputs.numpy_input_fn(
@@ -167,6 +171,7 @@ input_fn = tf.estimator.inputs.numpy_input_fn(
     batch_size=batch_size, num_epochs=None, shuffle=True)
 model.train(input_fn, steps=num_steps)
 ~~~~
+
 * `model.train` ultimately calls `model_fn`
 
 </section>
