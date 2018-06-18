@@ -12,16 +12,12 @@ categories: MAPL talk
 <h3 style="margin-top: 0;">Analysis for Machine Learning</h3>
 <br />
 <br />
-<br />
 <p>Julian Dolby, Avraham Shinnar</p>
 <p>Allison Allain, Jenna Reinen</p>
 <br />
-<br />
 <p>IBM Thomas J. Watson Research Center</p>
 <br />
-<br />
-<br />
-<br />
+<a href="https://juliandolby.github.io/mapl/talk/2018/06/14/mapl-ariadne-analysis.html"><small>https://juliandolby.github.io/mapl/talk/2018/06/14/mapl-ariadne-analysis.html</small></a>
 <p><small>MAPL, PLDI, Philadelphia, June 2018</small></p>
 </section>
 
